@@ -1,0 +1,16 @@
+import Link from "next/link";
+import { site } from "@/lib/seo/site";
+
+export function Header() {
+  return (
+    <header className="site-header">
+      <Link className="brand" href="/" aria-label="ScottWang home">
+        <span className="brand-mark">SW</span>
+        <span>ScottWang</span>
+      </Link>
+      <nav aria-label="Primary navigation">
+        {site.navigation.slice(1).map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+      </nav>
+    </header>
+  );
+}
