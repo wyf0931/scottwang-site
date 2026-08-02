@@ -12,3 +12,4 @@ test-results
 public/writing/*.md
 public/notes/*.md
 public/thoughts/*.md
+.vercel
