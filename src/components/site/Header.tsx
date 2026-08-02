@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/lib/seo/site";
+import { SearchDialog } from "./SearchDialog";
 
 export function Header() {
   return (
@@ -10,6 +11,7 @@ export function Header() {
       </Link>
       <nav aria-label="Primary navigation">
         {site.navigation.slice(1).map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+        <SearchDialog />
       </nav>
     </header>
   );

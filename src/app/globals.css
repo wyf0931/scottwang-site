@@ -21,6 +21,18 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .site-header, .site-footer, .page-shell { width: min(calc(100% - 48px), var(--content-width)); margin-inline: auto; }
 .site-header { display: flex; align-items: center; justify-content: space-between; padding: 28px 0; border-bottom: 1px solid var(--border); }
 .site-header nav { display: flex; gap: 26px; color: var(--muted); font-size: 0.82rem; letter-spacing: 0.04em; }
+.search-trigger { display: inline-flex; align-items: center; gap: 7px; padding: 0; border: 0; color: var(--muted); background: transparent; font: inherit; cursor: pointer; }
+.search-trigger kbd { padding: 2px 5px; border: 1px solid var(--border); color: var(--faint); font: 0.62rem ui-monospace, monospace; }
+.search-backdrop { position: fixed; inset: 0; z-index: 10; display: flex; justify-content: center; padding-top: 12vh; background: rgba(3, 5, 8, 0.78); backdrop-filter: blur(8px); }
+.search-dialog { width: min(620px, calc(100% - 32px)); max-height: 70vh; overflow: auto; border: 1px solid var(--border); background: var(--surface); box-shadow: 0 24px 80px rgba(0,0,0,.4); }
+.search-input-row { display: flex; align-items: center; gap: 12px; padding: 18px 20px; border-bottom: 1px solid var(--border); color: var(--accent); }
+.search-input-row input { width: 100%; border: 0; outline: 0; color: var(--text); background: transparent; font: 1rem inherit; }
+.search-results { padding: 8px; }
+.search-result { display: flex; flex-direction: column; gap: 3px; padding: 14px; }
+.search-result:hover { background: var(--surface-raised); }
+.search-result .eyebrow { margin-bottom: 0; }
+.search-result small, .search-empty, .search-hint { margin: 0; color: var(--muted); font-size: .82rem; }
+.search-empty, .search-hint { padding: 24px 14px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.02em; }
 .brand-mark { display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid var(--accent); color: var(--accent); font: 700 0.62rem/1 ui-monospace, monospace; }
 .page-shell { min-height: calc(100vh - 145px); }
@@ -79,6 +91,7 @@ h2 { margin-bottom: 0; font-size: clamp(2rem, 4vw, 3.4rem); letter-spacing: -0.0
   .site-header, .site-footer, .page-shell { width: min(calc(100% - 32px), var(--content-width)); }
   .site-header { align-items: flex-start; gap: 16px; }
   .site-header nav { flex-wrap: nowrap; justify-content: end; gap: 8px 10px; font-size: 0.7rem; white-space: nowrap; }
+  .search-trigger kbd { display: none; }
   .hero { padding: 84px 0 70px; }
   h1 { font-size: clamp(3.4rem, 17vw, 5.5rem); }
   .content-grid { grid-template-columns: 1fr; }
