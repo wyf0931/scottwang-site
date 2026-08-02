@@ -35,4 +35,16 @@ npm test
 npm run build
 ```
 
+## Local operations and deployment
+
+Use `./bin/ops.sh` for repeatable local operations:
+
+```bash
+./bin/ops.sh start|stop|restart|status
+```
+
+The script owns the `.runtime/` PID/log files and must not write runtime state into source directories. `./bin/ops.sh deploy` requires `VERCEL_TOKEN`, runs the full verification chain, and then deploys production through Vercel CLI. Never commit tokens or Vercel secrets.
+
+`.github/workflows/ci.yml` validates pull requests and pushes. `.github/workflows/deploy.yml` deploys `main` to Vercel using the `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` repository secrets.
+
 When adding a new content type or output, update the schema, source query, route, metadata/feed behavior, docs, and tests together.
