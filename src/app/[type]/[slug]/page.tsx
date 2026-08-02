@@ -5,6 +5,7 @@ import { getAllContent, getContentBySlug } from "@/lib/content/source";
 import { contentTypeSchema } from "@/lib/content/schema";
 
 export function generateStaticParams() { return getAllContent().map((entry) => ({ type: entry.type, slug: entry.slug })); }
+export const dynamicParams = false;
 
 export default async function ArticlePage({ params }: { params: Promise<{ type: string; slug: string }> }) {
   const { type, slug } = await params;
