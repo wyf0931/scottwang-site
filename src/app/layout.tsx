@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/site/PageShell";
 import { personStructuredData, site } from "@/lib/seo/site";
+import { UmamiAnalytics } from "@/components/site/UmamiAnalytics";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="zh-CN"><body className="site-grid"><PageShell>{children}</PageShell><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personStructuredData()) }} /></body></html>;
+  return <html lang="zh-CN"><body className="site-grid"><PageShell>{children}</PageShell><UmamiAnalytics /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personStructuredData()) }} /></body></html>;
 }

@@ -15,12 +15,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 ::selection { background: rgba(114, 246, 194, 0.25); }
 .site-grid {
-  background-image: linear-gradient(rgba(114, 246, 194, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(114, 246, 194, 0.045) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(23, 25, 28, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 25, 28, 0.045) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 .site-header, .site-footer, .page-shell { width: min(calc(100% - 48px), var(--content-width)); margin-inline: auto; }
 .site-header { display: flex; align-items: center; justify-content: space-between; padding: 28px 0; border-bottom: 1px solid var(--border); }
 .site-header nav { display: flex; gap: 26px; color: var(--muted); font-size: 0.82rem; letter-spacing: 0.04em; }
+.theme-toggle { padding: 0; border: 0; color: var(--muted); background: transparent; font: 1rem/1 system-ui; cursor: pointer; }
 .search-trigger { display: inline-flex; align-items: center; gap: 7px; padding: 0; border: 0; color: var(--muted); background: transparent; font: inherit; cursor: pointer; }
 .search-trigger kbd { padding: 2px 5px; border: 1px solid var(--border); color: var(--faint); font: 0.62rem ui-monospace, monospace; }
 .search-backdrop { position: fixed; inset: 0; z-index: 10; display: flex; justify-content: center; padding-top: 12vh; background: rgba(3, 5, 8, 0.78); backdrop-filter: blur(8px); }
@@ -147,6 +148,12 @@ h2 { margin-bottom: 0; font-size: clamp(2rem, 4vw, 3.4rem); letter-spacing: -0.0
 .about-card > a { display: block; margin-bottom: 22px; color: var(--accent); }
 .wechat-card { padding: 18px 0 0; border-top: 1px solid var(--border); color: var(--muted); font: 0.75rem ui-monospace, monospace; }
 .wechat-card span { color: var(--text); font-size: 1rem; }
+.social-links { display: grid; gap: 10px; margin: 24px 0; font: .75rem ui-monospace, monospace; }
+.social-links a { color: var(--accent); }
+.comments-section { margin-top: 70px; padding-top: 26px; border-top: 1px solid var(--border); }
+.giscus-comments { min-height: 220px; }
+.comments-unavailable { margin: 0; color: var(--muted); font-size: .84rem; }
+html[data-theme="dark"] .site-grid { background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px); }
 @media (max-width: 720px) {
   .site-header, .site-footer, .page-shell { width: min(calc(100% - 32px), var(--content-width)); }
   .site-header { align-items: flex-start; gap: 16px; }
