@@ -78,6 +78,12 @@ h2 { margin-bottom: 0; font-size: clamp(2rem, 4vw, 3.4rem); letter-spacing: -0.0
 .article-body pre { overflow-x: auto; padding: 20px; background: var(--code); border: 1px solid var(--border); font-size: 0.85rem; }
 .article-body code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 .article-body :not(pre) > code { padding: 0.15em 0.35em; color: var(--accent); background: var(--code); }
+.video-embed { position: relative; aspect-ratio: 16 / 9; margin: 28px 0; overflow: hidden; background: var(--code); border: 1px solid var(--border); }
+.video-embed iframe { width: 100%; height: 100%; border: 0; }
+.embed-error { padding: 14px; border-left: 2px solid #ff8c69; color: #ffb39c; background: rgba(255, 140, 105, .08); }
+.callout { margin: 28px 0; padding: 16px 18px; border: 1px solid var(--border); background: var(--surface); }
+.callout-success { border-color: rgba(114, 246, 194, .45); }
+.callout-warning { border-color: rgba(255, 194, 92, .45); }
 .about-page { padding: 100px 0; }
 .about-page h1 { font-size: clamp(3.4rem, 8vw, 6.5rem); }
 .about-grid { display: grid; grid-template-columns: 1.4fr 0.8fr; gap: 80px; max-width: 980px; }
