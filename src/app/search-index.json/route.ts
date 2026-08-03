@@ -1,19 +1,20 @@
 import { getAllContent } from "@/lib/content/source";
 import { contentPath } from "@/lib/content/paths";
 import { site } from "@/lib/seo/site";
+import { getAllProjects, projectPath } from "@/lib/content/projects";
 
 export const dynamic = "force-static";
 
 export function GET() {
-  const documents = getAllContent().map((entry) => ({
+  const documents: Array<{ id: string; title: string; description: string; body: string; type: string; tags: string; date: string; url: string }> = getAllContent().map((entry) => ({
     id: `${entry.type}-${entry.slug}`,
     title: entry.title,
     description: entry.description,
     body: entry.plainText,
-    type: entry.type,
+    type: entry.type as string,
     tags: entry.tags.join(" "),
     date: entry.date.toISOString(),
     url: `${site.url}${contentPath(entry.type, entry.slug)}`,
-  }));
+  })).concat(getAllProjects().map((project) => ({ id: `project-${project.slug}`, title: project.title, description: project.description, body: project.body, type: "projects", tags: `${project.visibility} ${project.stack.join(" ")}`, date: project.date.toISOString(), url: `${site.url}${projectPath(project.slug)}` })));
   return Response.json(documents, { headers: { "Cache-Control": "public, max-age=3600" } });
 }

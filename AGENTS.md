@@ -17,6 +17,8 @@ Every public content file needs `title`, `description`, `date`, `type`, `tags`, 
 
 Optional `series` groups related entries. The site automatically exposes `/tags`, `/series`, and `/archive`; use concise, stable tag and series names because they become public navigation URLs.
 
+Projects belong in `content/projects/*.md`. A project may be open source, private, or closed source; only add a public repository or demo URL when it is intentionally publishable.
+
 ## Engineering rules
 
 - Preserve static generation and Vercel compatibility.
