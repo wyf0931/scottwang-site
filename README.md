@@ -32,8 +32,17 @@ description: "摘要"
 date: "2026-08-02"
 type: "notes"
 tags: ["AI"]
+series: "Agent Architecture"
 draft: false
 ```
+
+## 内容导航
+
+- `/tags`：按主题浏览标签
+- `/series`：浏览连续主题合集
+- `/archive`：按年份回看全部公开内容
+
+标签、合集和归档页面会随 `content/` 中的 Markdown / MDX 文件自动生成。
 
 `draft: true` 的内容不会进入公开列表。完整建设方案和实施计划见 `docs/superpowers/`。
 
