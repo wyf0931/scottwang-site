@@ -15,6 +15,8 @@ This is ScottWang's Markdown-first personal site. The owner is 王云飞 / Scott
 
 Every public content file needs `title`, `description`, `date`, `type`, `tags`, and `draft`. Supported types are `writing`, `notes`, and `thoughts`. Drafts must never appear in public routes, feeds, sitemap, or machine-readable indexes.
 
+Optional `series` groups related entries. The site automatically exposes `/tags`, `/series`, and `/archive`; use concise, stable tag and series names because they become public navigation URLs.
+
 ## Engineering rules
 
 - Preserve static generation and Vercel compatibility.

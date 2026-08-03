@@ -4,6 +4,7 @@ description: "关于 Agent 架构、上下文工程与长期系统能力的一�
 date: "2026-08-02"
 type: "writing"
 tags: ["AI", "Agent", "Architecture"]
+series: "Agent Architecture"
 featured: true
 draft: false
 ---
