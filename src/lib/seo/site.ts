@@ -8,6 +8,7 @@ export const site = {
     { href: "/writing", label: "Writing" },
     { href: "/notes", label: "Notes" },
     { href: "/thoughts", label: "Thoughts" },
+    { href: "/projects", label: "Projects" },
     { href: "/about", label: "About" },
   ],
 } as const;

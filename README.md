@@ -41,8 +41,9 @@ draft: false
 - `/tags`：按主题浏览标签
 - `/series`：浏览连续主题合集
 - `/archive`：按年份回看全部公开内容
+- `/projects`：查看正在构建、探索或维护的项目
 
-标签、合集和归档页面会随 `content/` 中的 Markdown / MDX 文件自动生成。
+标签、合集、归档和项目页面会随 `content/` 中的 Markdown / MDX 文件自动生成。项目不默认等同于开源项目，闭源项目使用 `visibility: "Closed Source"`，不填写仓库链接即可。
 
 `draft: true` 的内容不会进入公开列表。完整建设方案和实施计划见 `docs/superpowers/`。
 
