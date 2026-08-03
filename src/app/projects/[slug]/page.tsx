@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { renderMdx } from "@/lib/content/markdown";
 import { getAllProjects, getProjectBySlug, projectPath } from "@/lib/content/projects";
-import { site } from "@/lib/seo/site";
+import { contentOgImagePath, site } from "@/lib/seo/site";
 
 export const dynamicParams = false;
 export function generateStaticParams() { return getAllProjects().map((project) => ({ slug: project.slug })); }
@@ -10,7 +10,7 @@ export function generateStaticParams() { return getAllProjects().map((project) =
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const project = getProjectBySlug((await params).slug);
   if (!project) return {};
-  return { title: project.title, description: project.description, alternates: { canonical: projectPath(project.slug) }, openGraph: { type: "article", title: project.title, description: project.description } };
+  return { title: project.title, description: project.description, alternates: { canonical: projectPath(project.slug) }, openGraph: { type: "article", title: project.title, description: project.description, images: [contentOgImagePath("projects", project.slug)] } };
 }
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -14,6 +14,8 @@ export const site = {
   ],
 } as const;
 
+export function contentOgImagePath(kind: string, slug: string) { return `/og/${kind}/${slug}.svg`; }
+
 export function personStructuredData() {
   return { "@context": "https://schema.org", "@type": "Person", name: "王云飞", alternateName: "ScottWang", description: site.description, url: site.url, email: "wyf0931@gmail.com", knowsAbout: ["Artificial Intelligence", "Agent Architecture", "Internet Technology"] };
 }

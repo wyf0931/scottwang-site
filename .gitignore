@@ -12,4 +12,7 @@ test-results
 public/writing/*.md
 public/notes/*.md
 public/thoughts/*.md
+public/og/content/
+public/og/projects/
+public/og/research/
 .vercel

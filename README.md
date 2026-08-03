@@ -48,6 +48,12 @@ draft: false
 
 Research 报告由外部 Deep Research Agent 生成 Markdown，审核后放入 `content/research/`。站点只负责静态发布，不与 Agent 运行时打通；`Draft` 和 `Review` 报告不会出现在公开页面、sitemap、RSS、`llms.txt` 或搜索索引中。
 
+## Comments and analytics
+
+文章和 Research 页面使用 GitHub Discussions + Giscus。生产环境已绑定仓库 `wyf0931/scottwang-site` 的 `Announcements` 分类；如需本地预览，复制 `.env.example` 并补充 Giscus IDs。
+
+Umami 集成为可选项，不配置网站 ID 时不会加载任何统计脚本。配置 `NEXT_PUBLIC_UMAMI_SCRIPT_URL` 与 `NEXT_PUBLIC_UMAMI_WEBSITE_ID` 后重新部署即可启用。
+
 `draft: true` 的内容不会进入公开列表。完整建设方案和实施计划见 `docs/superpowers/`。
 
 `.mdx` 内容可以使用受控组件：
