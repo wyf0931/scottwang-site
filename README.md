@@ -42,8 +42,11 @@ draft: false
 - `/series`：浏览连续主题合集
 - `/archive`：按年份回看全部公开内容
 - `/projects`：查看正在构建、探索或维护的项目
+- `/research`：查看 AI Agent 辅助调研、人工审核后的研究报告
 
 标签、合集、归档和项目页面会随 `content/` 中的 Markdown / MDX 文件自动生成。项目不默认等同于开源项目，闭源项目使用 `visibility: "Closed Source"`，不填写仓库链接即可。
+
+Research 报告由外部 Deep Research Agent 生成 Markdown，审核后放入 `content/research/`。站点只负责静态发布，不与 Agent 运行时打通；`Draft` 和 `Review` 报告不会出现在公开页面、sitemap、RSS、`llms.txt` 或搜索索引中。
 
 `draft: true` 的内容不会进入公开列表。完整建设方案和实施计划见 `docs/superpowers/`。
 

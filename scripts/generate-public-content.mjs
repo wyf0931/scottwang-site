@@ -22,3 +22,15 @@ for (const type of types) {
     fs.writeFileSync(path.join(outputDir, `${slug}.md`), raw);
   }
 }
+
+const researchSourceDir = path.join(contentRoot, "research");
+const researchOutputDir = path.join(publicRoot, "research");
+fs.mkdirSync(researchOutputDir, { recursive: true });
+if (fs.existsSync(researchSourceDir)) {
+  for (const entry of fs.readdirSync(researchSourceDir, { withFileTypes: true })) {
+    if (!entry.isFile() || !entry.name.endsWith(".md")) continue;
+    const raw = fs.readFileSync(path.join(researchSourceDir, entry.name), "utf8");
+    if (!/^status:\s*["']?Published["']?\s*$/m.test(raw)) continue;
+    fs.writeFileSync(path.join(researchOutputDir, entry.name), raw);
+  }
+}
