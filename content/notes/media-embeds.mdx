@@ -1,0 +1,14 @@
+---
+title: "媒体嵌入与内容边界"
+description: "用显式 MDX 组件控制外部媒体的安全性、响应式和长期可维护性。"
+date: "2026-08-03"
+type: "notes"
+tags: ["MDX", "Media", "Web"]
+draft: false
+---
+
+<Callout tone="success">外部媒体应该通过受控组件进入内容，而不是允许任意 iframe。</Callout>
+
+组件可以统一处理响应式比例、加载策略、无效 URL 和可访问性标题。
+
+{/* Example: <YouTubeEmbed url="https://www.youtube.com/watch?v=..." /> */}

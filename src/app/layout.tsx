@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/site/PageShell";
-import { site } from "@/lib/seo/site";
+import { personStructuredData, site } from "@/lib/seo/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,8 +10,11 @@ export const metadata: Metadata = {
   authors: [{ name: site.author }],
   openGraph: { type: "website", siteName: site.name, title: "ScottWang — AI & Agent Architect", description: site.description },
   twitter: { card: "summary_large_image", title: "ScottWang — AI & Agent Architect", description: site.description },
+  alternates: { canonical: "/" },
+  icons: { icon: "/favicon.svg" },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="zh-CN"><body className="site-grid"><PageShell>{children}</PageShell></body></html>;
+  return <html lang="zh-CN"><body className="site-grid"><PageShell>{children}</PageShell><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personStructuredData()) }} /></body></html>;
 }

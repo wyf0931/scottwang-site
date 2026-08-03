@@ -37,6 +37,16 @@ draft: false
 
 `draft: true` 的内容不会进入公开列表。完整建设方案和实施计划见 `docs/superpowers/`。
 
+`.mdx` 内容可以使用受控组件：
+
+```mdx
+<Callout tone="success">这是一条提示。</Callout>
+<YouTubeEmbed url="https://www.youtube.com/watch?v=..." />
+<BilibiliEmbed url="https://www.bilibili.com/video/BV..." />
+```
+
+外部视频只允许通过这些组件嵌入，不要直接写任意 iframe。
+
 ## Commands
 
 ```bash

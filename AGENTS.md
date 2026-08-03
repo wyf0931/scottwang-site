@@ -21,6 +21,7 @@ Every public content file needs `title`, `description`, `date`, `type`, `tags`, 
 - Keep content parsing and UI rendering separate.
 - Prefer small typed modules over large route files.
 - Use explicit MDX components for external media; do not add arbitrary iframe HTML.
+- Supported MDX components are `Callout`, `YouTubeEmbed`, and `BilibiliEmbed`; validate provider URLs inside the component.
 - Keep semantic HTML, keyboard access, visible focus, readable Chinese typography, and mobile layouts intact.
 - Do not introduce a database, CMS, account system, or runtime search service without updating the approved design.
 
