@@ -50,7 +50,7 @@ Research 报告由外部 Deep Research Agent 生成 Markdown，审核后放入 `
 
 ## Comments and analytics
 
-文章和 Research 页面使用 GitHub Discussions + Giscus。生产环境已绑定仓库 `wyf0931/scottwang-site` 的 `Announcements` 分类；如需本地预览，复制 `.env.example` 并补充 Giscus IDs。
+文章和 Research 页面使用 GitHub Discussions + Giscus。生产环境已绑定仓库 `wyf0931/scottwang-site` 的 `Announcements` 分类；首次启用还需要在该仓库安装 [Giscus GitHub App](https://github.com/apps/giscus/installations/new)，否则页面会显示 `giscus is not installed on this repository`。
 
 Umami 集成为可选项，不配置网站 ID 时不会加载任何统计脚本。配置 `NEXT_PUBLIC_UMAMI_SCRIPT_URL` 与 `NEXT_PUBLIC_UMAMI_WEBSITE_ID` 后重新部署即可启用。
 
