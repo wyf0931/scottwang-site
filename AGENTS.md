@@ -41,6 +41,7 @@ Giscus comments are optional at build time and use GitHub Discussions. Umami is 
 - Use explicit MDX components for external media; do not add arbitrary iframe HTML.
 - Supported MDX components are `Callout`, `YouTubeEmbed`, and `BilibiliEmbed`; validate provider URLs inside the component.
 - GFM tables are supported through `remark-gfm`. Mermaid diagrams use fenced `mermaid` blocks and the controlled `MermaidDiagram` client component; do not add arbitrary script or HTML embeds.
+- Content may declare `github: "owner/repo"`. `scripts/generate-github-cards.mjs` refreshes repository metadata once per build into ignored `.generated/`; article layouts render it before comments. Keep the fallback path usable when GitHub API access is unavailable.
 - Keep semantic HTML, keyboard access, visible focus, readable Chinese typography, and mobile layouts intact.
 - Do not introduce a database, CMS, account system, or runtime search service without updating the approved design.
 

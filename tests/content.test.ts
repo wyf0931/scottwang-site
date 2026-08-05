@@ -21,6 +21,7 @@ describe("content source", () => {
     expect(resource?.kind).toBe("resource");
     expect(resource?.resourceType).toBe("github");
     expect(resource?.resourceUrl).toContain("github.com");
+    expect(resource?.github).toBe("crewAIInc/crewAI");
   });
 
   it("includes OmniData as an active closed-source project", () => {

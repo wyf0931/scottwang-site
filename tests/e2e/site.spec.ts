@@ -44,6 +44,12 @@ test("Markdown renders GFM tables and Mermaid diagrams", async ({ page }) => {
   await expect(page.locator(".mermaid-diagram")).toBeVisible();
 });
 
+test("content can show a build-time GitHub repository card", async ({ page }) => {
+  await page.goto("/notes/agent-resources");
+  await expect(page.locator(".github-repo-card")).toBeVisible();
+  await expect(page.locator(".github-repo-title")).toHaveAttribute("href", "https://github.com/crewAIInc/crewAI");
+});
+
 test("theme toggle switches between light and dark mode", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");

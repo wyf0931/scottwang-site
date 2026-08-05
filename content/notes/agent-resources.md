@@ -6,6 +6,7 @@ type: "notes"
 kind: "resource"
 resourceType: "github"
 resourceUrl: "https://github.com/crewAIInc/crewAI"
+github: "crewAIInc/crewAI"
 tags:
   - AI
   - Agent

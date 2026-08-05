@@ -16,3 +16,4 @@ public/og/content/
 public/og/projects/
 public/og/research/
 .vercel
+.generated
