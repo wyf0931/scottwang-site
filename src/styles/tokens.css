@@ -6,8 +6,8 @@
   --muted: #68717b;
   --faint: #8b939b;
   --border: rgba(23, 25, 28, 0.14);
-  --accent: #18794e;
-  --accent-strong: #0b5d39;
+  --accent: #1565c0;
+  --accent-strong: #0d47a1;
   --code: #f1f3f4;
   --content-width: 1180px;
   --reading-width: 760px;
@@ -23,8 +23,8 @@ html[data-theme="dark"] {
   --muted: #9ba3ad;
   --faint: #69737e;
   --border: rgba(203, 213, 225, 0.18);
-  --accent: #75c89f;
-  --accent-strong: #a1e1bd;
+  --accent: #64b5f6;
+  --accent-strong: #90caf9;
   --code: #101317;
   color-scheme: dark;
 }

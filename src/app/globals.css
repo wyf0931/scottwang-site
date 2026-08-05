@@ -181,7 +181,6 @@ h2 { margin-bottom: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15;
 .github-repo-meta { justify-content: flex-start; color: var(--muted); font: .7rem ui-monospace, monospace; }
 .giscus-comments { min-height: 220px; }
 .comments-unavailable { margin: 0; color: var(--muted); font-size: .84rem; }
-html[data-theme="dark"] .site-grid { background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px); }
 @media (max-width: 720px) {
   .site-header, .site-footer, .page-shell { width: min(calc(100% - 32px), var(--content-width)); }
   .site-header { align-items: flex-start; gap: 16px; }
@@ -205,6 +204,395 @@ html[data-theme="dark"] .site-grid { background-image: linear-gradient(rgba(255,
   .about-grid { grid-template-columns: 1fr; gap: 36px; }
   .section-heading, .site-footer { align-items: flex-start; flex-direction: column; gap: 16px; }
 }
+
+/* Coder-inspired personal site pass. Keep the site quiet, text-first, and list-oriented. */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.65;
+}
+
+.site-grid {
+  background-image: none;
+}
+
+.site-header,
+.site-footer,
+.page-shell {
+  width: min(calc(100% - 48px), 960px);
+}
+
+.site-header {
+  min-height: 60px;
+  padding: 0;
+  border-bottom: 0;
+}
+
+.site-header nav {
+  gap: 20px;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.brand {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.brand-mark {
+  display: none;
+}
+
+.page-shell {
+  min-height: calc(100vh - 120px);
+}
+
+.site-footer {
+  justify-content: center;
+  gap: 6px;
+  padding: 22px 0;
+  border-top: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.site-footer span:first-child {
+  display: none;
+}
+
+h1,
+.collection-page h1,
+.taxonomy-page h1,
+.projects-page h1,
+.research-page h1,
+.about-page h1 {
+  max-width: none;
+  margin-bottom: 16px;
+  font-size: 2.65rem;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+h2 {
+  font-size: 1.55rem;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.home-page {
+  padding-bottom: 48px;
+}
+
+.home-intro {
+  display: flex;
+  min-height: calc(100vh - 190px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0 84px;
+  text-align: center;
+}
+
+.home-avatar {
+  display: grid;
+  width: 156px;
+  height: 156px;
+  place-items: center;
+  margin-bottom: 28px;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--bg);
+  font: 800 2rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: -0.08em;
+}
+
+.home-intro h1 {
+  margin-bottom: 4px;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.home-subtitle,
+.home-role,
+.home-copy {
+  margin-bottom: 0;
+}
+
+.home-subtitle {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.home-role {
+  margin-top: 10px;
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.home-copy {
+  max-width: 560px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.home-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 28px;
+  font-weight: 650;
+}
+
+.home-links a:hover {
+  color: var(--accent);
+}
+
+.content-section,
+.featured-section {
+  padding: 34px 0;
+}
+
+.section-heading {
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.section-heading .eyebrow,
+.eyebrow.accent {
+  color: var(--muted);
+}
+
+.text-link,
+.taxonomy-links,
+.resource-link,
+.raw-link {
+  color: var(--accent);
+}
+
+.content-grid,
+.project-grid,
+.research-grid {
+  display: block;
+  margin-top: 22px;
+}
+
+.content-card {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 28px;
+  padding: 13px 0;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  transition: none;
+}
+
+.content-card:hover {
+  border-color: var(--border);
+  transform: none;
+}
+
+.content-card > time {
+  color: var(--muted);
+  font: 0.92rem/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-align: right;
+}
+
+.content-card h3 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  font-weight: 750;
+  letter-spacing: 0;
+}
+
+.content-card p {
+  max-width: 680px;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.tag-row {
+  gap: 8px 12px;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.project-card,
+.project-teaser,
+.research-card,
+.taxonomy-card,
+.about-card,
+.github-repo-card {
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+}
+
+.project-card,
+.project-teaser,
+.research-card {
+  min-height: 0;
+  padding: 16px 0;
+  transition: none;
+}
+
+.project-card:hover,
+.project-teaser:hover {
+  border-color: var(--border);
+  transform: none;
+}
+
+.project-card h2,
+.research-card h2 {
+  margin: 6px 0;
+  font-size: 1.12rem;
+  letter-spacing: 0;
+}
+
+.project-card p,
+.research-card p,
+.project-teaser small {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.project-teaser {
+  display: block;
+}
+
+.project-teaser span {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 750;
+}
+
+.collection-page,
+.taxonomy-page,
+.projects-page,
+.research-page,
+.about-page,
+.project-detail,
+.research-detail,
+.article-layout {
+  max-width: 760px;
+  padding: 64px 0 90px;
+}
+
+.article-header,
+.project-detail-header,
+.research-detail-header {
+  padding-bottom: 22px;
+}
+
+.article-header h1,
+.project-detail-header h1,
+.research-detail-header h1 {
+  max-width: 760px;
+  margin-bottom: 16px;
+  font-size: 2.35rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.article-description,
+.lead,
+.hero-copy {
+  font-size: 1rem;
+}
+
+.article-body {
+  max-width: 760px;
+  padding-top: 28px;
+  font-size: 1rem;
+  line-height: 1.82;
+}
+
+.article-body h2 {
+  font-size: 1.55rem;
+  letter-spacing: 0;
+}
+
+.article-body h3 {
+  font-size: 1.22rem;
+  letter-spacing: 0;
+}
+
+.research-feature {
+  align-items: center;
+  margin: 24px 0 42px;
+  padding: 18px 0;
+}
+
+.values,
+.hero {
+  display: none;
+}
+
+html[data-theme="dark"] .site-grid {
+  background-image: none;
+}
+
+@media (max-width: 720px) {
+  .site-header,
+  .site-footer,
+  .page-shell {
+    width: min(calc(100% - 28px), 960px);
+  }
+
+  .site-header {
+    min-height: auto;
+    padding: 18px 0;
+  }
+
+  .site-header nav {
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    font-size: 0.84rem;
+  }
+
+  .home-intro {
+    min-height: calc(100vh - 180px);
+    padding-bottom: 56px;
+  }
+
+  .home-avatar {
+    width: 132px;
+    height: 132px;
+  }
+
+  h1,
+  .collection-page h1,
+  .taxonomy-page h1,
+  .projects-page h1,
+  .research-page h1,
+  .about-page h1,
+  .article-header h1,
+  .project-detail-header h1,
+  .research-detail-header h1 {
+    font-size: 2rem;
+    line-height: 1.22;
+  }
+
+  .content-card,
+  .archive-item {
+    display: block;
+  }
+
+  .content-card > time {
+    display: block;
+    margin-bottom: 3px;
+    text-align: left;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }

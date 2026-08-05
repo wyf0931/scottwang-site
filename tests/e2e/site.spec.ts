@@ -3,14 +3,14 @@ import { expect, test } from "@playwright/test";
 test("home exposes the primary site navigation", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/ScottWang/);
-  await expect(page.getByRole("link", { name: "Content", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Research" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Projects" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Blog", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Research", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Projects", exact: true })).toBeVisible();
 });
 
 test("content index filters resource entries and keeps legacy views", async ({ page }) => {
   await page.goto("/content?kind=note");
-  await expect(page.locator("h1")).toHaveText("Content");
+  await expect(page.locator("h1")).toHaveText("Blog");
   await expect(page.getByText("5W2H：把一件模糊的事问完整")).toBeVisible();
   await page.goto("/notes");
   await expect(page.locator("h1")).toHaveText("Notes");
