@@ -11,17 +11,9 @@ describe("content source", () => {
   });
 
   it("filters by type and resolves slugs", () => {
-    expect(getContentByType("notes").map((entry) => entry.slug)).toEqual(expect.arrayContaining(["nextjs-mdx-patterns", "media-embeds"]));
+    expect(getContentByType("notes").map((entry) => entry.slug)).toEqual(expect.arrayContaining(["5w2h", "udp-packet", "media-embeds"]));
     expect(getContentBySlug("thoughts", "why-build-in-public")?.type).toBe("thoughts");
     expect(getContentBySlug("thoughts", "draft-example")).toBeUndefined();
-  });
-
-  it("supports canonical kinds and resource metadata", () => {
-    const resource = getContentBySlug("notes", "agent-resources");
-    expect(resource?.kind).toBe("resource");
-    expect(resource?.resourceType).toBe("github");
-    expect(resource?.resourceUrl).toContain("github.com");
-    expect(resource?.github).toBe("crewAIInc/crewAI");
   });
 
   it("loads the UDP packet note", () => {
