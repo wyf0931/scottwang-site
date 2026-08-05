@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getAllContent, getContentBySlug, getContentByType } from "@/lib/content/source";
+import { getAllProjects, getProjectBySlug } from "@/lib/content/projects";
 
 describe("content source", () => {
   it("loads public content in date order", () => {
@@ -20,5 +21,10 @@ describe("content source", () => {
     expect(resource?.kind).toBe("resource");
     expect(resource?.resourceType).toBe("github");
     expect(resource?.resourceUrl).toContain("github.com");
+  });
+
+  it("includes OmniData as an active closed-source project", () => {
+    expect(getAllProjects()).toHaveLength(3);
+    expect(getProjectBySlug("omni-data")).toMatchObject({ status: "Active", visibility: "Closed Source", url: "https://data.ohmyagent.ai/" });
   });
 });
