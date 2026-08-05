@@ -44,6 +44,12 @@ test("Markdown renders GFM tables and Mermaid diagrams", async ({ page }) => {
   await expect(page.locator(".mermaid-diagram")).toBeVisible();
 });
 
+test("UDP note renders the packet diagram", async ({ page }) => {
+  await page.goto("/notes/udp-packet");
+  await expect(page.locator("h1")).toContainText("UDP 数据包");
+  await expect(page.locator(".mermaid-diagram")).toBeVisible();
+});
+
 test("content can show a build-time GitHub repository card", async ({ page }) => {
   await page.goto("/notes/agent-resources");
   await expect(page.locator(".github-repo-card")).toBeVisible();
