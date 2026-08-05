@@ -76,21 +76,40 @@ status() {
 }
 
 deploy() {
-  if [[ -z "${VERCEL_TOKEN:-}" ]]; then
-    echo "VERCEL_TOKEN is required. Create a token in Vercel and export it before deploy."
+  local commit_message="${*:-chore: publish site updates}"
+  local current_branch
+  current_branch="$(cd "$ROOT_DIR" && git branch --show-current)"
+
+  if [[ -z "$current_branch" ]]; then
+    echo "Cannot deploy from a detached HEAD."
     return 1
   fi
 
   echo "Running release checks..."
   (cd "$ROOT_DIR" && npm run lint && npm run typecheck && npm test && npm run build)
-  echo "Deploying to Vercel production..."
-  local scope_args=()
-  [[ -n "${VERCEL_SCOPE:-}" ]] && scope_args+=(--scope "$VERCEL_SCOPE")
-  (cd "$ROOT_DIR" && npx vercel --prod --yes --token "$VERCEL_TOKEN" "${scope_args[@]}")
+
+  if [[ -n "$(cd "$ROOT_DIR" && git status --porcelain)" ]]; then
+    echo "Committing local changes..."
+    (cd "$ROOT_DIR" && git add -A && git commit -m "$commit_message")
+  else
+    echo "No local changes to commit."
+  fi
+
+  echo "Pushing $current_branch..."
+  (cd "$ROOT_DIR" && git push origin "$current_branch")
+
+  if [[ "$current_branch" == "main" ]]; then
+    echo "Changes are on main. GitHub Actions will deploy production."
+    return 0
+  fi
+
+  echo "Merging $current_branch into main..."
+  (cd "$ROOT_DIR" && git switch main && git pull origin main && git merge --no-ff "$current_branch" -m "merge: $commit_message" && git push origin main && git switch "$current_branch")
+  echo "Pushed main. GitHub Actions will deploy production."
 }
 
 usage() {
-  echo "Usage: ./bin/ops.sh {start|stop|restart|status|deploy}"
+  echo "Usage: ./bin/ops.sh {start|stop|restart|status|deploy [commit-message]}"
 }
 
 case "${1:-}" in
