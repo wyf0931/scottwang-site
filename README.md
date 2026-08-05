@@ -78,6 +78,16 @@ Umami 集成为可选项，不配置网站 ID 时不会加载任何统计脚本�
 
 外部视频只允许通过这些组件嵌入，不要直接写任意 iframe。
 
+Markdown 默认支持 GFM 表格，也支持 Mermaid 图表：
+
+````md
+```mermaid
+flowchart LR
+  A[问题] --> B[方案]
+  B --> C[执行]
+```
+````
+
 ## Commands
 
 ```bash

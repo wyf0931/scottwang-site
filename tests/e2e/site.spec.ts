@@ -38,6 +38,12 @@ test("search finds Chinese content", async ({ page }) => {
   await expect(page.locator(".search-result").first()).toBeVisible();
 });
 
+test("Markdown renders GFM tables and Mermaid diagrams", async ({ page }) => {
+  await page.goto("/notes/5w2h");
+  await expect(page.locator("table")).toBeVisible();
+  await expect(page.locator(".mermaid-diagram")).toBeVisible();
+});
+
 test("theme toggle switches between light and dark mode", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
