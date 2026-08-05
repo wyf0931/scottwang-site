@@ -14,4 +14,11 @@ describe("content source", () => {
     expect(getContentBySlug("thoughts", "why-build-in-public")?.type).toBe("thoughts");
     expect(getContentBySlug("thoughts", "draft-example")).toBeUndefined();
   });
+
+  it("supports canonical kinds and resource metadata", () => {
+    const resource = getContentBySlug("notes", "agent-resources");
+    expect(resource?.kind).toBe("resource");
+    expect(resource?.resourceType).toBe("github");
+    expect(resource?.resourceUrl).toContain("github.com");
+  });
 });
