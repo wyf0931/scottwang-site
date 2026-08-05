@@ -282,7 +282,7 @@ h2 {
 }
 
 .home-page {
-  padding-bottom: 48px;
+  padding-bottom: 0;
 }
 
 .home-intro {
@@ -345,9 +345,22 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 18px;
+  gap: 14px;
   margin-top: 28px;
   font-weight: 650;
+}
+
+.home-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--text);
+}
+
+.home-links svg {
+  width: 1.12em;
+  height: 1.12em;
+  fill: currentColor;
 }
 
 .home-links a:hover {
