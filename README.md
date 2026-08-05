@@ -115,6 +115,8 @@ npm run build
 - `docs/`: decisions, specifications, plans, and research
 - `AGENTS.md`: instructions for Coding Agents
 
+For a full operating guide, read `docs/user-manual.md`.
+
 ## Deployment
 
 GitHub is the source repository and Vercel is the target deployment platform. Set `NEXT_PUBLIC_SITE_URL` to the production URL in Vercel. Production builds are static and can also be exported to `out/`.

@@ -13,16 +13,17 @@
 
 The default port is `3000`; override it with `PORT=3100 ./bin/ops.sh start`.
 
-## Local production deployment
+## One-command publishing
 
-The `deploy` command runs all release checks before invoking Vercel CLI:
+The `deploy` command is the preferred local publishing entry point:
 
 ```bash
-export VERCEL_TOKEN="..."
-./bin/ops.sh deploy
+./bin/ops.sh deploy "docs: update note"
 ```
 
-`VERCEL_SCOPE` is optional for team-scoped projects. Secrets must never be committed.
+It runs lint, typecheck, unit tests, and a production build. If local files changed, it commits them with the provided message, pushes the current branch, merges that branch into `main`, and pushes `main`. Production deployment is then handled by GitHub Actions.
+
+Local deployment no longer requires a local `VERCEL_TOKEN`. Secrets must never be committed.
 
 ## GitHub deployment
 
