@@ -24,6 +24,13 @@ describe("content source", () => {
     expect(resource?.github).toBe("crewAIInc/crewAI");
   });
 
+  it("loads the UDP packet note", () => {
+    expect(getContentBySlug("notes", "udp-packet")).toMatchObject({
+      title: "UDP 数据包：轻量，但不替你保证可靠",
+      kind: "note",
+    });
+  });
+
   it("includes OmniData as an active closed-source project", () => {
     expect(getAllProjects()).toHaveLength(3);
     expect(getProjectBySlug("omni-data")).toMatchObject({ status: "Active", visibility: "Closed Source", url: "https://data.ohmyagent.ai/" });
