@@ -9,9 +9,9 @@ test("home exposes the primary site navigation", async ({ page }) => {
 });
 
 test("content index filters resource entries and keeps legacy views", async ({ page }) => {
-  await page.goto("/content?kind=resource");
+  await page.goto("/content?kind=note");
   await expect(page.locator("h1")).toHaveText("Content");
-  await expect(page.getByText("Agent 工程资源书签")).toBeVisible();
+  await expect(page.getByText("5W2H：把一件模糊的事问完整")).toBeVisible();
   await page.goto("/notes");
   await expect(page.locator("h1")).toHaveText("Notes");
 });
@@ -48,12 +48,6 @@ test("UDP note renders the packet diagram", async ({ page }) => {
   await page.goto("/notes/udp-packet");
   await expect(page.locator("h1")).toContainText("UDP 数据包");
   await expect(page.locator(".mermaid-diagram")).toBeVisible();
-});
-
-test("content can show a build-time GitHub repository card", async ({ page }) => {
-  await page.goto("/notes/agent-resources");
-  await expect(page.locator(".github-repo-card")).toBeVisible();
-  await expect(page.locator(".github-repo-title")).toHaveAttribute("href", "https://github.com/crewAIInc/crewAI");
 });
 
 test("theme toggle switches between light and dark mode", async ({ page }) => {

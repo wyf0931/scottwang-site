@@ -6,10 +6,9 @@ type: "notes"
 kind: "note"
 tags:
   - 网络
+  - 协议
   - UDP
   - TCP/IP
-  - Mermaid
-  - 工程实践
 ---
 
 UDP 是 User Datagram Protocol 的缩写。它位于传输层，设计目标很直接：把一段数据交给 IP 层发送，尽量少做额外事情。
@@ -18,7 +17,9 @@ UDP 是 User Datagram Protocol 的缩写。它位于传输层，设计目标很�
 
 ## UDP 报文长什么样
 
-UDP 头部固定只有 8 字节，由四个 16 位字段组成。下面用 Mermaid 的 packet diagram 画出报文布局：
+UDP 头部固定只有 8 字节，由四个 16 位字段组成。
+
+下面是 UDP 报文布局：
 
 ```mermaid
 ---
@@ -38,9 +39,9 @@ packet
 - **Checksum**：校验和，用于发现传输过程中的数据损坏。IPv4 中可以不使用，IPv6 中通常必须使用。
 - **Data**：应用数据，长度可变。
 
-端口字段是 16 位，因此端口号范围是 0 到 65535。UDP 长度字段也是 16 位，理论上的数据报最大长度是 65535 字节；实际可用大小还会受到 IP 层、链路 MTU 和分片的影响。
+端口字段是 16 位，因此端口号范围是 `0～65535`。UDP 长度字段也是 16 位，理论上的数据报最大长度是 65535 字节；实际可用大小还会受到 IP 层、链路 MTU 和分片的影响。
 
-## 它为什么叫“无连接”
+## 为什么是“无连接”、“无状态“
 
 UDP 发送数据前不需要握手。应用只需要指定目标地址和端口，就可以发出一个 datagram。接收方拿到后，根据目标端口把它交给对应的 socket。
 
@@ -51,7 +52,7 @@ UDP 发送数据前不需要握手。应用只需要指定目标地址和端口�
 - 数据不会重复到达；
 - 发送方一定知道接收方是否处理成功。
 
-丢包、乱序、重复和超时，都可能需要应用层自己处理。如果业务确实需要可靠传输，可以在 UDP 之上增加序列号、确认、重传、拥塞控制等机制。QUIC 就是在 UDP 之上实现可靠传输和加密的一个典型例子。
+**丢包、乱序、重复和超时，都可能需要应用层自己处理。** 如果业务确实需要可靠传输，可以在 UDP 之上增加序列号、确认、重传、拥塞控制等机制。QUIC 就是在 UDP 之上实现可靠传输和加密的一个典型例子。
 
 ## UDP 适合什么场景
 
@@ -81,4 +82,3 @@ UDP 适合那些更看重低延迟、简单请求响应，或希望自己控制�
 
 - [Wikipedia：User Datagram Protocol](https://en.wikipedia.org/wiki/User_Datagram_Protocol)
 - [RFC 768：User Datagram Protocol](https://www.rfc-editor.org/rfc/rfc768)
-- [Mermaid：Packet Diagram](https://mermaid.js.org/syntax/packet.html)
