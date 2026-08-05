@@ -117,6 +117,6 @@ case "${1:-}" in
   stop) stop ;;
   restart) stop || true; start ;;
   status) status ;;
-  deploy) deploy ;;
+  deploy) shift; deploy "$@" ;;
   *) usage; exit 2 ;;
 esac
