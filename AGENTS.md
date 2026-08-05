@@ -13,7 +13,9 @@ This is ScottWang's Markdown-first personal site. The owner is 王云飞 / Scott
 
 ## Content rules
 
-Every public content file needs `title`, `description`, `date`, `type`, `tags`, and `draft`. Supported types are `writing`, `notes`, and `thoughts`. Drafts must never appear in public routes, feeds, sitemap, or machine-readable indexes.
+Every public content file needs `title`, `description`, `date`, `type`, `tags`, and `draft`. Legacy source types are `writing`, `notes`, and `thoughts`; the canonical presentation kinds are `essay`, `note`, `thought`, and `resource`. Existing files default from legacy type to kind, so migrations can be incremental. A resource may add `resourceType` (`github`, `youtube`, `bilibili`, `course`, `website`, or `upload`) and `resourceUrl`. Drafts must never appear in public routes, feeds, sitemap, or machine-readable indexes.
+
+`/content` is the canonical unified collection. `/writing`, `/notes`, and `/thoughts` remain compatible filtered views for old links.
 
 Optional `series` groups related entries. The site automatically exposes `/tags`, `/series`, and `/archive`; use concise, stable tag and series names because they become public navigation URLs.
 

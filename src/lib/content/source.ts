@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { CONTENT_ROOT } from "./paths";
-import { contentTypeSchema, frontmatterSchema, type ContentRecord, type ContentType } from "./schema";
+import { contentTypeSchema, defaultContentKind, frontmatterSchema, type ContentRecord, type ContentType } from "./schema";
 
 function contentFiles(type: ContentType) {
   const directory = path.join(CONTENT_ROOT, type);
@@ -33,10 +33,11 @@ function plainText(markdown: string) {
 function parseFile(type: ContentType, file: string): ContentRecord {
   const raw = fs.readFileSync(file, "utf8");
   const parsed = matter(raw);
-  const data = frontmatterSchema.parse({ ...parsed.data, type: parsed.data.type ?? type });
+  const data = frontmatterSchema.parse({ ...parsed.data, type: parsed.data.type ?? type, kind: parsed.data.kind ?? defaultContentKind(type) });
+  const kind = data.kind ?? defaultContentKind(type);
   const body = parsed.content.trim();
   const text = plainText(body);
-  return { ...data, slug: slugFromFile(type, file), sourcePath: file, raw, body, plainText: text, readingTime: Math.max(1, Math.ceil(text.length / 500)) };
+  return { ...data, kind, slug: slugFromFile(type, file), sourcePath: file, raw, body, plainText: text, readingTime: Math.max(1, Math.ceil(text.length / 500)) };
 }
 
 export function getAllContent(includeDrafts = false): ContentRecord[] {

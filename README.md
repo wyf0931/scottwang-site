@@ -1,6 +1,6 @@
 # ScottWang Personal Site
 
-王云飞（ScottWang）的个人站点，记录 AI、Agent 架构、技术笔记、开源项目和个人思考。
+王云飞（ScottWang）的个人站点，记录 AI、Agent 架构、技术内容、资源、开源项目和个人思考。
 
 ## Quick start
 
@@ -24,20 +24,32 @@ Logs and the PID file are stored in `.runtime/` and are ignored by Git.
 
 ## 写作
 
-在 `content/writing`、`content/notes` 或 `content/thoughts` 新增 `.md` / `.mdx` 文件，使用以下 frontmatter：
+在 `content/writing`、`content/notes` 或 `content/thoughts` 新增 `.md` / `.mdx` 文件，使用以下 frontmatter。目录和 `type` 主要用于兼容旧路径；Content 页面使用 `kind` 做统一分类：
 
 ```yaml
 title: "标题"
 description: "摘要"
 date: "2026-08-02"
 type: "notes"
+kind: "note" # essay | note | thought | resource
 tags: ["AI"]
 series: "Agent Architecture"
 draft: false
 ```
 
+资源内容可以这样声明：
+
+```yaml
+kind: "resource"
+resourceType: "github" # github | youtube | bilibili | course | website | upload
+resourceUrl: "https://github.com/..."
+```
+
+`tags` 只表示主题，例如 `AI`、`Agent`、`Open Source`。资源正文仍然使用 Markdown，用于记录背景、评价和使用建议。
+
 ## 内容导航
 
+- `/content`：统一浏览 Essays、Notes、Thoughts 和 Resources，可按类型或标签筛选
 - `/tags`：按主题浏览标签
 - `/series`：浏览连续主题合集
 - `/archive`：按年份回看全部公开内容

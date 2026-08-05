@@ -12,8 +12,8 @@ export function GET() {
     title: entry.title,
     description: entry.description,
     body: entry.plainText,
-    type: entry.type as string,
-    tags: entry.tags.join(" "),
+    type: entry.kind as string,
+    tags: [entry.kind, entry.resourceType, ...entry.tags].filter(Boolean).join(" "),
     date: entry.date.toISOString(),
     url: `${site.url}${contentPath(entry.type, entry.slug)}`,
   })).concat(getAllProjects().map((project) => ({ id: `project-${project.slug}`, title: project.title, description: project.description, body: project.body, type: "projects", tags: `${project.visibility} ${project.stack.join(" ")}`, date: project.date.toISOString(), url: `${site.url}${projectPath(project.slug)}` }))).concat(getAllResearch().map((report) => ({ id: `research-${report.slug}`, title: report.title, description: report.description, body: report.body, type: "research", tags: `${report.industry} ${report.topic} ${report.tags.join(" ")}`, date: report.date.toISOString(), url: `${site.url}${researchPath(report.slug)}` })));

@@ -3,8 +3,17 @@ import { expect, test } from "@playwright/test";
 test("home exposes the primary site navigation", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/ScottWang/);
+  await expect(page.getByRole("link", { name: "Content", exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "Research" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Projects" })).toBeVisible();
+});
+
+test("content index filters resource entries and keeps legacy views", async ({ page }) => {
+  await page.goto("/content?kind=resource");
+  await expect(page.locator("h1")).toHaveText("Content");
+  await expect(page.getByText("Agent 工程资源书签")).toBeVisible();
+  await page.goto("/notes");
+  await expect(page.locator("h1")).toHaveText("Notes");
 });
 
 test("research report exposes SEO and raw Markdown", async ({ page, request }) => {
