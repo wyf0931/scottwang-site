@@ -18,6 +18,7 @@ npm run dev
 ./bin/ops.sh status      # PID, URL, and log location
 ./bin/ops.sh restart
 ./bin/ops.sh stop
+./bin/ops.sh deploy "docs: update note" # verify, commit, merge main, deploy
 ```
 
 Logs and the PID file are stored in `.runtime/` and are ignored by Git.
@@ -118,14 +119,13 @@ npm run build
 
 GitHub is the source repository and Vercel is the target deployment platform. Set `NEXT_PUBLIC_SITE_URL` to the production URL in Vercel. Production builds are static and can also be exported to `out/`.
 
-For a local one-command production deploy, authenticate with Vercel and export a token:
+For one-command publishing after editing content locally, run:
 
 ```bash
-export VERCEL_TOKEN="..."
-./bin/ops.sh deploy
+./bin/ops.sh deploy "docs: update my note"
 ```
 
-`deploy` runs lint, typecheck, tests, and a production build before invoking Vercel CLI. If the project is scoped to a Vercel team, also export `VERCEL_SCOPE`.
+`deploy` runs lint, typecheck, tests, and a production build. If local files changed, it commits them with the provided message, pushes the current branch, merges it into `main`, and pushes `main` so GitHub Actions triggers the Vercel production deployment.
 
 GitHub Actions deploys `main` automatically. Add these repository secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`. PRs run the verification workflow; production deployment runs only after changes reach `main`.
 

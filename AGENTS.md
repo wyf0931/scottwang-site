@@ -56,9 +56,10 @@ Use `./bin/ops.sh` for repeatable local operations:
 
 ```bash
 ./bin/ops.sh start|stop|restart|status
+./bin/ops.sh deploy "docs: update note"
 ```
 
-The script owns the `.runtime/` PID/log files and must not write runtime state into source directories. `./bin/ops.sh deploy` requires `VERCEL_TOKEN`, runs the full verification chain, and then deploys production through Vercel CLI. Never commit tokens or Vercel secrets.
+The script owns the `.runtime/` PID/log files and must not write runtime state into source directories. `./bin/ops.sh deploy` runs the full verification chain, commits local changes with the provided message, pushes the current branch, merges it into `main`, and pushes `main` so GitHub Actions deploys production. Never commit tokens or Vercel secrets.
 
 `.github/workflows/ci.yml` validates pull requests and pushes. `.github/workflows/deploy.yml` deploys `main` to Vercel using the `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` repository secrets.
 
