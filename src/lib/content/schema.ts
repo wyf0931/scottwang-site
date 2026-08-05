@@ -16,6 +16,7 @@ export const frontmatterSchema = z.object({
   kind: contentKindSchema.optional(),
   resourceType: resourceTypeSchema.optional(),
   resourceUrl: z.string().url().optional(),
+  github: z.string().regex(/^[^/\s]+\/[^/\s]+$/, "Expected a GitHub repository in owner/repo format").optional(),
   tags: z.array(z.string()).default([]),
   series: z.string().optional(),
   draft: z.boolean().default(false),

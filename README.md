@@ -78,6 +78,14 @@ Umami 集成为可选项，不配置网站 ID 时不会加载任何统计脚本�
 
 外部视频只允许通过这些组件嵌入，不要直接写任意 iframe。
 
+文章可以在 frontmatter 中通过 `owner/repo` 引入 GitHub 信息卡片。构建时会读取一次 GitHub API，文章正文后、评论前展示仓库名称、描述、Star、Fork 和主要语言：
+
+```yaml
+github: "crewAIInc/crewAI"
+```
+
+构建时网络不可用时会优先使用上一次缓存，首次没有缓存时仍保留可点击的仓库链接。
+
 Markdown 默认支持 GFM 表格，也支持 Mermaid 图表：
 
 ````md

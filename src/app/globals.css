@@ -171,6 +171,14 @@ h2 { margin-bottom: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15;
 .social-links { display: grid; gap: 10px; margin: 24px 0; font: .75rem ui-monospace, monospace; }
 .social-links a { color: var(--accent); }
 .comments-section { margin-top: 70px; padding-top: 26px; border-top: 1px solid var(--border); }
+.github-repo-card { margin-top: 58px; padding: 22px; border: 1px solid var(--border); background: var(--surface); }
+.github-repo-heading, .github-repo-meta { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.github-repo-heading .eyebrow { margin-bottom: 0; }
+.github-repo-mark { display: grid; width: 30px; height: 30px; place-items: center; border: 1px solid var(--border); color: var(--muted); font: .65rem ui-monospace, monospace; }
+.github-repo-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 20px 0 8px; color: var(--text); font-size: 1.2rem; letter-spacing: -.025em; }
+.github-repo-title span { color: var(--accent); font: .9rem ui-monospace, monospace; }
+.github-repo-card p { max-width: 680px; margin-bottom: 20px; color: var(--muted); font-size: .9rem; }
+.github-repo-meta { justify-content: flex-start; color: var(--muted); font: .7rem ui-monospace, monospace; }
 .giscus-comments { min-height: 220px; }
 .comments-unavailable { margin: 0; color: var(--muted); font-size: .84rem; }
 html[data-theme="dark"] .site-grid { background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px); }

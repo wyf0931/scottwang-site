@@ -4,9 +4,9 @@
   "description": "",
   "private": true,
   "scripts": {
-    "predev": "node scripts/generate-public-content.mjs && node scripts/generate-og-images.mjs",
+    "predev": "node scripts/generate-public-content.mjs && node scripts/generate-github-cards.mjs && node scripts/generate-og-images.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/generate-public-content.mjs && node scripts/generate-og-images.mjs",
+    "prebuild": "node scripts/generate-public-content.mjs && node scripts/generate-github-cards.mjs && node scripts/generate-og-images.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
