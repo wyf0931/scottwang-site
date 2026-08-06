@@ -108,8 +108,12 @@ deploy() {
   echo "Pushed main. GitHub Actions will deploy production."
 }
 
+import_obsidian() {
+  (cd "$ROOT_DIR" && node scripts/import-obsidian.mjs "$@")
+}
+
 usage() {
-  echo "Usage: ./bin/ops.sh {start|stop|restart|status|deploy [commit-message]}"
+  echo "Usage: ./bin/ops.sh {start|stop|restart|status|deploy [commit-message]|import-obsidian <vault-or-folder> [options]}"
 }
 
 case "${1:-}" in
@@ -118,5 +122,6 @@ case "${1:-}" in
   restart) stop || true; start ;;
   status) status ;;
   deploy) shift; deploy "$@" ;;
+  import-obsidian) shift; import_obsidian "$@" ;;
   *) usage; exit 2 ;;
 esac
