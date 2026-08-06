@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/projects/home-shares",
+      "destination": "/projects/oma-drop/",
+      "permanent": true
+    },
+    {
+      "source": "/projects/home-shares/",
+      "destination": "/projects/oma-drop/",
+      "permanent": true
+    }
+  ]
+}
