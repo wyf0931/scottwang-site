@@ -482,6 +482,25 @@ h2 {
   font-size: 0.72rem;
 }
 
+.content-taxonomy {
+  margin-top: 34px;
+  padding: 18px 0;
+  border-block: 1px solid var(--border);
+}
+
+.content-taxonomy .tag-row {
+  margin: 0;
+}
+
+.content-taxonomy .tag-row a,
+.content-taxonomy .tag-row span {
+  color: var(--muted);
+}
+
+.content-taxonomy .tag-row a:hover {
+  color: var(--accent);
+}
+
 .project-card,
 .project-teaser,
 .research-card,
