@@ -48,6 +48,24 @@ resourceUrl: "https://github.com/..."
 
 `tags` 只表示主题，例如 `AI`、`Agent`、`Open Source`。资源正文仍然使用 Markdown，用于记录背景、评价和使用建议。
 
+### 从 Obsidian 导入
+
+可以把 Obsidian vault 或其中一个目录批量导入到站点内容区。默认导入到 `content/notes/<slug>/index.md`，并设置 `draft: true`，方便先本地检查再发布：
+
+```bash
+./bin/ops.sh import-obsidian ~/Documents/ObsidianVault --dry-run
+./bin/ops.sh import-obsidian ~/Documents/ObsidianVault --tag Obsidian
+```
+
+确认内容没问题后，可以重新导入为公开内容：
+
+```bash
+./bin/ops.sh import-obsidian ~/Documents/ObsidianVault --publish --overwrite
+./bin/ops.sh deploy "content: import obsidian notes"
+```
+
+导入脚本会处理 Obsidian wikilink、图片附件和 callout 基本语法。图片会复制到 `public/obsidian-assets/<slug>/`，正文链接会改成站点可访问路径。
+
 ## 内容导航
 
 - `/content`：统一浏览 Essays、Notes、Thoughts 和 Resources，可按类型或标签筛选

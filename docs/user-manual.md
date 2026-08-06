@@ -215,6 +215,61 @@ draft: false
 ./bin/ops.sh deploy "docs: add my new note"
 ```
 
+## 怎么导入 Obsidian 笔记
+
+如果平时在 Obsidian 里写笔记，可以用导入脚本把 vault 或某个子目录转成本站内容。
+
+先做 dry run。
+
+```bash
+./bin/ops.sh import-obsidian ~/Documents/ObsidianVault --dry-run
+```
+
+确认将要生成的文件路径没问题后，再正式导入。
+
+```bash
+./bin/ops.sh import-obsidian ~/Documents/ObsidianVault --tag Obsidian
+```
+
+默认行为比较保守。
+
+```text
+导入位置       content/notes/<slug>/index.md
+内容状态       draft: true
+默认标签       Obsidian
+图片附件       public/obsidian-assets/<slug>/
+重复文件       默认跳过
+```
+
+常用参数如下。
+
+```bash
+--type notes|writing|thoughts   # 导入到哪个内容目录，默认 notes
+--kind note|essay|thought|resource
+--tag AI                        # 给所有导入内容追加标签，可以重复
+--publish                       # 直接设置 draft: false
+--overwrite                     # 覆盖已有导入文件
+--dry-run                       # 只预览，不写文件
+```
+
+例如，只导入 Obsidian 里的 AI 目录，并作为公开笔记发布。
+
+```bash
+./bin/ops.sh import-obsidian ~/Documents/ObsidianVault/AI --tag AI --publish --overwrite
+./bin/ops.sh deploy "content: import ai notes from obsidian"
+```
+
+导入脚本会做这些转换。
+
+```text
+[[Some Note]]                 -> [Some Note](/notes/some-note)
+[[Some Note|alias]]           -> [alias](/notes/some-note)
+![[image.png]]                -> ![image](/obsidian-assets/<slug>/image.png)
+> [!NOTE] title               -> > **NOTE title**
+```
+
+脚本不会删除或修改原始 Obsidian 文件。第一次批量导入建议保持 draft，检查标题、摘要、图片和内部链接后，再把准备公开的文章改成 `draft: false`，最后执行发布。
+
 ## 一键发布做了什么
 
 `./bin/ops.sh deploy "message"` 是当前推荐发布方式。它不依赖本机 Vercel token，生产部署由 GitHub Actions 触发。

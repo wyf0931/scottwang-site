@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "import:obsidian": "node scripts/import-obsidian.mjs",
     "test:e2e": "playwright test"
   },
   "keywords": [],
