@@ -28,11 +28,11 @@ describe("content source", () => {
     expect(getProjectBySlug("omni-data")).toMatchObject({ status: "Active", visibility: "Closed Source", url: "https://data.ohmyagent.ai/" });
   });
 
-  it("includes Home Shares as an open-source project", () => {
-    expect(getProjectBySlug("home-shares")).toMatchObject({
+  it("includes oma-drop as an open-source project", () => {
+    expect(getProjectBySlug("oma-drop")).toMatchObject({
       status: "Active",
       visibility: "Open Source",
-      repository: "https://github.com/wyf0931/home-shares",
+      repository: "https://github.com/wyf0931/oma-drop",
     });
   });
 });
