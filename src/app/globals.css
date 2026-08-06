@@ -677,9 +677,13 @@ html[data-theme="dark"] .site-grid {
     align-items: start;
   }
 
+  .content-results {
+    grid-column: 1;
+    min-width: 0;
+  }
+
   .content-browser .content-filters {
     grid-column: 2;
-    grid-row: 1 / span 2;
     position: sticky;
     top: 84px;
     margin: 0;
@@ -691,13 +695,7 @@ html[data-theme="dark"] .site-grid {
     display: block;
   }
 
-  .content-browser .filter-summary,
-  .content-browser .content-grid,
-  .content-browser .empty-state {
-    grid-column: 1;
-  }
-
-  .content-browser .filter-summary {
+  .content-results .filter-summary {
     margin-top: 0;
   }
 
