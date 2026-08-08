@@ -10,5 +10,15 @@
       "destination": "/projects/oma-drop/",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index"
+    },
+    {
+      "source": "/:path*/",
+      "destination": "/:path*/index"
+    }
   ]
 }
