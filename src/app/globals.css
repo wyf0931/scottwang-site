@@ -147,6 +147,12 @@ h2 { margin-bottom: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15;
 .article-body :is(pre, pre > code) { width: 100%; min-width: 0; }
 .article-body [data-rehype-pretty-code-figure] { width: 100%; margin: 1.25em 0; }
 .article-body [data-rehype-pretty-code-figure] > pre { margin: 0; }
+
+/* shiki syntax highlighting: map CSS custom properties to color */
+[data-rehype-pretty-code-figure] span[style] { color: var(--shiki-light); }
+html[data-theme="dark"] [data-rehype-pretty-code-figure] span[style] { color: var(--shiki-dark); }
+[data-rehype-pretty-code-figure] code { color: var(--shiki-light); background: transparent; }
+html[data-theme="dark"] [data-rehype-pretty-code-figure] code { color: var(--shiki-dark); }
 .article-body table { display: block; width: 100%; overflow-x: auto; margin: 32px 0; border-collapse: collapse; font-size: .94rem; }
 .article-body th, .article-body td { min-width: 120px; padding: 11px 14px; text-align: left; vertical-align: top; border: 1px solid var(--border); }
 .article-body th { color: var(--text); background: var(--code); font-weight: 600; }
