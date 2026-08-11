@@ -312,7 +312,7 @@ Vercel 项目里需要站点 URL 和统计相关环境变量。
 ```text
 NEXT_PUBLIC_SITE_URL=https://wyf0931.cn
 NEXT_PUBLIC_UMAMI_SCRIPT_URL=https://cloud.umami.is/script.js
-NEXT_PUBLIC_UMAMI_WEBSITE_ID=2677e96c-cacb-4cfb-8804-ae49706c63d0
+NEXT_PUBLIC_UMAMI_WEBSITE_ID=<your-umami-website-id>
 ```
 
 Giscus 评论依赖 GitHub Discussions 和 Giscus GitHub App。仓库没有安装 Giscus 时，页面会显示对应错误。
