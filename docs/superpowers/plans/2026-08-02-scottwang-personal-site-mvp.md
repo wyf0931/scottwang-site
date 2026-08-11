@@ -164,7 +164,7 @@ Build a keyboard-accessible header with the five primary links, a compact mobile
 
 - [ ] **Step 2: Implement the homepage composition**
 
-Create a hero that states “王云飞 / ScottWang”, current focus on AI and Agent architecture, and the values “共赢 · 专注 · 精进”. Add featured content, latest Writing/Notes/Thoughts entries, and a restrained system-like visual motif such as grid lines or signal markers. Avoid decorative noise and avoid making the hero depend on client-side JavaScript.
+Create a hero that states "ScottWang", current focus on AI and Agent architecture, and the values "共赢 · 专注 · 精进". Add featured content, latest Writing/Notes/Thoughts entries, and a restrained system-like visual motif such as grid lines or signal markers. Avoid decorative noise and avoid making the hero depend on client-side JavaScript.
 
 - [ ] **Step 3: Add responsive and accessibility behavior**
 

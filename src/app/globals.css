@@ -312,15 +312,9 @@ h2 {
   letter-spacing: 0;
 }
 
-.home-subtitle,
 .home-role,
 .home-copy {
   margin-bottom: 0;
-}
-
-.home-subtitle {
-  color: var(--muted);
-  font-size: 1rem;
 }
 
 .home-role {
