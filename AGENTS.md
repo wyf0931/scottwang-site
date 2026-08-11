@@ -49,6 +49,13 @@ Giscus comments are optional at build time and use GitHub Discussions. Umami is 
 - Keep semantic HTML, keyboard access, visible focus, readable Chinese typography, and mobile layouts intact.
 - Do not introduce a database, CMS, account system, or runtime search service without updating the approved design.
 
+## Branching and worktree workflow
+
+- Never commit code changes directly on `main`; keep `main` deployable and pristine.
+- Develop every change on a `feat/...` or `fix/...` branch in a dedicated git worktree created off `main` (for example `git worktree add -b feat/<name> ../<worktree> main`), not in the main checkout.
+- One writer per worktree. Run the full verification chain on the branch before pushing.
+- Land changes via pull request or the `./bin/ops.sh deploy` flow, not by committing straight to `main`.
+
 ## Verification
 
 Before handoff, run:
