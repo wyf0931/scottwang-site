@@ -153,6 +153,26 @@ h2 { margin-bottom: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15;
 html[data-theme="dark"] [data-rehype-pretty-code-figure] span[style] { color: var(--shiki-dark); }
 [data-rehype-pretty-code-figure] code { color: var(--shiki-light); background: transparent; }
 html[data-theme="dark"] [data-rehype-pretty-code-figure] code { color: var(--shiki-dark); }
+
+/* code copy button */
+[data-rehype-pretty-code-figure] { position: relative; }
+.code-copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 1;
+}
+[data-rehype-pretty-code-figure]:hover .code-copy-btn { opacity: 1; }
+.code-copy-btn:hover { color: var(--text); border-color: var(--muted); }
+.code-copy-btn-copied { color: var(--accent); border-color: var(--accent); }
 .article-body table { display: block; width: 100%; overflow-x: auto; margin: 32px 0; border-collapse: collapse; font-size: .94rem; }
 .article-body th, .article-body td { min-width: 120px; padding: 11px 14px; text-align: left; vertical-align: top; border: 1px solid var(--border); }
 .article-body th { color: var(--text); background: var(--code); font-weight: 600; }
