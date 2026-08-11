@@ -130,9 +130,9 @@ h2 { margin-bottom: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15;
 .archive-item { display: grid; grid-template-columns: 72px 1fr 80px; gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--border); }
 .archive-item span, .archive-item small { color: var(--muted); font: .72rem ui-monospace, monospace; }
 .archive-item small { text-align: right; text-transform: uppercase; }
-.article-layout { max-width: 900px; margin: 0 auto; padding: 88px 0 110px; }
+.article-layout { max-width: var(--reading-width); margin: 0 auto; padding: 88px 0 110px; }
 .article-header { padding-bottom: 42px; border-bottom: 1px solid var(--border); }
-.article-header h1 { max-width: 850px; margin-bottom: 22px; font-size: clamp(2.2rem, 4vw, 3.6rem); line-height: 1.1; letter-spacing: -0.06em; text-wrap: balance; }
+.article-header h1 { max-width: none; margin-bottom: 22px; font-size: clamp(2.2rem, 4vw, 3.6rem); line-height: 1.1; letter-spacing: -0.06em; text-wrap: balance; }
 .article-description { color: var(--muted); font-size: 1.1rem; }
 .article-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 26px; color: var(--faint); font: 0.72rem ui-monospace, monospace; }
 .article-meta a { color: var(--accent); }
