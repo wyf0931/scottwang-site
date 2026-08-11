@@ -6,7 +6,7 @@ status: "Active"
 visibility: "Open Source"
 stack: ["Next.js", "TypeScript", "MDX", "Vercel"]
 featured: true
-url: "https://ohmyclaw.cn"
+url: "https://wyf0931.cn"
 repository: "https://github.com/wyf0931/scottwang-site"
 ---
 

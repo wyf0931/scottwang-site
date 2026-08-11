@@ -11,7 +11,7 @@
 生产站点是
 
 ```text
-https://ohmyclaw.cn
+https://wyf0931.cn
 ```
 
 代码仓库是
@@ -291,7 +291,7 @@ git push origin main
 git switch 回原分支
 ```
 
-`main` 推送后，GitHub Actions 会跑 CI 和 Vercel 生产部署。部署完成后，内容会出现在 `https://ohmyclaw.cn`。
+`main` 推送后，GitHub Actions 会跑 CI 和 Vercel 生产部署。部署完成后，内容会出现在 `https://wyf0931.cn`。
 
 如果没有本地改动，脚本会跳过 commit，但仍会推当前分支并合并到 `main`。
 
@@ -310,7 +310,7 @@ VERCEL_PROJECT_ID
 Vercel 项目里需要站点 URL 和统计相关环境变量。
 
 ```text
-NEXT_PUBLIC_SITE_URL=https://ohmyclaw.cn
+NEXT_PUBLIC_SITE_URL=https://wyf0931.cn
 NEXT_PUBLIC_UMAMI_SCRIPT_URL=https://cloud.umami.is/script.js
 NEXT_PUBLIC_UMAMI_WEBSITE_ID=2677e96c-cacb-4cfb-8804-ae49706c63d0
 ```
