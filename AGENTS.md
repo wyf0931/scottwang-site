@@ -2,7 +2,7 @@
 
 ## Project
 
-This is ScottWang's Markdown-first personal site. The owner is 王云飞 / ScottWang, an internet technology and AI/Agent architect. The site should feel precise, calm, technical, and premium; avoid generic SaaS styling and noisy cyberpunk decoration.
+This is ScottWang's Markdown-first personal site. The owner is ScottWang, an internet technology and AI/Agent architect. The site should feel precise, calm, technical, and premium; avoid generic SaaS styling and noisy cyberpunk decoration.
 
 ## Source of truth
 

@@ -27,7 +27,6 @@ Brand attributes:
 
 Public identity:
 
-- Chinese name: 王云飞
 - English name: ScottWang
 - Background: former architect at an internet mobility company; currently focused full-time on AI.
 - Public email: wyf0931@gmail.com, shown on About.

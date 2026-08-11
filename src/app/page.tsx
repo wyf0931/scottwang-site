@@ -5,7 +5,6 @@ export default function Home() {
     <section className="home-intro" aria-label="ScottWang profile">
       <div className="home-avatar" aria-hidden="true">SW</div>
       <h1>ScottWang</h1>
-      <p className="home-subtitle">王云飞</p>
       <p className="home-role">互联网技术与 AI / Agent 架构师</p>
       <p className="home-copy">记录技术笔记、行业观察、资源分享和一些还在形成中的判断。</p>
       <div className="home-links">

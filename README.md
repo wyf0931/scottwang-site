@@ -1,6 +1,6 @@
 # ScottWang Personal Site
 
-王云飞（ScottWang）的个人站点，记录 AI、Agent 架构、技术内容、资源、开源项目和个人思考。
+ScottWang 的个人站点，记录 AI、Agent 架构、技术内容、资源、开源项目和个人思考。
 
 ## Quick start
 
