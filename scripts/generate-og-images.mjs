@@ -4,6 +4,8 @@ import matter from "gray-matter";
 
 const root = process.cwd();
 const publicRoot = path.join(root, "public", "og");
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const hostLabel = (() => { try { return new URL(siteUrl).hostname.toUpperCase(); } catch { return "WYF0931.CN"; } })();
 
 function escapeXml(value) { return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;"); }
 function wrap(value, max = 18) {
@@ -15,7 +17,7 @@ function wrap(value, max = 18) {
 function render({ title, type, label, accent = "#111111" }) {
   const lines = wrap(title);
   const titleSvg = lines.map((line, index) => `<text x="94" y="${270 + index * 68}" fill="#111111" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="56" font-weight="700" letter-spacing="-2">${escapeXml(line)}</text>`).join("");
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#fafafa"/><path d="M0 96H1200M0 534H1200" stroke="#e5e5e5"/><path d="M96 0V630M1104 0V630" stroke="#e5e5e5"/><rect x="94" y="78" width="28" height="28" fill="${accent}"/><text x="142" y="101" fill="#555" font-family="ui-monospace,SFMono-Regular,monospace" font-size="18" letter-spacing="3">SCOTTWANG / ${escapeXml(type.toUpperCase())}</text>${titleSvg}<text x="94" y="566" fill="#777" font-family="ui-monospace,SFMono-Regular,monospace" font-size="16" letter-spacing="2">${escapeXml(label)}</text><text x="1104" y="566" text-anchor="end" fill="#111" font-family="ui-monospace,SFMono-Regular,monospace" font-size="16">OHMYCLAW.CN</text></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#fafafa"/><path d="M0 96H1200M0 534H1200" stroke="#e5e5e5"/><path d="M96 0V630M1104 0V630" stroke="#e5e5e5"/><rect x="94" y="78" width="28" height="28" fill="${accent}"/><text x="142" y="101" fill="#555" font-family="ui-monospace,SFMono-Regular,monospace" font-size="18" letter-spacing="3">SCOTTWANG / ${escapeXml(type.toUpperCase())}</text>${titleSvg}<text x="94" y="566" fill="#777" font-family="ui-monospace,SFMono-Regular,monospace" font-size="16" letter-spacing="2">${escapeXml(label)}</text><text x="1104" y="566" text-anchor="end" fill="#111" font-family="ui-monospace,SFMono-Regular,monospace" font-size="16">${hostLabel}</text></svg>`;
 }
 function write(kind, slug, data) {
   const output = path.join(publicRoot, kind, `${slug}.svg`);
