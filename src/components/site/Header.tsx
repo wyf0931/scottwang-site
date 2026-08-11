@@ -11,7 +11,13 @@ export function Header() {
         <span>ScottWang</span>
       </Link>
       <nav aria-label="Primary navigation">
-        {site.navigation.slice(1).map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+        {site.navigation.slice(1).map((item) =>
+          "external" in item ? (
+            <a key={item.href} href={item.href} target="_blank" rel="noreferrer">{item.label}</a>
+          ) : (
+            <Link key={item.href} href={item.href}>{item.label}</Link>
+          )
+        )}
         <ThemeToggle /><SearchDialog />
       </nav>
     </header>
