@@ -22,10 +22,8 @@ UDP 头部固定只有 8 字节，由四个 16 位字段组成。
 下面是 UDP 报文布局：
 
 ```mermaid
----
-title: "UDP Packet"
----
 packet
+title UDP Packet
 0-15: "Source Port"
 16-31: "Destination Port"
 32-47: "Length"

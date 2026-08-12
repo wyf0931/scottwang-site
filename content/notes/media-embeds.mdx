@@ -55,10 +55,8 @@ Callout 用来在文中插入需要读者注意的信息，渲染为带图标的
 用 ` ```mermaid ` 开头的代码块会被自动渲染为 SVG 图表，客户端执行，支持暗色主题。
 
 ```mermaid
----
-title: "示例流程图"
----
 graph TD
+title 示例流程图
     A[开始] --> B{判断条件}
     B -->|是| C[执行操作]
     B -->|否| D[结束]
@@ -68,17 +66,15 @@ graph TD
 
 ````mdx
 ```mermaid
----
-title: "示例流程图"
----
 graph TD
+title 示例流程图
     A[开始] --> B{判断条件}
     B -->|是| C[执行操作]
     B -->|否| D[结束]
 ```
 ````
 
-支持所有 Mermaid 图表类型：graph（流程图）、sequence（时序图）、class（类图）、state（状态图）、er（ER 图）、gantt（甘特图）、pie（饼图）、packet（报文图）等。在 frontmatter 和代码块之间用 `---` 分隔的 YAML 里写 `title`，图表上方会显示标题。
+支持所有 Mermaid 图表类型：graph（流程图）、sequence（时序图）、class（类图）、state（状态图）、er（ER 图）、gantt（甘特图）、pie（饼图）、packet（报文图）等。用 `title` 关键字在图表定义内写标题。
 
 ## 代码高亮
 
