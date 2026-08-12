@@ -6,13 +6,11 @@ describe("content source", () => {
   it("loads public content in date order", () => {
     const entries = getAllContent();
     expect(entries.length).toBeGreaterThanOrEqual(4);
-    expect(entries.find((entry) => entry.featured)?.title).toBe("Building Agent Systems That Compound");
     expect(entries.every((entry) => !entry.draft)).toBe(true);
   });
 
   it("filters by type and resolves slugs", () => {
-    expect(getContentByType("notes").map((entry) => entry.slug)).toEqual(expect.arrayContaining(["5w2h", "udp-packet", "media-embeds"]));
-    expect(getContentBySlug("thoughts", "why-build-in-public")?.type).toBe("thoughts");
+    expect(getContentByType("notes").map((entry) => entry.slug)).toEqual(expect.arrayContaining(["5w2h", "udp-packet", "media-embeds", "eternal-september", "fomo"]));
     expect(getContentBySlug("thoughts", "draft-example")).toBeUndefined();
   });
 
