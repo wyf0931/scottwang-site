@@ -5,8 +5,6 @@ date: "2026-08-12"
 type: "notes"
 kind: "note"
 tags:
-  - 互联网
-  - 黑话
   - 哲学
   - 思维方法
 ---

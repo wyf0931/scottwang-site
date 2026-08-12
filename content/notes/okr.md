@@ -6,8 +6,6 @@ type: "notes"
 kind: "note"
 series: "okr"
 tags:
-  - 互联网
-  - 黑话
   - 管理学
   - 目标管理
 ---
