@@ -5,15 +5,15 @@ import type { Element, Root } from "hast";
  * Rehype plugin that preserves mermaid code blocks through rehype-pretty-code.
  *
  * rehype-pretty-code uses Shiki for syntax highlighting, which doesn't support
- * mermaid. When it encounters a mermaid code block, Shiki throws and the
- * fallback to "plaintext" produces empty/malformed output, destroying the
- * original diagram text.
+ * mermaid. Even worse, it wraps <pre> in <figure>, stripping unknown data
+ * attributes. This plugin preserves mermaid blocks through that process.
  *
  * This plugin works in two phases:
- * - Phase 1 ("before"): Extracts mermaid <pre> blocks from the tree, saving
- *   them to a side-map keyed by a data attribute on a placeholder <pre>.
+ * - Phase 1 ("before"): Extracts mermaid <pre> blocks, replaces them with
+ *   a bare <div data-mermaid-preserve="id"> placeholder that rehype-pretty-code
+ *   ignores (no <pre>/<code> children to trigger figure wrapping).
  * - Phase 2 ("after"): Restores the original <pre><code> elements from the
- *   side-map, replacing the placeholders.
+ *   side-map, replacing the <div> placeholders.
  *
  * Usage: insert this plugin immediately before AND after rehype-pretty-code
  * in the plugin chain, calling with phase "before" then "after".
@@ -47,30 +47,22 @@ export function rehypePreserveMermaid(phase: "before" | "after") {
         const id = `mermaid-preserved-${idx}`;
         preservedBlocks.set(id, rawText);
 
-        // Replace the entire <pre> with a placeholder that rehype-pretty-code
-        // won't try to highlight (use "math" language which is explicitly skipped)
+        // Replace the entire <pre> with a bare <div> placeholder.
+        // rehype-pretty-code only touches <pre><code> blocks, so a plain div
+        // passes through untouched, preserving the data-mermaid-preserve attribute.
         const placeholder: Element = {
           type: "element",
-          tagName: "pre",
-          properties: {
-            "data-mermaid-preserve": id,
-          },
-          children: [
-            {
-              type: "element",
-              tagName: "code",
-              properties: { className: ["language-math"] },
-              children: [],
-            },
-          ],
+          tagName: "div",
+          properties: { "data-mermaid-preserve": id },
+          children: [],
         };
 
         (parent.children as Element[])[idx] = placeholder;
       });
     } else {
-      // Phase "after": restore original mermaid blocks from placeholders
+      // Phase "after": restore original mermaid blocks from <div> placeholders
       visit(tree, "element", (node: Element, idx, parent) => {
-        if (!parent || idx == null || node.tagName !== "pre") return;
+        if (!parent || idx == null || node.tagName !== "div") return;
 
         const preserveId = node.properties?.["data-mermaid-preserve"];
         if (typeof preserveId !== "string") return;
