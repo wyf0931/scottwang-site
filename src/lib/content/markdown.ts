@@ -9,6 +9,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import { BilibiliEmbed, YouTubeEmbed } from "@/components/content/VideoEmbed";
 import { Callout } from "@/components/content/Callout";
 import { MarkdownPre } from "@/components/content/MarkdownCode";
+import { rehypePreserveMermaid } from "./rehype-preserve-mermaid";
 
 const prettyCodeOptions = {
   theme: { light: "github-light" as const, dark: "github-dark" as const },
@@ -24,7 +25,9 @@ export async function renderMarkdown(markdown: string) {
     .use(remarkGfm)
     .use(remarkRehype)
     .use(rehypeSlug)
+    .use(rehypePreserveMermaid, "before")
     .use(codeHighlighter)
+    .use(rehypePreserveMermaid, "after")
     .use(rehypeStringify)
     .process(markdown);
   return String(file);
@@ -37,7 +40,11 @@ export async function renderMdx(source: string) {
     options: {
       mdxOptions: {
         remarkPlugins: [remarkGfm],
-        rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
+        rehypePlugins: [
+          [rehypePreserveMermaid, "before"],
+          [rehypePrettyCode, prettyCodeOptions],
+          [rehypePreserveMermaid, "after"],
+        ],
       },
       parseFrontmatter: false,
     },
