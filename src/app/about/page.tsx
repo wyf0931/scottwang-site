@@ -11,8 +11,8 @@ export default function AboutPage() {
 
       <div className="about-meta">
         <div className="about-meta-block">
-          <p className="eyebrow">Core values</p>
-          <div className="about-values"><strong>共赢</strong><strong>专注</strong><strong>精进</strong></div>
+          <p className="eyebrow">偈言 <span lang="en">Gāthā</span></p>
+          <div className="about-values"><strong>明月松间照</strong><strong>清泉石上流</strong></div>
         </div>
         <div className="about-meta-block">
           <p className="eyebrow">Contact</p>
