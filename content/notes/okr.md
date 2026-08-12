@@ -4,6 +4,7 @@ description: "诞生于 Intel、成名于 Google 的目标管理方法论。目�
 date: "2026-08-12"
 type: "notes"
 kind: "note"
+series: "okr"
 tags:
   - 互联网
   - 黑话
