@@ -48,6 +48,20 @@ Giscus comments are optional at build time and use GitHub Discussions. Umami is 
 - One writer per worktree. Run the full verification chain on the branch before pushing.
 - Land changes via pull request or the `./bin/ops.sh deploy` flow, not by committing straight to `main`.
 
+### Content branches (`content/...`)
+
+Use a `content/<slug>` branch for blog posts, about page updates, and any editorial content changes that do not modify the site framework itself (no code, no config, no component changes).
+
+Workflow:
+
+1. Create a worktree: `git worktree add -b content/<slug> ../scottwang-content-<slug> main`
+2. Write the article in `content/<type>/<slug>/` inside the worktree.
+3. After drafting, run the `human-writing` skill to review and polish the prose before committing.
+4. Commit, merge into `main`, and push. GitHub Actions will auto-deploy.
+5. Clean up: `git worktree remove ../scottwang-content-<slug>`
+
+Content-only branches skip the full verification chain (lint, typecheck, test, build). If a content branch also touches code or configuration, it must follow the `feat/...` or `fix/...` flow instead.
+
 ## Verification
 
 Before handoff, run:
