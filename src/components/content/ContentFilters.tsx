@@ -25,8 +25,8 @@ export function ContentFilters({ entries }: { entries: ContentRecord[] }) {
     <div className="content-filters" aria-label="Content filters">
       <p className="sidebar-label">Filter</p>
       <div className="filter-group">{filters.map((filter) => <Link className={activeKind === filter.value ? "filter-link is-active" : "filter-link"} href={filter.value === "all" ? "/content" : `/content?kind=${filter.value}`} key={filter.value}>{filter.label}</Link>)}</div>
-      <div className="filter-tags"><span>Topic</span>{tags.map((item) => <Link className={tag === item ? "filter-tag is-active" : "filter-tag"} href={`/content?tag=${encodeURIComponent(item)}`} key={item}>#{item}</Link>)}</div>
       <div className="content-browse-links"><p className="sidebar-label">Browse</p><Link href="/tags">Tags →</Link><Link href="/series">Series →</Link><Link href="/archive">Archive →</Link></div>
+      <div className="filter-tags"><span>Topic</span>{tags.map((item) => <Link className={tag === item ? "filter-tag is-active" : "filter-tag"} href={`/content?tag=${encodeURIComponent(item)}`} key={item}>#{item}</Link>)}</div>
     </div>
   </div>;
 }
