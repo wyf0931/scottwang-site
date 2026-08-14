@@ -9,6 +9,7 @@ export const site = {
     { href: "/projects", label: "Projects" },
     { href: "https://games.wyf0931.cn", label: "Games", external: true },
     { href: "/research", label: "Research" },
+    { href: "/books", label: "Books" },
     { href: "/about", label: "About" },
   ],
 } as const;
