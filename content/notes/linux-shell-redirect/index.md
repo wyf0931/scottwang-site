@@ -2,9 +2,8 @@
 title: "Linux/Unix Shell 重定向操作符与文件描述符"
 description: "Shell 中文件描述符 0/1/2 的含义、重定向操作符 > / >> / 2>&1 等语法，以及 /dev/null /dev/tty 等特殊目标的速查。"
 date: "2026-08-14"
-type: "resources"
-kind: "resource"
-resourceType: "notes"
+type: "notes"
+kind: "note"
 tags:
   - shell
   - bash

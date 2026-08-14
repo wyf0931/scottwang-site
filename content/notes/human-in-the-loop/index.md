@@ -2,9 +2,8 @@
 title: "Human-in-the-loop（HITL）中文翻译速查"
 description: "Human-in-the-loop（HITL）的中文翻译辨析，涵盖‘人在回路’‘人机协作’‘人机协同闭环’等译法及其适用场景。"
 date: "2026-08-14"
-type: "resources"
-kind: "resource"
-resourceType: "notes"
+type: "notes"
+kind: "note"
 tags:
   - HITL
   - AI

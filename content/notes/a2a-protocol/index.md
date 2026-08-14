@@ -2,7 +2,7 @@
 title: "Agent2Agent (A2A) 协议"
 description: "Agent2Agent (A2A) 协议 — 一个开放标准，使不同框架、不同厂商构建的 AI Agent 能够发现彼此、协商交互、安全协作，无需暴露内部状态。"
 date: "2026-08-14"
-type: "resources"
+type: "notes"
 kind: "resource"
 resourceType: "github"
 resourceUrl: "https://github.com/a2aproject/A2A"

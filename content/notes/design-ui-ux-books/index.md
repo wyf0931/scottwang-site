@@ -2,7 +2,7 @@
 title: "Design, UI & UX 书单资源"
 description: "GitHub 上一个精心整理的 UI/UX 设计书籍合集，涵盖色彩、设计原则、Figma 工具、平面设计、设计心理学、UI 设计、UX 设计和导视设计八个方向，共 60+ 本。"
 date: "2026-08-12"
-type: "resources"
+type: "notes"
 kind: "resource"
 resourceType: "github"
 resourceUrl: "https://github.com/ytx-readings/design-ui-ux"

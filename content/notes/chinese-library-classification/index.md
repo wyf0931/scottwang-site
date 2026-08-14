@@ -2,7 +2,7 @@
 title: "中国图书馆分类法（中图法）在线查询"
 description: "中国图书馆分类法（中图法）在线分类查询和图书检索工具，可查询中图分类号、浏览分类体系、检索图书。"
 date: "2026-08-13"
-type: "resources"
+type: "notes"
 kind: "resource"
 resourceType: "website"
 resourceUrl: "https://www.clcindex.com/"
