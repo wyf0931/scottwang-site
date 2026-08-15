@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getAllContent, getContentBySlug, getContentByType } from "@/lib/content/source";
 import { getAllProjects, getProjectBySlug } from "@/lib/content/projects";
+import { getAllBooks, getBookBySlug } from "@/lib/content/books";
 
 describe("content source", () => {
   it("loads public content in date order", () => {
@@ -31,6 +32,15 @@ describe("content source", () => {
       status: "Active",
       visibility: "Open Source",
       repository: "https://github.com/wyf0931/oma-drop",
+    });
+  });
+
+  it("loads the curated books shelf", () => {
+    expect(getAllBooks()).toHaveLength(1);
+    expect(getBookBySlug("fde-guidance-book")).toMatchObject({
+      title: "FDE: The Guidance Book of Forward Deployed Engineer",
+      readerUrl: "https://fde4.ai/book/",
+      draft: false,
     });
   });
 });

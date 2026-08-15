@@ -2,7 +2,9 @@
 
 ## Source of truth
 
-Markdown and MDX files under `content/writing`, `content/notes`, and `content/thoughts` are the only content source. Each file is parsed by `src/lib/content/source.ts`, validated by the Zod schema, and transformed into a typed `ContentRecord`.
+Markdown and MDX files under `content/writing`, `content/notes`, and `content/thoughts` are the primary article source. Each file is parsed by `src/lib/content/source.ts`, validated by the Zod schema, and transformed into a typed `ContentRecord`.
+
+Project, research, and book records use their own typed source modules. They still read from `content/`, but they do not share the article schema because their public behavior is different.
 
 ## Public filtering
 
@@ -18,6 +20,8 @@ The same record provides:
 - Sitemap entries
 - `llms.txt` retrieval links
 - Reading-time and excerpt data
+
+Books are curated shelf entries. A book record provides metadata for `/books`, sitemap, `llms.txt`, and the static search index. Books are not mirrored into article pages and do not enter RSS.
 
 ## Boundaries
 

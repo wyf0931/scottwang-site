@@ -29,6 +29,7 @@ content/
 ├── writing/   长文
 ├── notes/     笔记和资源
 ├── thoughts/  想法
+├── books/     精选电子书入口
 ├── research/  AI Agent 调研报告
 └── projects/  项目介绍
 
@@ -68,6 +69,7 @@ content/*.md
 标签页
 合集页
 归档页
+精选书架
 RSS
 sitemap
 llms.txt
@@ -123,6 +125,40 @@ github: "owner/repo"
 ```
 
 如果写了 `github: "owner/repo"`，构建时会读取一次 GitHub API，在文章正文后、评论前展示仓库卡片。网络失败时会尽量使用缓存。
+
+## 怎么添加一本书
+
+书架收录公开阅读或开源电子书。默认只放元信息和阅读入口，不复制整本书正文。这样可以保留作者自己的更新节奏，也避免授权边界变得含糊。
+
+新建文件。
+
+```text
+content/books/my-book.md
+```
+
+写入 frontmatter 和一小段收录说明。
+
+```md
+---
+title: "My Book"
+description: "一句话说明这本书适合谁。"
+date: "2026-08-14"
+author: "Author Name"
+language: "中文"
+status: "Recommended"
+tags:
+  - AI
+sourceUrl: "https://github.com/owner/repo"
+readerUrl: "https://example.com/book/"
+licenseNote: "按原作者授权说明填写。"
+featured: false
+draft: false
+---
+
+这本书的收录理由。
+```
+
+`readerUrl` 指向最适合读者打开的阅读页，`sourceUrl` 指向源码或项目主页。`draft: true` 的书不会出现在公开书架、搜索索引、sitemap 或 `llms.txt`。
 
 ## Markdown 支持什么
 
