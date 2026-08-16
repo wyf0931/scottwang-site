@@ -1,11 +1,14 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return <div className="home-page">
     <section className="home-intro" aria-label="ScottWang profile">
-      <div className="home-avatar" aria-hidden="true">SW</div>
+      <div className="home-avatar">
+        <Image className="home-avatar-image" src="/avatar.jpg" alt="ScottWang 头像" width={156} height={156} priority />
+      </div>
       <h1>ScottWang</h1>
-      <p className="home-role">互联网技术与 AI / Agent 架构师</p>
+      <p className="home-role">全栈程序员 / 架构师 / 创业者</p>
       <p className="home-copy">记录技术笔记、行业观察、资源分享和一些还在形成中的判断。</p>
       <div className="home-links">
         <a href="https://github.com/wyf0931" target="_blank" rel="noreferrer" aria-label="GitHub"><GithubIcon /><span>GitHub</span></a>
