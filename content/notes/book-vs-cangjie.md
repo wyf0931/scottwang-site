@@ -84,14 +84,6 @@ Cangjie 的价值类型和 README 给人的第一感觉有落差。它真正优�
 
 真正值得研究的问题，是哪些东西有技术价值可以拿过来用。book-to-skill 的工程底座，文档解析、格式适配、chunk 和 chapter detection、CLI、validator、tests，是一套可以独立复用的 Knowledge Compiler 骨架。Cangjie 的 Prompt workflow，framework extraction、anti-pattern extraction、boundary、application scenario、cross-skill relation，是 Skill 结构设计上的具体思路。两者各取所长，能组装出更严谨的 Knowledge 到 Skill 的编译管线。
 
-## 研究这类项目的铁律
-
-README 里出现的 Agent、Pipeline、Verification、Evolution、Graph、Memory、Reasoning 这些词，先当营销名词看，直到代码证明它真的存在。
-
-看到"5 agents 并行"，第一反应是问五个进程在哪、谁调度、状态怎么传、失败怎么重试、代码在哪。看到"Triple Verification"，先看 evaluator 是几个独立模型、有没有 ground truth、pass rate 怎么测的、能不能自己跑一遍。看到 token 下降比例，先看测试样本、测试集规模、对比基线、有没有重复实验。
-
-这些动作做完，一个项目的技术含量就差不多清楚了。
-
 ## 关联词
 
 - **book-to-skill**，virgiliojr94 2026 年 5 月开源的书籍到 Agent Skill 编译工具，22,149 Star，MIT 协议，本质是 document parsing 加 prompt-driven transformation 加 skill packaging。
