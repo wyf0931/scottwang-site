@@ -1,0 +1,1 @@
+/root/.hermes/profiles/zxl/skills/content/blog-content/scripts/human-writing-check.py
