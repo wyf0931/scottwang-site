@@ -1,6 +1,6 @@
 # ScottWang Personal Site
 
-ScottWang 的个人站点，记录 AI、Agent 架构、技术内容、资源、开源项目和个人思考。
+ScottWang 的 Markdown-first 个人站点，记录 AI、Agent 架构、技术内容、资源、开源项目和个人思考。
 
 ## Quick start
 
@@ -11,21 +11,20 @@ npm run dev
 
 打开 <http://localhost:3000>。
 
-### Local operations
+常用本地操作由 `bin/ops.sh` 统一管理：
 
 ```bash
-./bin/ops.sh start       # background dev server
-./bin/ops.sh status      # PID, URL, and log location
+./bin/ops.sh start
+./bin/ops.sh status
 ./bin/ops.sh restart
 ./bin/ops.sh stop
-./bin/ops.sh deploy "docs: update note" # verify, commit, merge main, deploy
 ```
 
-Logs and the PID file are stored in `.runtime/` and are ignored by Git.
+后台进程、PID 和日志放在被 Git 忽略的 `.runtime/` 目录。
 
 ## 写作
 
-在 `content/writing`、`content/notes` 或 `content/thoughts` 新增 `.md` / `.mdx` 文件，使用以下 frontmatter。目录和 `type` 主要用于兼容旧路径；Content 页面使用 `kind` 做统一分类：
+文章放在 `content/writing`、`content/notes` 或 `content/thoughts`，支持 `.md` 和 `.mdx`。目录与 `type` 保留旧链接兼容，`kind` 用于统一展示分类。
 
 ```yaml
 title: "标题"
@@ -38,84 +37,40 @@ series: "Agent Architecture"
 draft: false
 ```
 
-资源内容可以这样声明：
+资源可补充：
 
 ```yaml
-kind: "resource"
 resourceType: "github" # github | youtube | bilibili | course | website | upload
 resourceUrl: "https://github.com/..."
 ```
 
-`tags` 只表示主题，例如 `AI`、`Agent`、`Open Source`。资源正文仍然使用 Markdown，用于记录背景、评价和使用建议。
+正文仍使用 Markdown，用于记录背景、判断和使用建议。`draft: true` 的内容不会出现在公开页面、RSS、sitemap、`llms.txt` 或搜索索引中。
+
+支持的 MDX 组件只有 `Callout`、`YouTubeEmbed` 和 `BilibiliEmbed`。外部视频不要直接写 iframe。Markdown 支持 GFM 表格和 Mermaid 图表。
 
 ### 从 Obsidian 导入
 
-可以把 Obsidian vault 或其中一个目录批量导入到站点内容区。默认导入到 `content/notes/<slug>/index.md`，并设置 `draft: true`，方便先本地检查再发布：
+先预览，再检查生成内容：
 
 ```bash
 ./bin/ops.sh import-obsidian ~/Documents/ObsidianVault --dry-run
 ./bin/ops.sh import-obsidian ~/Documents/ObsidianVault --tag Obsidian
 ```
 
-确认内容没问题后，可以重新导入为公开内容：
+默认写入 `content/notes/<slug>/index.md` 并保持为草稿。确认无误后再使用 `--publish --overwrite`。导入器会处理基础 wikilink、callout 和本地图片附件，图片复制到 `public/obsidian-assets/<slug>/`。
 
-```bash
-./bin/ops.sh import-obsidian ~/Documents/ObsidianVault --publish --overwrite
-./bin/ops.sh deploy "content: import obsidian notes"
-```
-
-导入脚本会处理 Obsidian wikilink、图片附件和 callout 基本语法。图片会复制到 `public/obsidian-assets/<slug>/`，正文链接会改成站点可访问路径。
+项目放在 `content/projects/*.md`，研究报告放在 `content/research/`。研究报告由外部 Agent 生成，人工审核后才发布；站点本身不连接 Agent 运行时。
 
 ## 内容导航
 
-- `/content`：统一浏览 Essays、Notes、Thoughts 和 Resources，可按类型或标签筛选
-- `/tags`：按主题浏览标签
-- `/series`：浏览连续主题合集
-- `/archive`：按年份回看全部公开内容
-- `/projects`：查看正在构建、探索或维护的项目
-- `/research`：查看 AI Agent 辅助调研、人工审核后的研究报告
+- `/content`：统一浏览文章和资源
+- `/writing`、`/notes`、`/thoughts`：按旧类型筛选的兼容视图
+- `/tags`、`/series`、`/archive`：标签、合集和归档
+- `/projects`、`/research`、`/books`：项目、研究报告和书架
 
-标签、合集、归档和项目页面会随 `content/` 中的 Markdown / MDX 文件自动生成。项目不默认等同于开源项目，闭源项目使用 `visibility: "Closed Source"`，不填写仓库链接即可。
+## 开发与发布
 
-Research 报告由外部 Deep Research Agent 生成 Markdown，审核后放入 `content/research/`。站点只负责静态发布，不与 Agent 运行时打通；`Draft` 和 `Review` 报告不会出现在公开页面、sitemap、RSS、`llms.txt` 或搜索索引中。
-
-## Comments and analytics
-
-文章和 Research 页面使用 GitHub Discussions + Giscus。生产环境已绑定仓库 `wyf0931/scottwang-site` 的 `Announcements` 分类；首次启用还需要在该仓库安装 [Giscus GitHub App](https://github.com/apps/giscus/installations/new)，否则页面会显示 `giscus is not installed on this repository`。
-
-Umami 集成为可选项，不配置网站 ID 时不会加载任何统计脚本。配置 `NEXT_PUBLIC_UMAMI_SCRIPT_URL` 与 `NEXT_PUBLIC_UMAMI_WEBSITE_ID` 后重新部署即可启用。
-
-`draft: true` 的内容不会进入公开列表。完整建设方案和实施计划见 `docs/superpowers/`。
-
-`.mdx` 内容可以使用受控组件：
-
-```mdx
-<Callout tone="success">这是一条提示。</Callout>
-<YouTubeEmbed url="https://www.youtube.com/watch?v=..." />
-<BilibiliEmbed url="https://www.bilibili.com/video/BV..." />
-```
-
-外部视频只允许通过这些组件嵌入，不要直接写任意 iframe。
-
-文章可以在 frontmatter 中通过 `owner/repo` 引入 GitHub 信息卡片。构建时会读取一次 GitHub API，文章正文后、评论前展示仓库名称、描述、Star、Fork 和主要语言：
-
-```yaml
-github: "crewAIInc/crewAI"
-```
-
-构建时网络不可用时会优先使用上一次缓存，首次没有缓存时仍保留可点击的仓库链接。
-
-Markdown 默认支持 GFM 表格，也支持 Mermaid 图表：
-
-````md
-```mermaid
-flowchart LR
-  A[问题] --> B[方案]
-  B --> C[执行]
-```
-````
-
-## Commands
+提交前运行完整检查：
 
 ```bash
 npm run lint
@@ -124,31 +79,27 @@ npm test
 npm run build
 ```
 
-## Project map
-
-- `content/`: Markdown/MDX source of truth
-- `src/lib/content/`: parsing, validation, and rendering
-- `src/app/`: routes and page composition
-- `src/components/`: reusable visual components
-- `docs/`: decisions, specifications, plans, and research
-- `AGENTS.md`: instructions for Coding Agents
-
-For a full operating guide, read `docs/user-manual.md`.
-
-## Deployment
-
-GitHub is the source repository and Vercel is the target deployment platform. Set `NEXT_PUBLIC_SITE_URL` to the production URL in Vercel. Production builds are static and can also be exported to `out/`.
-
-For one-command publishing after editing content locally, run:
+推荐在独立分支和 worktree 中工作。文档、代码和配置变更不要直接提交到 `main`；内容变更使用 `content/...` 分支，其他变更使用 `docs/...`、`feat/...` 或 `fix/...` 分支。
 
 ```bash
-./bin/ops.sh deploy "docs: update my note"
+./bin/ops.sh deploy "docs: update note"
 ```
 
-`deploy` runs lint, typecheck, tests, and a production build. If local files changed, it commits them with the provided message, pushes the current branch, merges it into `main`, and pushes `main` so GitHub Actions triggers the Vercel production deployment.
+`deploy` 会执行检查、提交当前改动、推送当前分支、合并到 `main` 并推送。GitHub Actions 随后负责生产部署。也可以通过 Pull Request 合并。不要提交 Token 或 Vercel secrets。
 
-GitHub Actions deploys `main` automatically. Add these repository secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`. PRs run the verification workflow; production deployment runs only after changes reach `main`.
+生产环境使用 Vercel，仓库需要 `VERCEL_TOKEN`、`VERCEL_ORG_ID` 和 `VERCEL_PROJECT_ID`。站点地址由 `NEXT_PUBLIC_SITE_URL` 提供；GitHub Actions 的生产工作流会注入正式地址。
 
-## Machine-readable routes
+## 项目结构
 
-The site exposes `/about.md`, article `.md` routes, `/llms.txt`, `/robots.txt`, `/sitemap.xml`, and `/rss.xml` so search engines and coding agents can retrieve the site with low noise.
+- `content/`：Markdown/MDX 内容源
+- `src/lib/content/`：解析、校验和查询
+- `src/app/`：路由和页面组合
+- `src/components/`：可复用组件
+- `docs/`：架构、决策、规格和操作说明
+- `AGENTS.md`：Coding Agent 工作规范
+
+需要更完整的内容格式、导入和运维说明时，阅读 [docs/user-manual.md](docs/user-manual.md)；部署细节见 [docs/architecture/operations.md](docs/architecture/operations.md)。
+
+## 可机器读取的输出
+
+站点提供 `/about.md`、文章 `.md` 路由、`/llms.txt`、`/robots.txt`、`/sitemap.xml` 和 `/rss.xml`，方便搜索引擎与 Coding Agent 读取公开内容。
