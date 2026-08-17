@@ -4,12 +4,15 @@ description: "Acorn 把 JavaScript 源码变成结构化的 AST，ESLint、Babel
 date: "2026-08-11"
 type: "writing"
 tags: ["JavaScript", "Parser", "AST", "Node.js"]
+github: "acornjs/acorn"
 draft: false
 ---
 
 写一个 ESLint 插件，配置 Babel 转译 TypeScript，用 webpack 打包的时候让 acorn 报了个语法错误。这三个工具看起来各管各的，但它们的底层解析器可能是同一个东西。
 
-Acorn。一个把 JavaScript 源代码字符串变成抽象语法树（AST）的小模块，GitHub 上 11.4k Stars。Babel 的解析器 @babel/preset-env 底层基于它，ESLint 的默认解析器基于它，UglifyJS 和 webpack 的部分工具链也用了它。
+Acorn 是一个把 JavaScript 源代码变成抽象语法树（AST）的解析器。它长期被 JavaScript 工具链使用，ESLint、Babel 生态和 webpack 周边都能看到解析器或 AST 的身影。仓库的实时受欢迎程度放在下面的 GitHub 卡片里，不在正文里写死。
+
+<GithubRepoCard repo="acornjs/acorn" />
 
 官方就一句话定位。"A tiny, fast JavaScript parser written in JavaScript."
 
@@ -63,7 +66,7 @@ const ast = acorn.parse(code, {
 
 `locations` 给每个节点加上行列号，`ranges` 加上字符区间，`onComment` 和 `onToken` 收集注释和 token。这些选项按需开，不开就有开销。
 
-还有一个实用方法 `parseExpressionAt`。大多数时候需要解析完整文件，但有时候只想从一个偏移位置开始解析一个表达式。
+还有一个实用方法 `parseExpressionAt`。大多数时候需要解析完整文件，但有时只想从一个偏移位置开始解析一个表达式。
 
 ```js
 const expr = acorn.parseExpressionAt("a + b * 2", 2, { ecmaVersion: 2020 })
@@ -129,8 +132,8 @@ try {
 
 做源码分析工具的时候。依赖关系图、代码复杂度度量、自动重构建议，这些工具的起点都是 AST。Acorn 给了起点，acorn-walk 给了遍历能力。
 
-Acorn 在 JavaScript 生态里的位置有点像 Linux 里的 many small tools philosophy。它只做一件事，把代码变成树，做完就交出去。Babel 在这棵树上做转换，ESLint 在这棵树上做检查，webpack 在这棵树上做模块分析。各自处理各自的逻辑，不需要关心解析这件事本身。
+Acorn 在 JavaScript 生态里的位置，接近一件职责单一的基础工具。它把代码变成树，再把后续遍历和转换交给调用方。Babel 在 AST 上做转换，ESLint 在 AST 上做检查，webpack 周边工具用 AST 做模块分析。
 
 这个分工之所以成立，是因为 AST 是一个非常稳定的中间表示。ECMAScript 标准在演进，AST 规范（ESTree）也在跟着更新，但节点类型和树结构的组织方式已经稳定了很多年。写一个 visitor 去匹配 `FunctionDeclaration`，十年前和现在没有本质区别。
 
-这也是 Acorn 能活这么久的原因。它解决的问题足够底层，接口足够简单，性能足够好，替换它带来的收益远不够覆盖迁移成本。于是一个 2012 年左右的项目，到现在仍然是 ESLint 和 Babel 的解析基础。
+这也是 Acorn 能长期存在的原因。它解决的问题边界清楚，接口简单，替换它的收益往往不足以覆盖迁移成本。对需要处理 JavaScript 源码的工具来说，这种稳定的解析入口仍然有价值。

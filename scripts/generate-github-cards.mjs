@@ -9,14 +9,24 @@ const contentRoot = path.join(root, "content");
 const types = ["writing", "notes", "thoughts"];
 const repositories = new Set();
 
+function contentFiles(directory) {
+  if (!fs.existsSync(directory)) return [];
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const file = path.join(directory, entry.name);
+    if (entry.isDirectory()) return contentFiles(file);
+    return /\.mdx?$/.test(entry.name) ? [file] : [];
+  });
+}
+
 for (const type of types) {
   const directory = path.join(contentRoot, type);
-  if (!fs.existsSync(directory)) continue;
-  for (const file of fs.readdirSync(directory)) {
-    if (!/\.mdx?$/.test(file)) continue;
-    const raw = fs.readFileSync(path.join(directory, file), "utf8");
+  for (const file of contentFiles(directory)) {
+    const raw = fs.readFileSync(file, "utf8");
     const github = matter(raw).data.github;
     if (typeof github === "string" && /^[^/\s]+\/[^/\s]+$/.test(github)) repositories.add(github);
+    for (const match of raw.matchAll(/<GithubRepoCard\s+repo=["']([^"']+)["']\s*\/?\s*>/g)) {
+      if (/^[^/\s]+\/[^/\s]+$/.test(match[1])) repositories.add(match[1]);
+    }
   }
 }
 
