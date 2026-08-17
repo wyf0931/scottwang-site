@@ -1,0 +1,23 @@
+---
+title: "AIHOT 大模型排行榜：AI 模型综合表现参考"
+description: "数字生命卡兹克维护的 AI 模型排行榜，汇总多家公开模型榜单，并用统一方法计算 AIHOT 共识分。"
+date: "2026-08-18"
+type: "notes"
+kind: "resource"
+resourceType: "website"
+resourceUrl: "https://aihot.virxact.com/leaderboard"
+tags:
+  - AI
+  - 大模型
+  - 模型评测
+  - 资源
+draft: false
+---
+
+[AIHOT 大模型排行榜](https://aihot.virxact.com/leaderboard) 是微信公众号「数字生命卡兹克」维护的模型评测资源。
+
+它汇总全网多家公开模型榜单，再用统一方法计算 AIHOT 共识分，帮助读者快速了解当前主流大模型的综合表现。
+
+适合在模型选型、技术调研和日常跟踪时作为参考。具体决策仍应结合任务类型、上下文长度、调用成本、延迟、可用地区和实际测试结果。
+
+评分计算方式见 [AIHOT 排行榜方法论](https://aihot.virxact.com/leaderboard/methodology)。
