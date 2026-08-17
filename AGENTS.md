@@ -25,7 +25,9 @@ This is ScottWang's Markdown-first personal site. Keep it precise, calm, technic
 
 - Use `Callout`, `YouTubeEmbed`, and `BilibiliEmbed` for MDX media. Do not add arbitrary iframe or script embeds.
 - GFM tables are supported. Mermaid diagrams use fenced `mermaid` blocks and the controlled `MermaidDiagram` component.
-- A content file may declare `github: "owner/repo"`. GitHub metadata is generated at build time; preserve the fallback when the API or cache is unavailable.
+- A content file may declare `github: "owner/repo"` for compatibility and metadata caching. Do not rely on it for placement. GitHub project cards are explicitly inserted in MDX with `<GithubRepoCard repo="owner/repo" />`; the card may appear anywhere in the article body.
+- GitHub project notes are written for architecture and technology selection. Cover the business or engineering problem, the solution path, core flow, technical trade-offs, alternatives, selection boundaries, and a minimal validation example as the material allows. Do not turn them into README summaries or generic feature lists.
+- After drafting a GitHub project article, use the `human-writing` skill to review facts, source boundaries, paragraph progression, Chinese rhythm, and AI-like phrasing before publishing.
 - Comments use optional Giscus/GitHub Discussions. Umami is optional and must not load without `NEXT_PUBLIC_UMAMI_WEBSITE_ID`.
 
 ## Engineering guardrails
@@ -34,6 +36,7 @@ This is ScottWang's Markdown-first personal site. Keep it precise, calm, technic
 - Keep content parsing separate from rendering. Prefer small typed modules over large route files.
 - Preserve semantic HTML, keyboard access, visible focus, readable Chinese typography, and mobile layouts.
 - When adding a content type or output, update its schema, query, route, metadata/feed behavior, docs, and tests together.
+- For the GitHub project card and article framework, follow `docs/superpowers/specs/2026-08-16-github-project-embeds-and-selection-notes-design.md`.
 
 ## Branch and worktree workflow
 

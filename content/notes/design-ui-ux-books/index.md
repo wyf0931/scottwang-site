@@ -14,7 +14,9 @@ tags:
 draft: false
 ---
 
-[ytx-readings/design-ui-ux](https://github.com/ytx-readings/design-ui-ux) 是一个 GitHub 仓库，按主题分类整理了 60 多本设计类书籍的 PDF 和 EPUB，从色彩理论到用户体验，从 Figma 实操到设计心理学，覆盖面很全。下面按仓库的分组列一份清单，附带每本书的中文译名（如果有）和一句话简介。
+这是一个按主题整理的设计类电子书仓库，内容从色彩理论、平面设计到 Figma、UI 和 UX。下面沿用仓库的分组，列出书名和简短说明。它适合用来找入口，不适合替代完整的阅读计划，书籍的版本、授权和内容质量需要逐本确认。
+
+<GithubRepoCard repo="ytx-readings/design-ui-ux" />
 
 ### 色彩
 

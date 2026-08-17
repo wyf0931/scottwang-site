@@ -46,7 +46,13 @@ resourceUrl: "https://github.com/..."
 
 正文仍使用 Markdown，用于记录背景、判断和使用建议。`draft: true` 的内容不会出现在公开页面、RSS、sitemap、`llms.txt` 或搜索索引中。
 
-支持的 MDX 组件只有 `Callout`、`YouTubeEmbed` 和 `BilibiliEmbed`。外部视频不要直接写 iframe。Markdown 支持 GFM 表格和 Mermaid 图表。
+支持的 MDX 组件包括 `Callout`、`YouTubeEmbed`、`BilibiliEmbed` 和 `GithubRepoCard`。外部视频不要直接写 iframe。GitHub 卡片可以放在正文任意位置：
+
+```mdx
+<GithubRepoCard repo="owner/repo" />
+```
+
+Markdown 支持 GFM 表格和 Mermaid 图表。
 
 ### 从 Obsidian 导入
 

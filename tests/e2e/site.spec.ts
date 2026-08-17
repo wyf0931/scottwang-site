@@ -50,6 +50,14 @@ test("UDP note renders the packet diagram", async ({ page }) => {
   await expect(page.locator(".mermaid-diagram")).toBeVisible();
 });
 
+test("GitHub project cards can be placed inside article content", async ({ page }) => {
+  await page.goto("/notes/human-writing-skill");
+  await expect(page.locator(".article-body .github-repo-card")).toBeVisible();
+  await expect(page.locator(".article-body .github-repo-icon")).toBeVisible();
+  await expect(page.getByRole("link", { name: "View on GitHub ↗" })).toHaveAttribute("href", "https://github.com/KKKKhazix/human-writing");
+  await expect(page.locator(".article-layout > .github-repo-card")).toHaveCount(0);
+});
+
 test("theme toggle switches between light and dark mode", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");

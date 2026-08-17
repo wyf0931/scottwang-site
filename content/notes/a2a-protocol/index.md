@@ -6,6 +6,7 @@ type: "notes"
 kind: "resource"
 resourceType: "github"
 resourceUrl: "https://github.com/a2aproject/A2A"
+github: "a2aproject/A2A"
 tags:
   - A2A
   - Agent
@@ -16,9 +17,11 @@ tags:
 draft: false
 ---
 
-[Agent2Agent (A2A) 协议](https://github.com/a2aproject/A2A) 是一个开放协议，使不同框架、不同厂商构建的 AI Agent 能够发现彼此、协商交互、安全协作，无需暴露内部状态。
+[Agent2Agent (A2A) 协议](https://github.com/a2aproject/A2A) 面向一个具体的工程问题：不同团队用不同框架构建 Agent 后，怎样在不暴露内部实现的情况下互相调用。它定义了发现、任务交互和结果传递的约定，适合需要跨团队、跨框架协作的 Agent 系统。
 
 [协议官网](https://a2a-protocol.org/latest/specification/) 提供完整的技术规范、教程和 SDK。
+
+<GithubRepoCard repo="a2aproject/A2A" />
 
 ### 核心能力
 
@@ -32,7 +35,7 @@ A2A 使 Agent 能够：
 ### 为什么需要 A2A
 
 | 目标 | 说明 |
-| :--- | :--- |
+|---|---|
 | **打破孤岛** | 连接不同生态系统的 Agent |
 | **复杂协作** | 让专业 Agent 协同处理单一 Agent 无法完成的复杂任务 |
 | **开放标准** | 促进社区驱动的 Agent 通信，鼓励创新和广泛采用 |
@@ -49,7 +52,7 @@ A2A 使 Agent 能够：
 ### 协议分层
 
 | 层级 | 内容 |
-| :--- | :--- |
+|---|---|
 | **Layer 1 — 数据模型** | 核心数据结构（Task、Message、AgentCard、Part、Artifact、Extension），以 Protocol Buffer 定义 |
 | **Layer 2 — 抽象操作** | 基本能力：Send Message、Send Streaming Message、Get Task、List Tasks、Cancel Task、Get Agent Card |
 | **Layer 3 — 协议绑定** | 具体协议映射：JSON-RPC、gRPC、HTTP/REST |

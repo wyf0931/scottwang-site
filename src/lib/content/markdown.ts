@@ -8,6 +8,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { BilibiliEmbed, YouTubeEmbed } from "@/components/content/VideoEmbed";
 import { Callout } from "@/components/content/Callout";
+import { GithubRepoCard } from "@/components/content/GithubRepoCard";
 import { MarkdownPre } from "@/components/content/MarkdownCode";
 import { rehypePreserveMermaid } from "./rehype-preserve-mermaid";
 
@@ -36,7 +37,7 @@ export async function renderMarkdown(markdown: string) {
 export async function renderMdx(source: string) {
   const result = await compileMDX({
     source,
-    components: { BilibiliEmbed, YouTubeEmbed, Callout, pre: MarkdownPre },
+    components: { BilibiliEmbed, YouTubeEmbed, Callout, GithubRepoCard, pre: MarkdownPre },
     options: {
       mdxOptions: {
         remarkPlugins: [remarkGfm],

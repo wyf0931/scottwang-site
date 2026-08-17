@@ -16,15 +16,15 @@ tags:
 
 ## 从 Intel 的会议室里长出来
 
-OKR 的发明人是 Andrew Grove，他在 1970 年代担任 Intel CEO 期间开发并推行了这套体系。Grove 的管理风格非常务实，他有一句话被后来反复引用："关键结果必须是可衡量的。到了季度末你一看就知道，我做到了还是没做到？是还是否？简单。没有主观判断的空间。"
+OKR 通常被认为起源于 Andrew Grove 在 Intel 推行的管理实践。Grove 的管理风格非常务实，他强调关键结果必须可衡量，季度末要能判断目标是否完成。
 
-Intel 内部把这套方法用在了"Operation Crush"等关键项目上，效果显著。1975 年，Intel 员工 John Doerr 参加了 Grove 亲授的 OKR 课程，把这套方法论学了回去。当时没人会想到，这堂课的内容会在二十多年后影响整个硅谷。
+Intel 内部把这套方法用在了"Operation Crush"等关键项目上。1975 年，Intel 员工 John Doerr 参加了 Grove 讲授的相关课程，后来把这套方法带给了更多硅谷公司。
 
 ## 被 John Doerr 带到 Google
 
 1999 年，John Doerr 当时在风险投资机构 Kleiner Perkins 工作，投资了一家刚成立不久的搜索引擎公司 Google。他把自己的老领导 Grove 的 OKR 方法介绍给了 Google 的两位创始人 Larry Page 和 Sergey Brin。Page 和 Brin 当场拍板，Google 从成立第一年起就全面实施 OKR。
 
-后来 Google 从 60 人的小团队长到了超过十万人的巨无霸，OKR 一直没丢。2017 年，John Doerr 出版了《Measure What Matters》一书，详细记录了 OKR 的起源和在 Google 等组织中的实践，这本书让 OKR 从硅谷的内部工具变成了全球范围的管理流行语。
+Google 在早期采用了 OKR。2017 年，John Doerr 出版了《Measure What Matters》，记录了 OKR 的起源以及 Google 等组织的实践，这本书推动了 OKR 在更大范围内传播。
 
 除了 Google 和 Intel，LinkedIn、Amazon、Twitter、Oracle 都在用 OKR。Bono 的慈善组织 ONE Campaign 和 Bill & Melinda Gates Foundation 也在用，说明 OKR 的适用范围早就不限于科技公司了。
 
@@ -44,13 +44,13 @@ KPI（Key Performance Indicator）偏向监控过程，回答的是"事情运转
 
 OKR 偏向推动变化，回答的是"这一季我要突破什么"，比如把用户留存率从 40% 拉到 55%。它要求你走出舒适区，所以 OKR 应该既不太容易也不可达到。
 
-两者是互补的，不是互相替代。KPI 管日常运营，OKR 管方向突破，很多公司同时用这两套工具。
+两者关注的工作不同。KPI 管日常运营，OKR 管阶段性的方向变化，很多公司会同时使用这两套工具。
 
 ## 用 OKR 时容易踩的坑
 
-最常见的错误是把 OKR 当成绩效考核工具。Grove 和 Doerr 都明确说过，OKR 应该用来激励人挑战高目标，如果拿它来打绩效评分，大家会本能地把目标定低以确保能完成，整个体系就废了。OKR 和 performance review 是两件事。
+最常见的错误是把 OKR 当成绩效考核工具。若 OKR 直接决定绩效评分，成员会倾向于把目标定低，避免影响考核结果。OKR 和 performance review 应该分开使用。
 
-另一个常见问题是目标写得太空泛。"提升用户体验"不是一个合格的 Objective，"把新用户首周留存从 30% 提升到 45%"才是一个合格的 Key Result。Objective 定方向，但方向也要具体到能指导行动。
+另一个常见问题是目标写得太空泛。"提升用户体验"无法指导具体行动，"把新用户首周留存从 30% 提升到 45%"才是可以检查的 Key Result。Objective 负责说明方向，Key Result 负责说明结果。
 
 OKR 还有一个特点，应该公开。Google 的做法是全公司的 OKR 任何人都能看到，包括 CEO 的。公开透明让每个人知道其他人正在做什么，减少重复劳动，也让协作有了基础。
 
@@ -65,7 +65,7 @@ OKR 还有一个特点，应该公开。Google 的做法是全公司的 OKR 任�
 
 ## 小结
 
-OKR 的核心思路并不复杂，用定性目标指明方向，用定量结果衡量进度，周期短、目标高、全员公开。它从 Intel 的工厂车间走到 Google 的办公室，又从硅谷走向全球，之所以能流传这么广，是因为它解决了一个几乎所有组织都有的问题，人多了以后怎么保证大家朝同一个方向使劲。这个问题的答案并不只有 OKR 一种，但 OKR 提供了一套足够简洁、足够好用的框架，让"对齐"这件事变得可以操作。
+OKR 用定性目标说明方向，用定量结果检查进度，并通过短周期复盘调整计划。它从 Intel 的管理实践传播到 Google 和其他组织，解决的是一个常见问题，团队规模变大以后，怎样让不同角色知道当前阶段最重要的工作是什么。它不是唯一答案，但提供了一种相对清晰的表达方式。
 
 ## 参考资料
 
