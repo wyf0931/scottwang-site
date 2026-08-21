@@ -355,7 +355,11 @@ Vercel 项目里需要站点 URL 和统计相关环境变量。
 NEXT_PUBLIC_SITE_URL=https://wyf0931.cn
 NEXT_PUBLIC_UMAMI_SCRIPT_URL=https://cloud.umami.is/script.js
 NEXT_PUBLIC_UMAMI_WEBSITE_ID=<your-umami-website-id>
+NEXT_PUBLIC_UMAMI_API_URL=https://cloud.umami.is
+NEXT_PUBLIC_UMAMI_SHARE_ID=<your-umami-share-id>
 ```
+
+底部统计使用 Umami 的公开 Share URL 数据。请在 Umami 网站设置中创建只读 Share URL，将 URL 中的 share ID 填入 `NEXT_PUBLIC_UMAMI_SHARE_ID`。没有配置网站 ID 或 share ID 时，底部统计区域完全隐藏；统计接口不可用时也不会影响页面渲染。
 
 Giscus 评论依赖 GitHub Discussions 和 Giscus GitHub App。仓库没有安装 Giscus 时，页面会显示对应错误。
 

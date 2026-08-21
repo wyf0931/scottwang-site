@@ -38,6 +38,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .brand-mark { display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid var(--accent); color: var(--accent); font: 700 0.62rem/1 ui-monospace, monospace; }
 .page-shell { min-height: calc(100vh - 145px); }
 .site-footer { display: flex; justify-content: space-between; padding: 22px 0 32px; color: var(--muted); font-size: 0.78rem; border-top: 1px solid var(--border); }
+.site-footer-links { display: inline-flex; align-items: center; gap: 18px; }
+.site-stats { display: inline-flex; gap: 14px; color: var(--muted); font: 0.68rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.01em; }
 .home-page { padding-bottom: 80px; }
 .hero { max-width: 780px; padding: 120px 0 100px; }
 .hero h1 { max-width: 700px; font-size: clamp(3.2rem, 8vw, 6.25rem); line-height: .96; }
@@ -229,6 +231,7 @@ html[data-theme="dark"] [data-rehype-pretty-code-figure] code { color: var(--shi
   .archive-item { grid-template-columns: 58px 1fr; }
   .archive-item small { display: none; }
   .section-heading, .site-footer { align-items: flex-start; flex-direction: column; gap: 16px; }
+  .site-footer-links { align-items: flex-start; flex-direction: column; gap: 8px; }
 }
 
 /* Coder-inspired personal site pass. Keep the site quiet, text-first, and list-oriented. */
