@@ -79,7 +79,6 @@ Callout 用来在文中插入需要读者注意的信息，渲染为带图标的
 
 ```mermaid
 graph TD
-title 示例流程图
     A[开始] --> B{判断条件}
     B -->|是| C[执行操作]
     B -->|否| D[结束]
@@ -90,14 +89,13 @@ title 示例流程图
 ````mdx
 ```mermaid
 graph TD
-title 示例流程图
     A[开始] --> B{判断条件}
     B -->|是| C[执行操作]
     B -->|否| D[结束]
 ```
 ````
 
-支持 Mermaid 常用图表类型，包括 graph、sequence、class、state、er、gantt、pie 和 packet。用 `title` 关键字在图表定义内写标题。
+支持 Mermaid 常用图表类型，包括 graph、sequence、class、state、er、gantt、pie 和 packet。图表标题应使用 Markdown 标题或正文说明，不要把普通文字直接写进图表语法。
 
 ## 代码高亮
 
