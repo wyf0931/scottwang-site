@@ -124,7 +124,13 @@ resourceUrl: "https://github.com/owner/repo"
 github: "owner/repo"
 ```
 
-如果写了 `github: "owner/repo"`，构建时会读取一次 GitHub API，在文章正文后、评论前展示仓库卡片。网络失败时会尽量使用缓存。
+GitHub 卡片可以在 Markdown/MDX 正文中任意插入：
+
+```mdx
+<GithubRepoCard repo="owner/repo" />
+```
+
+构建时会读取或复用 GitHub 元数据缓存。`github: "owner/repo"` frontmatter 字段仍可用于兼容旧内容和缓存，但不会自动追加卡片。
 
 ## 怎么添加一本书
 

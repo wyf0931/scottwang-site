@@ -2,69 +2,57 @@
 
 ## Project
 
-This is ScottWang's Markdown-first personal site. The owner is ScottWang, an internet technology and AI/Agent architect. The site should feel precise, calm, technical, and premium; avoid generic SaaS styling and noisy cyberpunk decoration.
+This is ScottWang's Markdown-first personal site. Keep it precise, calm, technical, and premium. Avoid generic SaaS styling and noisy cyberpunk decoration.
 
 ## Source of truth
 
-- Content belongs in `content/`; do not hard-code articles into route components.
-- `docs/` contains durable project knowledge, approved specs, plans, and architectural notes.
-- `README.md` is the user-facing quick-start document.
-- `AGENTS.md` is the agent-facing operating manual.
+- `content/` is the source of published content. Do not hard-code articles in route components.
+- `src/lib/content/` owns parsing, validation, and content queries; `src/app/` owns routes; `src/components/` owns reusable UI.
+- `docs/` stores durable decisions, specifications, plans, and operating notes.
+- `README.md` is the user-facing quick start. This file is the agent-facing operating guide.
 
 ## Content rules
 
-Every public content file needs `title`, `description`, `date`, `type`, `tags`, and `draft`. Legacy source types are `writing`, `notes`, and `thoughts`; the canonical presentation kinds are `essay`, `note`, `thought`, and `resource`. Existing files default from legacy type to kind, so migrations can be incremental. A resource may add `resourceType` (`github`, `youtube`, `bilibili`, `course`, `website`, or `upload`) and `resourceUrl`. Drafts must never appear in public routes, feeds, sitemap, or machine-readable indexes.
+- Article content lives in `content/writing`, `content/notes`, or `content/thoughts` as `.md` or `.mdx`. These legacy directories also define the compatible public routes.
+- Public articles require `title`, `description`, `date`, `type`, `tags`, and `draft`. `kind` is the presentation taxonomy: `essay`, `note`, `thought`, or `resource`. Existing types map to kinds as `writing → essay`, `notes → note`, and `thoughts → thought`.
+- Resources may use `resourceType` (`github`, `youtube`, `bilibili`, `course`, `website`, or `upload`) and `resourceUrl`.
+- Drafts must stay out of public routes, feeds, sitemap, `llms.txt`, and search indexes.
+- Use concise, stable `tags` and optional `series` values because they become public URLs.
+- Projects live in `content/projects/*.md`; research reports live in `content/research/*.md`. Only published research reports enter public outputs.
+- Chinese writing, rewriting, or substantial editing must use the installed `human-writing` skill before drafting. Keep the result factual, material-led, and free of generic model prose.
 
-For Chinese writing, rewriting, or substantial editing, use the installed Codex skill `human-writing` before drafting. Read its `SKILL.md`, then read only the task-matched references it requires, such as forum prose and reality rules for public notes or resource introductions. If the skill is missing in a future environment, install it from `https://github.com/KKKKhazix/human-writing` before writing. Keep the article factual, material-led, and free of generic model prose.
+## Supported content features
 
-`/content` is the canonical unified collection. `/writing`, `/notes`, and `/thoughts` remain compatible filtered views for old links.
+- Use `Callout`, `YouTubeEmbed`, and `BilibiliEmbed` for MDX media. Do not add arbitrary iframe or script embeds.
+- GFM tables are supported. Mermaid diagrams use fenced `mermaid` blocks and the controlled `MermaidDiagram` component.
+- A content file may declare `github: "owner/repo"` for compatibility and metadata caching. Do not rely on it for placement. GitHub project cards are explicitly inserted in MDX with `<GithubRepoCard repo="owner/repo" />`; the card may appear anywhere in the article body.
+- GitHub project notes are written for architecture and technology selection. Cover the business or engineering problem, the solution path, core flow, technical trade-offs, alternatives, selection boundaries, and a minimal validation example as the material allows. Do not turn them into README summaries or generic feature lists.
+- After drafting a GitHub project article, use the `human-writing` skill to review facts, source boundaries, paragraph progression, Chinese rhythm, and AI-like phrasing before publishing.
+- Comments use optional Giscus/GitHub Discussions. Umami is optional and must not load without `NEXT_PUBLIC_UMAMI_WEBSITE_ID`.
 
-Optional `series` groups related entries. The site automatically exposes `/tags`, `/series`, and `/archive`; use concise, stable tag and series names because they become public navigation URLs.
+## Engineering guardrails
 
-Obsidian notes can be imported with `./bin/ops.sh import-obsidian <vault-or-folder>`. The importer writes to `content/<type>/<slug>/index.md`, defaults to `draft: true`, converts basic wikilinks and Obsidian callouts, and copies local image attachments into `public/obsidian-assets/<slug>/`. Use `--dry-run` before bulk imports and `--publish --overwrite` only after reviewing the output.
+- Preserve static generation and Vercel compatibility. Do not introduce a database, CMS, account system, or runtime search service without an approved design update.
+- Keep content parsing separate from rendering. Prefer small typed modules over large route files.
+- Preserve semantic HTML, keyboard access, visible focus, readable Chinese typography, and mobile layouts.
+- When adding a content type or output, update its schema, query, route, metadata/feed behavior, docs, and tests together.
+- For the GitHub project card and article framework, follow `docs/superpowers/specs/2026-08-16-github-project-embeds-and-selection-notes-design.md`.
 
-Projects belong in `content/projects/*.md`. A project may be open source, private, or closed source; only add a public repository or demo URL when it is intentionally publishable.
+## Branch and worktree workflow
 
-Research reports belong in `content/research/*.md`. They are generated by an external local Deep Research Agent and reviewed before commit. The site is a static publisher only; do not add runtime Agent integration. Only `status: Published` reports may enter public routes, feeds, sitemap, `llms.txt`, or search indexes.
+- Keep `main` deployable and pristine. Make changes on a dedicated `feat/...`, `fix/...`, `docs/...`, or `content/...` branch in a worktree created from `main`.
+- Use `content/...` only for editorial changes that do not touch code or configuration. Use `feat/...`, `fix/...`, or `docs/...` for framework, config, and documentation changes.
+- Run the applicable verification before handoff. Land changes through a pull request or `./bin/ops.sh deploy`, never by committing directly to `main`.
 
-Giscus comments are optional at build time and use GitHub Discussions. Umami is also opt-in: never hard-code a website ID or load analytics when `NEXT_PUBLIC_UMAMI_WEBSITE_ID` is absent. The visual system is intentionally restrained: light mode is the default, dark mode is user-selectable, with green reserved for links and status signals.
+Example:
 
-## Engineering rules
+```bash
+git worktree add -b docs/<slug> ../scottwang-docs-<slug> main
+```
 
-- Preserve static generation and Vercel compatibility.
-- Keep content parsing and UI rendering separate.
-- Prefer small typed modules over large route files.
-- Use explicit MDX components for external media; do not add arbitrary iframe HTML.
-- Supported MDX components are `Callout`, `YouTubeEmbed`, and `BilibiliEmbed`; validate provider URLs inside the component.
-- GFM tables are supported through `remark-gfm`. Mermaid diagrams use fenced `mermaid` blocks and the controlled `MermaidDiagram` client component; do not add arbitrary script or HTML embeds.
-- Content may declare `github: "owner/repo"`. `scripts/generate-github-cards.mjs` refreshes repository metadata once per build into ignored `.generated/`; article layouts render it before comments. Keep the fallback path usable when GitHub API access is unavailable.
-- Keep semantic HTML, keyboard access, visible focus, readable Chinese typography, and mobile layouts intact.
-- Do not introduce a database, CMS, account system, or runtime search service without updating the approved design.
+## Verification and operations
 
-## Branching and worktree workflow
-
-- Never commit code changes directly on `main`; keep `main` deployable and pristine.
-- Develop every change on a `feat/...` or `fix/...` branch in a dedicated git worktree created off `main` (for example `git worktree add -b feat/<name> ../<worktree> main`), not in the main checkout.
-- One writer per worktree. Run the full verification chain on the branch before pushing.
-- Land changes via pull request or the `./bin/ops.sh deploy` flow, not by committing straight to `main`.
-
-### Content branches (`content/...`)
-
-Use a `content/<slug>` branch for blog posts, about page updates, and any editorial content changes that do not modify the site framework itself (no code, no config, no component changes).
-
-Workflow:
-
-1. Create a worktree: `git worktree add -b content/<slug> ../scottwang-content-<slug> main`
-2. Write the article in `content/<type>/<slug>/` inside the worktree.
-3. After drafting, run the `human-writing` skill to review and polish the prose before committing.
-4. Commit, merge into `main`, and push. GitHub Actions will auto-deploy.
-5. Clean up: `git worktree remove ../scottwang-content-<slug>`
-
-Content-only branches skip the full verification chain (lint, typecheck, test, build). If a content branch also touches code or configuration, it must follow the `feat/...` or `fix/...` flow instead.
-
-## Verification
-
-Before handoff, run:
+For code or configuration changes, run:
 
 ```bash
 npm run lint
@@ -73,9 +61,7 @@ npm test
 npm run build
 ```
 
-## Local operations and deployment
-
-Use `./bin/ops.sh` for repeatable local operations:
+Use `./bin/ops.sh` for local server control, Obsidian imports, and the verified publishing flow:
 
 ```bash
 ./bin/ops.sh start|stop|restart|status
@@ -83,8 +69,4 @@ Use `./bin/ops.sh` for repeatable local operations:
 ./bin/ops.sh deploy "docs: update note"
 ```
 
-The script owns the `.runtime/` PID/log files and must not write runtime state into source directories. `./bin/ops.sh deploy` runs the full verification chain, commits local changes with the provided message, pushes the current branch, merges it into `main`, and pushes `main` so GitHub Actions deploys production. Never commit tokens or Vercel secrets.
-
-`.github/workflows/ci.yml` validates pull requests and pushes. `.github/workflows/deploy.yml` deploys `main` to Vercel using the `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` repository secrets.
-
-When adding a new content type or output, update the schema, source query, route, metadata/feed behavior, docs, and tests together.
+The script keeps PID and log files in `.runtime/`. Never commit tokens or Vercel secrets. GitHub Actions runs CI and deploys `main` to Vercel with `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`.

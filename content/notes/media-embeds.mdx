@@ -1,6 +1,6 @@
 ---
-title: "博客 MDX 组件速查"
-description: "写文章时有哪些 MDX 组件可用，每个组件的语法和参数。"
+title: "ScottWang Blog：Markdown 与 MDX 写作说明"
+description: "介绍本站文章支持的 Markdown、MDX 组件、代码高亮、Mermaid 图表和 GitHub 项目卡片。"
 date: "2026-08-03"
 type: "notes"
 tags:
@@ -10,11 +10,13 @@ tags:
 draft: false
 ---
 
-写文章时除了标准 Markdown 语法，博客还支持一些 MDX 组件和扩展功能。这篇速查手册把这些组件的写法集中整理，方便直接复制粘贴。
+这篇文章介绍本站写作时可以直接使用的 Markdown 和 MDX 功能。它是站点使用说明，不是通用的 MDX 教程。示例都可以复制到 `content/writing`、`content/notes` 或 `content/thoughts` 下的文章里。
+
+文章仍然以 Markdown 为主。只有需要受控组件时才使用 MDX，外部视频不要直接写 iframe，也不要在正文里加入任意脚本。
 
 ## 视频嵌入
 
-博客提供了 `YouTubeEmbed` 和 `BilibiliEmbed` 两个组件，内部都是 iframe，自动做响应式和 lazy loading。
+博客提供了 `YouTubeEmbed` 和 `BilibiliEmbed` 两个组件，自动做响应式和 lazy loading，并在组件内部校验 provider URL。
 
 YouTube 视频嵌入：
 
@@ -62,7 +64,7 @@ title 示例流程图
     B -->|否| D[结束]
 ```
 
-上图的源码是这样写的：
+上图的源码如下：
 
 ````mdx
 ```mermaid
@@ -74,7 +76,7 @@ title 示例流程图
 ```
 ````
 
-支持所有 Mermaid 图表类型：graph（流程图）、sequence（时序图）、class（类图）、state（状态图）、er（ER 图）、gantt（甘特图）、pie（饼图）、packet（报文图）等。用 `title` 关键字在图表定义内写标题。
+支持 Mermaid 常用图表类型，包括 graph、sequence、class、state、er、gantt、pie 和 packet。用 `title` 关键字在图表定义内写标题。
 
 ## 代码高亮
 
@@ -94,14 +96,18 @@ console.log(greeting);
 
 支持的语言标识跟 Shiki 一致，常见的 `javascript`、`typescript`、`python`、`rust`、`go`、`bash`、`json`、`yaml` 等都能识别。
 
-## GitHub 仓库卡片
+## GitHub 项目卡片
 
-如果文章的 frontmatter 里写了 `github` 字段，文章顶部会自动展示一个 GitHub 仓库信息卡片，显示仓库名、描述、星标数、主要语言和 fork 数。
+GitHub 项目卡片可以放在正文任意位置，适合放在资源、工具介绍或项目分析的结尾。它读取构建时缓存的仓库信息，显示 GitHub 图标、仓库头像、仓库名、项目描述、Stars、Forks、主要语言和 GitHub 入口。
 
-```yaml
----
-github: "ohmyscott/ohmyagent"
----
+```mdx
+<GithubRepoCard repo="lexiforest/curl_cffi" />
 ```
 
-这个功能写在 frontmatter 里就行，不需要在正文里额外添加 MDX 组件。适合那些围绕某个开源项目展开的笔记。
+组件的 `repo` 必须使用 `owner/repo` 格式：
+
+```mdx
+<GithubRepoCard repo="acornjs/acorn" />
+```
+
+`github: "owner/repo"` 仍可保留在 frontmatter 中，用于兼容旧内容和构建缓存，但不会自动在文章底部追加卡片。构建时如果 GitHub API 不可用，站点会优先使用已有缓存，首次没有缓存时仍保留仓库链接。
