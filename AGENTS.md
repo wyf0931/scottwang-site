@@ -43,6 +43,8 @@ This is ScottWang's Markdown-first personal site. Keep it precise, calm, technic
 ## Branch and worktree workflow
 
 - Keep `main` deployable and pristine. Make changes on a dedicated `feat/...`, `fix/...`, `docs/...`, or `content/...` branch in a worktree created from `main`.
+- At the start of every task, inspect `git worktree list`, `git branch -vv`, and `git status --short --branch`. Classify and promptly commit or otherwise resolve leftover changes; do not allow uncommitted files to accumulate across tasks.
+- Keep each active worktree and branch clean at handoff. If existing changes belong to the current task, verify and commit them; if they belong to another task, preserve them and work in a separate branch or worktree.
 - Use `content/...` only for editorial changes that do not touch code or configuration. Use `feat/...`, `fix/...`, or `docs/...` for framework, config, and documentation changes.
 - Run the applicable verification before handoff. Land changes through a pull request or `./bin/ops.sh deploy`, never by committing directly to `main`.
 
