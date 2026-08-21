@@ -19,6 +19,7 @@ This is ScottWang's Markdown-first personal site. Keep it precise, calm, technic
 - Drafts must stay out of public routes, feeds, sitemap, `llms.txt`, and search indexes.
 - Use concise, stable `tags` and optional `series` values because they become public URLs.
 - Projects live in `content/projects/*.md`; research reports live in `content/research/*.md`. Only published research reports enter public outputs.
+- Books live in `content/books/*.md` and are parsed by `src/lib/content/books.ts`; published books appear on `/books` and in the relevant machine-readable outputs.
 - Chinese writing, rewriting, or substantial editing must use the installed `human-writing` skill before drafting. Keep the result factual, material-led, and free of generic model prose.
 
 ## Supported content features
@@ -37,10 +38,13 @@ This is ScottWang's Markdown-first personal site. Keep it precise, calm, technic
 - Preserve semantic HTML, keyboard access, visible focus, readable Chinese typography, and mobile layouts.
 - When adding a content type or output, update its schema, query, route, metadata/feed behavior, docs, and tests together.
 - For the GitHub project card and article framework, follow `docs/superpowers/specs/2026-08-16-github-project-embeds-and-selection-notes-design.md`.
+- Generated public Markdown, GitHub metadata, and OG images are build artifacts. They are produced by the `predev`/`prebuild` scripts and must not become a second content source of truth.
 
 ## Branch and worktree workflow
 
 - Keep `main` deployable and pristine. Make changes on a dedicated `feat/...`, `fix/...`, `docs/...`, or `content/...` branch in a worktree created from `main`.
+- At the start of every task, inspect `git worktree list`, `git branch -vv`, and `git status --short --branch`. Classify and promptly commit or otherwise resolve leftover changes; do not allow uncommitted files to accumulate across tasks.
+- Keep each active worktree and branch clean at handoff. If existing changes belong to the current task, verify and commit them; if they belong to another task, preserve them and work in a separate branch or worktree.
 - Use `content/...` only for editorial changes that do not touch code or configuration. Use `feat/...`, `fix/...`, or `docs/...` for framework, config, and documentation changes.
 - Run the applicable verification before handoff. Land changes through a pull request or `./bin/ops.sh deploy`, never by committing directly to `main`.
 
@@ -61,6 +65,7 @@ npm test
 npm run build
 ```
 
+For browser coverage, run `npm run test:e2e` when the change affects routes, interaction, responsive layout, or rendered content. `npm run build` first generates public Markdown, GitHub card metadata, and OG images.
 Use `./bin/ops.sh` for local server control, Obsidian imports, and the verified publishing flow:
 
 ```bash
@@ -69,4 +74,5 @@ Use `./bin/ops.sh` for local server control, Obsidian imports, and the verified 
 ./bin/ops.sh deploy "docs: update note"
 ```
 
+Equivalent package-script entry points are `npm run import:obsidian` for direct importer use and `npm run test:e2e` for Playwright browser tests. `bin/ops.sh deploy` runs the verification chain, commits and pushes the current branch, then merges and pushes `main`; use a dedicated branch or worktree and review the resulting commit before invoking it.
 The script keeps PID and log files in `.runtime/`. Never commit tokens or Vercel secrets. GitHub Actions runs CI and deploys `main` to Vercel with `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`.
