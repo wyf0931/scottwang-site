@@ -21,7 +21,7 @@ The `deploy` command is the preferred local publishing entry point:
 ./bin/ops.sh deploy "docs: update note"
 ```
 
-It runs lint, typecheck, unit tests, and a production build. If local files changed, it commits them with the provided message, pushes the current branch, merges that branch into `main`, and pushes `main`. Production deployment is then handled by GitHub Actions.
+It runs lint, typecheck, unit tests, and a production build. If local files changed, it commits them with the provided message, pushes the current branch, merges that branch into `main`, and pushes `main`. This direct local merge is the standard path for the single-threaded `content/...` publishing workflow. Application and configuration changes use a reviewed pull request instead. Production deployment is then handled by GitHub Actions.
 
 Local deployment no longer requires a local `VERCEL_TOKEN`. Secrets must never be committed.
 
