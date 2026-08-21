@@ -66,7 +66,6 @@ npm run build
 ```
 
 For browser coverage, run `npm run test:e2e` when the change affects routes, interaction, responsive layout, or rendered content. `npm run build` first generates public Markdown, GitHub card metadata, and OG images.
-
 Use `./bin/ops.sh` for local server control, Obsidian imports, and the verified publishing flow:
 
 ```bash
@@ -76,5 +75,4 @@ Use `./bin/ops.sh` for local server control, Obsidian imports, and the verified 
 ```
 
 Equivalent package-script entry points are `npm run import:obsidian` for direct importer use and `npm run test:e2e` for Playwright browser tests. `bin/ops.sh deploy` runs the verification chain, commits and pushes the current branch, then merges and pushes `main`; use a dedicated branch or worktree and review the resulting commit before invoking it.
-
 The script keeps PID and log files in `.runtime/`. Never commit tokens or Vercel secrets. GitHub Actions runs CI and deploys `main` to Vercel with `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`.
