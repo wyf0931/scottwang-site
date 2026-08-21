@@ -29,7 +29,7 @@ This is ScottWang's Markdown-first personal site. Keep it precise, calm, technic
 - A content file may declare `github: "owner/repo"` for compatibility and metadata caching. Do not rely on it for placement. GitHub project cards are explicitly inserted in MDX with `<GithubRepoCard repo="owner/repo" />`; the card may appear anywhere in the article body.
 - GitHub project notes are written for architecture and technology selection. Cover the business or engineering problem, the solution path, core flow, technical trade-offs, alternatives, selection boundaries, and a minimal validation example as the material allows. Do not turn them into README summaries or generic feature lists.
 - After drafting a GitHub project article, use the `human-writing` skill to review facts, source boundaries, paragraph progression, Chinese rhythm, and AI-like phrasing before publishing.
-- Comments use optional Giscus/GitHub Discussions. Umami is optional and must not load without `NEXT_PUBLIC_UMAMI_WEBSITE_ID`.
+- Comments use optional Giscus/GitHub Discussions. Umami tracking is optional and must not load without `NEXT_PUBLIC_UMAMI_WEBSITE_ID`; the footer statistics also require a public Umami share ID and stay hidden otherwise.
 
 ## Engineering guardrails
 
