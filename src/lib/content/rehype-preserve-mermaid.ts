@@ -10,10 +10,10 @@ import type { Element, Root } from "hast";
  *
  * This plugin works in two phases:
  * - Phase 1 ("before"): Extracts mermaid <pre> blocks, replaces them with
- *   a bare <div data-mermaid-preserve="id"> placeholder that rehype-pretty-code
+ *   a bare <div data-mermaid-preserve data-mermaid-chart="..."> placeholder that rehype-pretty-code
  *   ignores (no <pre>/<code> children to trigger figure wrapping).
  * - Phase 2 ("after"): Restores the original <pre><code> elements from the
- *   side-map, replacing the <div> placeholders.
+ *   placeholder attributes, replacing the <div> placeholders.
  *
  * Usage: insert this plugin immediately before AND after rehype-pretty-code
  * in the plugin chain, calling with phase "before" then "after".
@@ -39,13 +39,12 @@ export function rehypePreserveMermaid(phase: "before" | "after") {
 
         if (!isMermaid) return;
 
-        // Extract the raw text content
-        const textNode = codeEl.children.find((c) => c.type === "text");
-        const rawText = textNode ? (textNode as { type: "text"; value: string }).value : "";
-
-        // Store in a module-level map keyed by a unique placeholder id
-        const id = `mermaid-preserved-${idx}`;
-        preservedBlocks.set(id, rawText);
+        // Keep the source on the placeholder itself so concurrent page builds
+        // cannot overwrite shared render state.
+        const rawText = codeEl.children
+          .filter((child): child is { type: "text"; value: string } => child.type === "text")
+          .map((child) => child.value)
+          .join("");
 
         // Replace the entire <pre> with a bare <div> placeholder.
         // rehype-pretty-code only touches <pre><code> blocks, so a plain div
@@ -53,7 +52,7 @@ export function rehypePreserveMermaid(phase: "before" | "after") {
         const placeholder: Element = {
           type: "element",
           tagName: "div",
-          properties: { "data-mermaid-preserve": id },
+          properties: { "data-mermaid-preserve": "true", "data-mermaid-chart": rawText },
           children: [],
         };
 
@@ -64,13 +63,9 @@ export function rehypePreserveMermaid(phase: "before" | "after") {
       visit(tree, "element", (node: Element, idx, parent) => {
         if (!parent || idx == null || node.tagName !== "div") return;
 
-        const preserveId = node.properties?.["data-mermaid-preserve"];
-        if (typeof preserveId !== "string") return;
-
-        const rawText = preservedBlocks.get(preserveId);
-        if (rawText === undefined) return;
-
-        preservedBlocks.delete(preserveId);
+        if (node.properties?.["data-mermaid-preserve"] !== "true") return;
+        const rawText = node.properties?.["data-mermaid-chart"];
+        if (typeof rawText !== "string") return;
 
         // Restore the original <pre><code class="language-mermaid"> block
         const restored: Element = {
@@ -97,9 +92,3 @@ export function rehypePreserveMermaid(phase: "before" | "after") {
     }
   };
 }
-
-// Side-map for passing data between "before" and "after" phases within a single
-// render pipeline call. Because both phases run in the same synchronous unified
-// pipeline (within the same `process()` or `compileMDX()` call), this module-level
-// map is safe to use.
-const preservedBlocks = new Map<string, string>();

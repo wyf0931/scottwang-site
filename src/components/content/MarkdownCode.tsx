@@ -5,13 +5,10 @@ type CodeElementProps = { className?: string; "data-language"?: string; children
 
 function extractCodeText(node: ReactNode): string {
   if (typeof node === "string") return node;
+  if (Array.isArray(node)) return node.map(extractCodeText).join("");
   if (isValidElement<CodeElementProps>(node)) {
     const props = node.props;
-    if (props.children !== undefined) {
-      return Children.toArray(props.children)
-        .map((child) => (typeof child === "string" ? child : ""))
-        .join("");
-    }
+    return props.children === undefined ? "" : extractCodeText(Children.toArray(props.children));
   }
   return "";
 }
