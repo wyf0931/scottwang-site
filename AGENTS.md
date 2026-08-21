@@ -42,11 +42,22 @@ This is ScottWang's Markdown-first personal site. Keep it precise, calm, technic
 
 ## Branch and worktree workflow
 
-- Keep `main` deployable and pristine. Make changes on a dedicated `feat/...`, `fix/...`, `docs/...`, or `content/...` branch in a worktree created from `main`.
-- At the start of every task, inspect `git worktree list`, `git branch -vv`, and `git status --short --branch`. Classify and promptly commit or otherwise resolve leftover changes; do not allow uncommitted files to accumulate across tasks.
-- Keep each active worktree and branch clean at handoff. If existing changes belong to the current task, verify and commit them; if they belong to another task, preserve them and work in a separate branch or worktree.
-- Use `content/...` only for editorial changes that do not touch code or configuration. Use `feat/...`, `fix/...`, or `docs/...` for framework, config, and documentation changes.
-- Run the applicable verification before handoff. Land changes through a pull request or `./bin/ops.sh deploy`, never by committing directly to `main`.
+- `main` must remain deployable. At the start and end of every task, inspect `git worktree list`, `git branch -vv`, and `git status --short --branch`. Resolve leftover changes promptly and do not let uncommitted files accumulate across tasks.
+- The repository has two maintenance tracks. The blog application and code use a dedicated worktree from `main`, with `feat/...`, `fix/...`, or `docs/...` branches. Code and configuration changes land through a reviewed pull request.
+- Content-only changes use a `content/...` branch in the current worktree. Do not create a separate worktree for content work unless parallel work makes it necessary. Content work is normally single-threaded.
+- Do not mix application or configuration changes into a `content/...` branch. If the task crosses that boundary, move the code/config changes to a `feat/...`, `fix/...`, or `docs/...` branch and follow the application track.
+
+## Content publishing contract
+
+This is the fast, standard workflow for content agents. It applies to Codex, Pi, Claude Code, Hermes Agent, and other collaborators.
+
+0. From a clean `main`, create the branch with `git switch -c content/<slug>`. Check `git status --short --branch` before writing.
+1. Research the topic according to the request. Search Wikipedia, Hacker News, Reddit, Stack Overflow, relevant blogs, and primary sources where appropriate. Record only the material needed to support the article's facts, definitions, examples, and boundaries. Do not treat forum comments as authoritative definitions.
+2. Draft the article in the correct `content/writing`, `content/notes`, or `content/thoughts` location. Unless the user specifies otherwise, use a concept-explanation style for architecture, engineering, and industry terms. The default audience is architects, programmers, experienced developers, internet practitioners, and technically curious general readers. Choose a structure that fits the material, such as Golden Circle, total-summary-total, progressive explanation, or 5W1H for news. Follow the content schema and keep drafts out of public outputs.
+3. Use the `human-writing` skill to review the draft for factual boundaries, source use, paragraph progression, Chinese rhythm, and AI-like phrasing. Fix the review findings before publishing.
+4. Verify the content with `git diff --check` and the applicable content/build checks. Commit the content branch, merge it locally into `main`, and push `main` to `origin`. GitHub Actions deploys production from `main`. Delete the merged local `content/...` branch when the worktree is clean.
+
+For the current task, content agents should complete this flow in one continuous pass. Do not leave a content branch waiting for a later handoff, do not push an unreviewed branch as a substitute for publishing, and do not use the application worktree/PR process for ordinary content-only work.
 
 Example:
 
@@ -74,5 +85,5 @@ Use `./bin/ops.sh` for local server control, Obsidian imports, and the verified 
 ./bin/ops.sh deploy "docs: update note"
 ```
 
-Equivalent package-script entry points are `npm run import:obsidian` for direct importer use and `npm run test:e2e` for Playwright browser tests. `bin/ops.sh deploy` runs the verification chain, commits and pushes the current branch, then merges and pushes `main`; use a dedicated branch or worktree and review the resulting commit before invoking it.
+Equivalent package-script entry points are `npm run import:obsidian` for direct importer use and `npm run test:e2e` for Playwright browser tests. `bin/ops.sh deploy` runs the verification chain, commits and pushes the current branch, then merges and pushes `main`; use it for the content publishing contract after reviewing the resulting commit. For application changes, use the pull-request flow instead.
 The script keeps PID and log files in `.runtime/`. Never commit tokens or Vercel secrets. GitHub Actions runs CI and deploys `main` to Vercel with `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`.

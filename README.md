@@ -85,13 +85,13 @@ npm test
 npm run build
 ```
 
-推荐在独立分支和 worktree 中工作。文档、代码和配置变更不要直接提交到 `main`；内容变更使用 `content/...` 分支，其他变更使用 `docs/...`、`feat/...` 或 `fix/...` 分支。
+项目分为应用代码和内容两条维护轨道。代码、配置和文档使用从 `main` 创建的独立 worktree，分支命名为 `feat/...`、`fix/...` 或 `docs/...`，通过 Pull Request 合并。纯内容变更使用 `content/...` 分支，不额外创建 worktree，完成资料检索、写作审查和验证后直接本地合并到 `main` 并推送。
 
 ```bash
 ./bin/ops.sh deploy "docs: update note"
 ```
 
-`deploy` 会执行检查、提交当前改动、推送当前分支、合并到 `main` 并推送。GitHub Actions 随后负责生产部署。也可以通过 Pull Request 合并。不要提交 Token 或 Vercel secrets。
+`deploy` 会执行检查、提交当前改动、推送当前分支、合并到 `main` 并推送，适合内容发布流程。代码和配置变更仍通过 Pull Request 合并。不要提交 Token 或 Vercel secrets。
 
 生产环境使用 Vercel，仓库需要 `VERCEL_TOKEN`、`VERCEL_ORG_ID` 和 `VERCEL_PROJECT_ID`。站点地址由 `NEXT_PUBLIC_SITE_URL` 提供；GitHub Actions 的生产工作流会注入正式地址。
 
