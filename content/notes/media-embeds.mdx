@@ -1,6 +1,6 @@
 ---
-title: "ScottWang Blog：Markdown 与 MDX 写作说明"
-description: "介绍本站文章支持的 Markdown、MDX 组件、代码高亮、Mermaid 图表和 GitHub 项目卡片。"
+title: "ScottWang Blog：Markdown 与 MDX 内容组件手册"
+description: "本站 Markdown 与 MDX 写作说明，逐个介绍 Callout、LinkCard、GithubRepoCard、视频嵌入、Mermaid 和代码块等受控组件。"
 date: "2026-08-03"
 type: "notes"
 tags:
@@ -10,27 +10,48 @@ tags:
 draft: false
 ---
 
-这篇文章介绍本站写作时可以直接使用的 Markdown 和 MDX 功能。它是站点使用说明，不是通用的 MDX 教程。示例都可以复制到 `content/writing`、`content/notes` 或 `content/thoughts` 下的文章里。
+这篇文章介绍本站写作时可以直接使用的 Markdown 和 MDX 功能。它是 ScottWang Blog 的组件使用手册，不是通用的 MDX 教程。示例都可以复制到 `content/writing`、`content/notes` 或 `content/thoughts` 下的文章里。
 
-文章仍然以 Markdown 为主。只有需要受控组件时才使用 MDX，外部视频不要直接写 iframe，也不要在正文里加入任意脚本。
+文章仍然以 Markdown 为主。只有需要受控组件时才使用 MDX，外部视频不要直接写 iframe，也不要在正文里加入任意脚本。组件只接受文档中列出的参数，构建时会校验部分外部链接。
+
+## 先选择 Markdown 还是 MDX
+
+没有组件需求时，使用 `.md` 文件就够了。需要调用 `Callout`、`LinkCard`、`GithubRepoCard` 或视频组件时，把文件保存为 `.mdx`。目录文章可以使用 `index.md` 或 `index.mdx`，普通文件也可以直接放在对应内容目录下。
+
+Markdown 文件仍然支持标题、列表、链接、图片、表格和代码块。MDX 只是增加了受控的 React 组件，不代表可以在正文里执行任意 JavaScript。
 
 ## 视频嵌入
 
 博客提供了 `YouTubeEmbed` 和 `BilibiliEmbed` 两个组件，自动做响应式和 lazy loading，并在组件内部校验 provider URL。
 
-YouTube 视频嵌入：
+YouTube 视频嵌入示例
 
 ```mdx
 <YouTubeEmbed url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" title="示例 YouTube 视频" />
 ```
 
-B 站视频嵌入：
+B 站视频嵌入示例
 
 ```mdx
 <BilibiliEmbed url="https://www.bilibili.com/video/BV1GJ411x7h7" title="示例 B 站视频" />
 ```
 
 `url` 是必填参数。`title` 可选，用于无障碍标注，不填的话默认显示 "YouTube video" 或 "Bilibili video"。YouTube 同时支持 `youtube.com/watch?v=` 和 `youtu.be/` 两种链接格式，B 站支持标准的 BV 号 URL。
+
+## 外部链接卡片
+
+`LinkCard` 用于把正文中的重要外部资料做成可扫描的链接卡片。它适合放在资源介绍之后，或读者需要继续打开原始网站的位置。卡片不会抓取第三方网页标题和摘要，文章作者需要显式填写内容。
+
+```mdx
+<LinkCard
+  href="https://aihot.virxact.com/leaderboard"
+  title="AIHOT 大模型排行榜"
+  description="汇总多家公开模型榜单，并计算 AIHOT 共识分。"
+  label="Website"
+/>
+```
+
+`href` 和 `title` 是必填参数。`description` 和 `label` 可选，`label` 默认是 `External link`。组件只接受 `http` 和 `https` 链接，卡片会在新标签页打开，并带有安全的外链属性。
 
 ## 提示框 Callout
 
@@ -50,7 +71,7 @@ Callout 用来在文中插入需要读者注意的信息，渲染为带图标的
 
 <Callout tone="info">tone 的默认值是 info，所以不写 tone 也行。</Callout>
 
-`tone` 支持三个值：`info`（默认）、`warning`、`success`。内容写在标签之间，可以包含行内 Markdown。
+`tone` 支持三个值，分别是 `info`（默认）、`warning` 和 `success`。内容写在标签之间，可以包含行内 Markdown。
 
 ## Mermaid 图表
 
@@ -111,3 +132,12 @@ GitHub 项目卡片可以放在正文任意位置，适合放在资源、工具�
 ```
 
 `github: "owner/repo"` 仍可保留在 frontmatter 中，用于兼容旧内容和构建缓存，但不会自动在文章底部追加卡片。构建时如果 GitHub API 不可用，站点会优先使用已有缓存，首次没有缓存时仍保留仓库链接。
+
+## 组件使用边界
+
+- 外部视频使用 `YouTubeEmbed` 或 `BilibiliEmbed`，不要直接写 iframe。
+- 重要网站或文档使用 `LinkCard`，普通句子中的引用使用标准 Markdown 链接。
+- GitHub 仓库使用 `GithubRepoCard`，不要手写仓库统计数字。
+- 提示信息使用 `Callout`，不要用 HTML 颜色和粗体模拟提示框。
+- 流程、时序或结构关系使用 Mermaid 代码块，不要在正文里加入脚本。
+- 组件参数应当来自已经核验的资料，尤其是标题、描述、版本、仓库和外部链接。
