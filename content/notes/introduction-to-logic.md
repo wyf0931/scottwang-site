@@ -4,6 +4,7 @@ description: "Irving Copi 的《Introduction to Logic》把'一段推理是否�
 date: "2026-08-26"
 type: "notes"
 kind: "note"
+series: "data-judgment"
 tags:
   - 逻辑
   - 推理

@@ -4,6 +4,7 @@ description: "David Salsburg 用一个个真实故事串起现代统计学的诞
 date: "2026-08-26"
 type: "notes"
 kind: "note"
+series: "data-judgment"
 tags:
   - 统计学
   - 实验

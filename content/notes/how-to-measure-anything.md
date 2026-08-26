@@ -4,6 +4,7 @@ description: "Douglas Hubbard 用一本书证明，几乎所有东西都能被�
 date: "2026-08-26"
 type: "notes"
 kind: "note"
+series: "data-judgment"
 tags:
   - 度量
   - 决策

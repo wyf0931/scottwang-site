@@ -4,6 +4,7 @@ description: "Kahneman、Sibony、Sunstein 三人合著。同样的人、同样�
 date: "2026-08-26"
 type: "notes"
 kind: "note"
+series: "data-judgment"
 tags:
   - 判断
   - 决策

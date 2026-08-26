@@ -4,6 +4,7 @@ description: "Darrell Huff 用一本小册子教会普通人看穿被操纵的�
 date: "2026-08-26"
 type: "notes"
 kind: "note"
+series: "data-judgment"
 tags:
   - 数据
   - 统计学

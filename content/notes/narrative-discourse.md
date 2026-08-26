@@ -4,6 +4,7 @@ description: "Gérard Genette 把叙事学从零散术语变成了一套可操�
 date: "2026-08-26"
 type: "notes"
 kind: "note"
+series: "data-judgment"
 tags:
   - 叙事学
   - 文学理论

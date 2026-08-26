@@ -4,6 +4,7 @@ description: "Nate Silver 用 2012 年大选的近乎完美预测，把贝叶斯
 date: "2026-08-26"
 type: "notes"
 kind: "note"
+series: "data-judgment"
 tags:
   - 预测
   - 贝叶斯
