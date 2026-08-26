@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { renderToStaticMarkup } from "react-dom/server";
+import { renderMdx } from "@/lib/content/markdown";
 import { getAllContent, getContentBySlug, getContentByType } from "@/lib/content/source";
 import { getAllProjects, getProjectBySlug } from "@/lib/content/projects";
 import { getAllBooks, getBookBySlug } from "@/lib/content/books";
@@ -42,5 +44,11 @@ describe("content source", () => {
       readerUrl: "https://fde4.ai/book/",
       draft: false,
     });
+  });
+
+  it("preserves native mark elements in MDX content", async () => {
+    const content = await renderMdx("<p>保留 <mark>这段高亮</mark> 文本。</p>");
+
+    expect(renderToStaticMarkup(content)).toContain("<mark>这段高亮</mark>");
   });
 });

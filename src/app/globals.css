@@ -144,6 +144,7 @@ h2 { margin-bottom: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15;
 .article-body h3 { font-size: 1.25rem; line-height: 1.35; }
 .article-body p, .article-body ul, .article-body ol, .article-body blockquote { margin: 1.25em 0; }
 .article-body img { max-width: 100%; height: auto; }
+.article-body mark { color: inherit; background: color-mix(in srgb, var(--accent) 18%, transparent); }
 .article-body blockquote { padding: 8px 20px; border-left: 2px solid var(--accent); color: var(--muted); }
 .article-body pre { overflow-x: auto; padding: 20px; background: var(--code); border: 1px solid var(--border); font-size: 0.85rem; }
 .article-body :is(pre, pre > code) { width: 100%; min-width: 0; }
