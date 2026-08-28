@@ -13,7 +13,7 @@ describe("content source", () => {
   });
 
   it("filters by type and resolves slugs", () => {
-    expect(getContentByType("notes").map((entry) => entry.slug)).toEqual(expect.arrayContaining(["5w2h", "udp-packet", "media-embeds", "eternal-september", "fomo", "strix", "needle", "deeptutor", "book-vs-cangjie", "croc", "podman-vs-portainer", "ragflow", "saining-xie-interview", "lingyu-liu-interview", "he-xiaopeng-interview", "openshell"]));
+    expect(getContentByType("notes").map((entry) => entry.slug)).toEqual(expect.arrayContaining(["5w2h", "udp-packet", "media-embeds", "eternal-september", "fomo", "strix", "needle", "deeptutor", "book-vs-cangjie", "croc", "podman-vs-portainer", "ragflow", "saining-xie-interview", "lingyu-liu-interview", "he-xiaopeng-interview", "openshell", "agpl-3-0", "apache-2-0", "mit-license"]));
     expect(getContentBySlug("thoughts", "draft-example")).toBeUndefined();
   });
 
