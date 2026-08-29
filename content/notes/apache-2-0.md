@@ -115,7 +115,7 @@ Apache 2.0 的核心可以用三句话概括。
 
 ## 参考资料
 
-- Apache License, Version 2.0 官方原文 <https://www.apache.org/licenses/LICENSE-2.0.txt>
-- Apache Software Foundation 许可证索引 <https://www.apache.org/licenses/>
-- Apache 2.0 中文社区译文 <https://www.ishareidea.com/licenses/apachelicense.html>
-- SPDX License List: Apache-2.0 <https://spdx.org/licenses/Apache-2.0.html>
+- Apache License, Version 2.0 官方原文 [LICENSE-2.0.txt](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- Apache Software Foundation 许可证索引 [licenses](https://www.apache.org/licenses/)
+- Apache 2.0 中文社区译文 [ishareidea](https://www.ishareidea.com/licenses/apachelicense.html)
+- SPDX License List, Apache-2.0 条目 [spdx.org](https://spdx.org/licenses/Apache-2.0.html)
