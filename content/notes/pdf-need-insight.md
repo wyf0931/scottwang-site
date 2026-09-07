@@ -39,7 +39,7 @@ Word↔PDF 转换 335，占 36.5%，是需求图谱里最粗的一条。PDF 品�
 xychart-beta
     title "增长率 Top 5（Google Trends）"
     x-axis ["what is a pdf", "small pdf", "pdf 24", "pdf drive", "photo to pdf"]
-    y-axis "增长率 %" -100 700
+    y-axis "增长率 %" -100 --> 700
     bar [650, 450, 300, 80, 60]
 ```
 
