@@ -12,7 +12,7 @@ export function MermaidDiagram({ chart }: { chart: string }) {
     void (async () => {
       try {
         const { default: mermaid } = await import("mermaid");
-        mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: document.documentElement.dataset.theme === "dark" ? "dark" : "neutral" });
+        mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: document.documentElement.dataset.theme === "dark" ? "dark" : "default" });
         const result = await mermaid.render(id, chart);
         if (!cancelled) setSvg(result.svg);
       } catch {
