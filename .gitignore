@@ -17,3 +17,4 @@ public/og/projects/
 public/og/research/
 .vercel
 .generated
+.playwright-cli/
