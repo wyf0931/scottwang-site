@@ -47,6 +47,6 @@ cp .env.example .env
 bin/ops.sh start
 ```
 
-打开 <http://127.0.0.1:8000> 就能用。不用 Docker 的话，`bin/ops.sh start-dev 8000` 直接起一个带热重载的 uvicorn。
+打开 `http://127.0.0.1:8000` 就能用。不用 Docker 的话，`bin/ops.sh start-dev 8000` 直接起一个带热重载的 uvicorn。
 
 状态说明一下。现在是 MVP，单用户，面向 localhost。API、存储和沙箱边界都可能变，执行边界后续计划移到独立的 SandboxRunner 后面。
