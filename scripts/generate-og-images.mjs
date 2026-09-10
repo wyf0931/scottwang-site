@@ -27,15 +27,15 @@ function write(kind, slug, data) {
 function markdownFiles(directory) {
   if (!fs.existsSync(directory)) return [];
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    if (entry.isFile() && entry.name.endsWith(".md")) return [{ slug: entry.name.replace(/\.md$/, ""), file: path.join(directory, entry.name) }];
-    if (entry.isDirectory()) { const file = path.join(directory, entry.name, "index.md"); return fs.existsSync(file) ? [{ slug: entry.name, file }] : []; }
+    if (entry.isFile() && /\.mdx?$/.test(entry.name)) return [{ slug: entry.name.replace(/\.mdx?$/, ""), file: path.join(directory, entry.name) }];
+    if (entry.isDirectory()) { const file = ["index.md", "index.mdx"].map((name) => path.join(directory, entry.name, name)).find((candidate) => fs.existsSync(candidate)); return file ? [{ slug: entry.name, file }] : []; }
     return [];
   });
 }
 for (const type of ["writing", "notes", "thoughts"]) for (const { slug, file } of markdownFiles(path.join(root, "content", type))) {
   const data = matter(fs.readFileSync(file, "utf8"));
   if (data.data.draft === true) continue;
-  write(path.join("content", type), slug, { title: data.data.title, type, label: data.data.description ?? "Technical notes and field reports" });
+  write(type, slug, { title: data.data.title, type, label: data.data.description ?? "Technical notes and field reports" });
 }
 for (const kind of ["projects", "research"]) for (const { slug, file } of markdownFiles(path.join(root, "content", kind))) {
   const data = matter(fs.readFileSync(file, "utf8"));

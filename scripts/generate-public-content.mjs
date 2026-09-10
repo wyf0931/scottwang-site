@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import matter from "gray-matter";
 
 const root = process.cwd();
 const contentRoot = path.join(root, "content");
@@ -14,11 +15,11 @@ for (const type of types) {
   for (const entry of fs.readdirSync(sourceDir, { withFileTypes: true })) {
     const source = entry.isDirectory()
       ? ["index.md", "index.mdx"].map((name) => path.join(sourceDir, entry.name, name)).find((file) => fs.existsSync(file))
-      : /\.md$/.test(entry.name) ? path.join(sourceDir, entry.name) : undefined;
+      : /\.mdx?$/.test(entry.name) ? path.join(sourceDir, entry.name) : undefined;
     if (!source) continue;
     const raw = fs.readFileSync(source, "utf8");
-    if (/^draft:\s*true\s*$/m.test(raw)) continue;
-    const slug = entry.isDirectory() ? entry.name : entry.name.replace(/\.md$/, "");
+    if (matter(raw).data.draft === true) continue;
+    const slug = entry.isDirectory() ? entry.name : entry.name.replace(/\.mdx?$/, "");
     fs.writeFileSync(path.join(outputDir, `${slug}.md`), raw);
   }
 }
