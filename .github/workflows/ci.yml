@@ -1,8 +1,9 @@
 name: CI
 
+# Pull requests only. A push to `main` runs the same lint, typecheck, test and build
+# inside the deploy workflow, and `vercel build` runs the project build command there,
+# so triggering CI on `main` as well would run the whole chain twice per push.
 on:
-  push:
-    branches: [main, master]
   pull_request:
     branches: [main, master]
 

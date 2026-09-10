@@ -21,11 +21,14 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      # This job is the only pipeline for `main`, so the checks CI runs on pull
+      # requests run here as well. There is no separate `npm run build` step: the
+      # `vercel build` step below runs the project build command, which is
+      # `npm run build` including the `prebuild` generators.
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
-      - run: npm run build
       - run: npx vercel pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
       - run: npx vercel build --prod --token="${{ secrets.VERCEL_TOKEN }}"
       # Next writes a new build id into every page, so most files change hash on each

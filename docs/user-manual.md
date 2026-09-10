@@ -351,7 +351,7 @@ git push origin main
 git switch 回原分支
 ```
 
-`main` 推送后，GitHub Actions 会跑 CI 和 Vercel 生产部署。部署完成后，内容会出现在 `https://wyf0931.cn`。
+`main` 推送后，Deploy 工作流会先跑 lint、typecheck、test，再用 `vercel build` 构建并部署，部署完成后内容出现在 `https://wyf0931.cn`。这里只构建一次，`vercel build` 自己会执行项目的 `npm run build`（包含 prebuild 生成步骤），所以工作流里不再单独跑一遍。CI 工作流只在 Pull Request 上运行，避免同一次推送把同一套检查跑两遍。
 
 如果没有本地改动，脚本会跳过 commit，但仍会推当前分支并合并到 `main`。
 

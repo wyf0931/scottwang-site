@@ -87,4 +87,4 @@ Use `./bin/ops.sh` for local server control, Obsidian imports, and the verified 
 ```
 
 Equivalent package-script entry points are `npm run import:obsidian` for direct importer use and `npm run test:e2e` for Playwright browser tests. `bin/ops.sh deploy` runs the verification chain, commits and pushes the current branch, then merges and pushes `main`; use it for the content publishing contract after reviewing the resulting commit. For application changes, use the pull-request flow instead.
-The script keeps PID and log files in `.runtime/`. Never commit tokens or Vercel secrets. GitHub Actions runs CI and deploys `main` to Vercel with `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`.
+The script keeps PID and log files in `.runtime/`. Never commit tokens or Vercel secrets. GitHub Actions verifies pull requests with CI, and the deploy workflow verifies and deploys `main` to Vercel with `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`.
