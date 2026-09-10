@@ -10,3 +10,7 @@ export function contentPath(type: ContentType, slug: string) {
 export function markdownPath(type: ContentType, slug: string) {
   return `${contentPath(type, slug)}.md`;
 }
+
+export function seriesPath(slug: string) {
+  return `/series/${encodeURIComponent(slug)}`;
+}

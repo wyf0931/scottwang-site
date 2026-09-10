@@ -44,6 +44,19 @@ resourceType: "github" # github | youtube | bilibili | course | website | upload
 resourceUrl: "https://github.com/..."
 ```
 
+### 合集标题
+
+`series` 是合集的分组键。文章的 URL 和合集页标题都在 `content/series/` 里单独登记，下面是一个完整文件 `content/series/agent-architecture.md`：
+
+```yaml
+series: "Agent Architecture"   # 分组键，必须与文章 frontmatter 里的 series 值一致
+slug: "agent-architecture"     # 决定 /series/<slug>/，省略时直接用 series 的值
+title: "Agent 架构"
+description: "多 agent 系统的协作模式、运行循环与职责划分。"
+```
+
+改标题只改 `title`，不要改 `series` 或 `slug`，否则会换掉已经发布的链接。`slug` 必须是小写 kebab-case；`series` 含空格或中文时必须显式写 `slug`。用了 `series` 却没登记合集，构建会直接报错并指出是哪些文章。
+
 正文仍使用 Markdown，用于记录背景、判断和使用建议。`draft: true` 的内容不会出现在公开页面、RSS、sitemap、`llms.txt` 或搜索索引中。
 
 支持的 MDX 组件包括 `Callout`、`YouTubeEmbed`、`BilibiliEmbed` 和 `GithubRepoCard`。外部视频不要直接写 iframe。GitHub 卡片可以放在正文任意位置：

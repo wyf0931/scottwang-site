@@ -9,6 +9,16 @@
       "source": "/projects/home-shares/",
       "destination": "/projects/oma-drop/",
       "permanent": true
+    },
+    {
+      "source": "/series/Agent%20Architecture",
+      "destination": "/series/agent-architecture/",
+      "permanent": true
+    },
+    {
+      "source": "/series/Agent%20Architecture/",
+      "destination": "/series/agent-architecture/",
+      "permanent": true
     }
   ],
   "rewrites": [

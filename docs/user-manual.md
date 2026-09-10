@@ -29,6 +29,7 @@ content/
 ├── writing/   长文
 ├── notes/     笔记和资源
 ├── thoughts/  想法
+├── series/    合集标识、URL 与标题
 ├── books/     精选电子书入口（Resources 菜单）
 ├── research/  AI Agent 调研报告（Resources 菜单）
 └── projects/  项目介绍
@@ -133,6 +134,21 @@ GitHub 卡片可以在 Markdown/MDX 正文中任意插入：
 ```
 
 构建时会读取或复用 GitHub 元数据缓存。`github: "owner/repo"` frontmatter 字段仍可用于兼容旧内容和缓存，但不会自动追加卡片。
+
+## 怎么给合集加中文标题
+
+文章里的 `series` 只是分组键，合集页面的地址和标题另外登记在 `content/series/` 下。新建 `content/series/agent-architecture.md`。
+
+```yaml
+series: "Agent Architecture"
+slug: "agent-architecture"
+title: "Agent 架构"
+description: "多 agent 系统的协作模式、运行循环与职责划分。"
+```
+
+三个字段各管一件事。`series` 必须与文章 frontmatter 里的值完全一致，用来把文章归到同一个合集；`slug` 决定 `/series/<slug>/` 这个地址，必须是小写 kebab-case，省略时直接用 `series` 的值；`title` 和 `description` 只影响显示。想让合集页显示中文标题，就加这个文件并写 `title`，不需要改文章，也不需要改已经发布的地址。
+
+加了 `series` 却没有登记合集时，构建会直接报错，并在错误信息里列出用到这个键的文章。这比默默生成一个英文 slug 页面更容易发现。`Agent Architecture` 这个合集保留了旧的分组键，地址从 `/series/Agent%20Architecture/` 收敛到 `/series/agent-architecture/`，旧链接由 `vercel.json` 重定向。
 
 ## 怎么添加一本书
 
