@@ -85,7 +85,7 @@ Markdown 支持 GFM 表格和 Mermaid 图表。
 - `/content`：统一浏览文章和资源
 - `/writing`、`/notes`、`/thoughts`：按旧类型筛选的兼容视图
 - `/tags`、`/series`、`/archive`：标签、合集和归档
-- `/projects`、`/research`、`/books`：项目、研究报告和书架
+- `/projects`、`/research`、`/resources`：项目、研究报告、站点收藏（Sites）
 
 ## 开发与发布
 

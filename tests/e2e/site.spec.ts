@@ -16,11 +16,14 @@ test("content index filters resource entries and keeps legacy views", async ({ p
   await expect(page.locator("h1")).toHaveText("Notes");
 });
 
-test("resources page exposes books and research sections", async ({ page }) => {
+test("resources page exposes sites and research sections", async ({ page }) => {
   await page.goto("/resources");
   await expect(page.locator("h1")).toHaveText("Resources");
-  await expect(page.locator("#books h2")).toHaveText("Books");
+  await expect(page.locator("#sites h2")).toHaveText("Sites");
   await expect(page.locator("#research h2")).toHaveText("Research");
+  await expect(page.locator(".site-card")).toHaveCount(2);
+  await expect(page.locator(".site-card .github-repo-card")).toHaveCount(2);
+  await expect(page.locator("#chinese-poetry h3")).toContainText("中华古诗词数据库");
 });
 
 test("about exposes social profiles", async ({ page }) => {

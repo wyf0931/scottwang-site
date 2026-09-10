@@ -1,43 +1,43 @@
 import Link from "next/link";
-import { getAllBooks } from "@/lib/content/books";
+import { GithubRepoCard } from "@/components/content/GithubRepoCard";
+import { getAllSites } from "@/lib/content/sites";
 import { getAllResearch, researchPath } from "@/lib/content/research";
 
 export const metadata = {
   title: "Resources",
-  description: "ScottWang 的资源中心：精选书籍与外部阅读入口、读书笔记，以及 AI Agent 与各领域的研究报告。",
+  description: "ScottWang 的资源中心：精选的外部网站与阅读入口，以及 AI Agent 与各领域的研究报告。",
 };
 
 export default function ResourcesPage() {
-  const books = getAllBooks();
+  const sites = getAllSites();
   const research = getAllResearch();
 
   return (
     <section className="resources-page">
       <p className="eyebrow accent">/ resources</p>
       <h1>Resources</h1>
-      <p className="lead">书籍入口与读书笔记，以及按领域整理的研究报告。外部内容注明来源和授权，站内报告标注方法与边界。</p>
+      <p className="lead">值得收藏的外部站点与阅读入口，以及按领域整理的研究报告。外部内容注明来源和授权，站内报告标注方法与边界。</p>
 
-      <section id="books" className="resource-section" aria-labelledby="books-heading">
-        <h2 id="books-heading">Books</h2>
-        {books.length === 0 ? (
-          <p className="resource-empty">书架整理中。</p>
+      <section id="sites" className="resource-section" aria-labelledby="sites-heading">
+        <h2 id="sites-heading">Sites</h2>
+        {sites.length === 0 ? (
+          <p className="resource-empty">站点整理中。</p>
         ) : (
-          <div className="books-list">
-            {books.map((book) => (
-              <article className="book-card" key={book.slug} id={book.slug}>
-                <div className="book-meta">
-                  <span>{book.status}</span>
-                  <span>{book.language}</span>
-                  <span>{book.author}</span>
+          <div className="sites-list">
+            {sites.map((site) => (
+              <article className="site-card" key={site.slug} id={site.slug}>
+                <div className="site-meta">
+                  <span>{site.license ?? "Website"}</span>
+                  <time dateTime={site.date.toISOString()}>{site.date.toLocaleDateString("zh-CN")}</time>
                 </div>
-                <h3>{book.title}</h3>
-                <p>{book.description}</p>
-                {book.body && <p className="book-note">{book.body}</p>}
-                <div className="tag-row">{book.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-                <p className="license-note">{book.licenseNote}</p>
-                <div className="book-links">
-                  <a href={book.readerUrl} target="_blank" rel="noreferrer">Read ↗</a>
-                  <a href={book.sourceUrl} target="_blank" rel="noreferrer">Source ↗</a>
+                <h3><a href={site.url} target="_blank" rel="noreferrer">{site.title}</a></h3>
+                <p>{site.description}</p>
+                {site.body && <p className="site-note">{site.body}</p>}
+                {site.github && <GithubRepoCard repo={site.github} />}
+                <div className="tag-row">{site.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                <div className="site-links">
+                  <a href={site.url} target="_blank" rel="noreferrer">Visit site ↗</a>
+                  {site.github && <a href={`https://github.com/${site.github}`} target="_blank" rel="noreferrer">GitHub ↗</a>}
                 </div>
               </article>
             ))}

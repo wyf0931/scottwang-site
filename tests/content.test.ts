@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { renderMdx } from "@/lib/content/markdown";
 import { getAllContent, getContentBySlug, getContentByType } from "@/lib/content/source";
 import { getAllProjects, getProjectBySlug } from "@/lib/content/projects";
-import { getAllBooks, getBookBySlug } from "@/lib/content/books";
+import { getAllSites, getSiteBySlug } from "@/lib/content/sites";
 import { getAllSeries, getContentBySeries, getSeriesBySlug, getSeriesRegistry } from "@/lib/content/series";
 import { seriesPath } from "@/lib/content/paths";
 
@@ -39,12 +39,19 @@ describe("content source", () => {
     });
   });
 
-  it("loads the curated books shelf", () => {
-    expect(getAllBooks()).toHaveLength(1);
-    expect(getBookBySlug("fde-guidance-book")).toMatchObject({
+  it("loads the curated sites collection", () => {
+    expect(getAllSites()).toHaveLength(2);
+    expect(getSiteBySlug("chinese-poetry")).toMatchObject({
+      title: "中华古诗词数据库",
+      url: "https://awesome-poetry.top/",
+      github: "chinese-poetry/chinese-poetry",
+      license: "MIT",
+    });
+    expect(getSiteBySlug("fde-guidance-book")).toMatchObject({
       title: "FDE: The Guidance Book of Forward Deployed Engineer",
-      readerUrl: "https://fde4.ai/book/",
-      draft: false,
+      url: "https://fde4.ai/book/",
+      github: "xdash/FDE-the-Guidance-Book-of-Forward-Deployed-Engineer",
+      featured: true,
     });
   });
 

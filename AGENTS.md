@@ -20,7 +20,7 @@ This is ScottWang's Markdown-first personal site. Keep it precise, calm, technic
 - Use concise, stable `tags` and optional `series` values because they become public URLs.
 - A series is registered in `content/series/*.md` with three separate fields: `series` (the exact grouping key articles write in frontmatter), `slug` (the lowercase kebab-case URL segment, defaults to `series`), and `title`/`description` for display. Change the title there, never by renaming the key or the URL. Every series used by published content must have a registry file, or the build fails.
 - Projects live in `content/projects/*.md`; research reports live in `content/research/*.md`. Only published research reports enter public outputs.
-- Books live in `content/books/*.md` and are parsed by `src/lib/content/books.ts`; published books appear on `/books` and in the relevant machine-readable outputs.
+- Sites are curated in `content/sites/*.md` and parsed by `src/lib/content/sites.ts`; published sites appear in the `Sites` section of `/resources` and in the relevant machine-readable outputs. Sites with a GitHub repository embed the shared `GithubRepoCard`.
 - Chinese writing, rewriting, or substantial editing must use the installed `human-writing` skill before drafting. Keep the result factual, material-led, and free of generic model prose.
 
 ## Supported content features

@@ -6,7 +6,7 @@ const root = process.cwd();
 const outputDir = path.join(root, ".generated");
 const outputFile = path.join(outputDir, "github-repos.json");
 const contentRoot = path.join(root, "content");
-const types = ["writing", "notes", "thoughts"];
+const types = ["writing", "notes", "thoughts", "sites"];
 const repositories = new Set();
 
 function contentFiles(directory) {

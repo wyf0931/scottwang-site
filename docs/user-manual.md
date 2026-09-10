@@ -30,11 +30,11 @@ content/
 ├── notes/     笔记和资源
 ├── thoughts/  想法
 ├── series/    合集标识、URL 与标题
-├── books/     精选电子书入口（Resources 菜单）
+├── sites/     精选站点收藏（Resources 菜单）
 ├── research/  AI Agent 调研报告（Resources 菜单）
 └── projects/  项目介绍
 
-导航中的 Resources 菜单对应 `/resources`，聚合书架与研究报告。
+导航中的 Resources 菜单对应 `/resources`，聚合站点收藏与研究报告。
 
 docs/          项目建设过程、方案和用户手册
 src/           Next.js 应用代码
@@ -73,6 +73,7 @@ content/*.md
 合集页
 归档页
 精选书架
+站点收藏
 RSS
 sitemap
 llms.txt
@@ -150,39 +151,36 @@ description: "多 agent 系统的协作模式、运行循环与职责划分。"
 
 加了 `series` 却没有登记合集时，构建会直接报错，并在错误信息里列出用到这个键的文章。这比默默生成一个英文 slug 页面更容易发现。`Agent Architecture` 这个合集保留了旧的分组键，地址从 `/series/Agent%20Architecture/` 收敛到 `/series/agent-architecture/`，旧链接由 `vercel.json` 重定向。
 
-## 怎么添加一本书
+## 怎么添加一个站点
 
-书架收录公开阅读或开源电子书。默认只放元信息和阅读入口，不复制整本书正文。这样可以保留作者自己的更新节奏，也避免授权边界变得含糊。
+Sites 收藏值得反复访问的外部网站、在线书和数据库。默认只放元信息和一句摘要，不复制对方内容，这样保留原作者的更新节奏，也避免授权边界变得含糊。
 
 新建文件。
 
 ```text
-content/books/my-book.md
+content/sites/my-site.md
 ```
 
 写入 frontmatter 和一小段收录说明。
 
 ```md
 ---
-title: "My Book"
-description: "一句话说明这本书适合谁。"
-date: "2026-08-14"
-author: "Author Name"
-language: "中文"
-status: "Recommended"
+title: "中华古诗词数据库"
+description: "一句话说明这个站点有什么。"
+date: "2026-09-10"
+url: "https://example.com/"
+github: "owner/repo"
+license: "MIT"
 tags:
-  - AI
-sourceUrl: "https://github.com/owner/repo"
-readerUrl: "https://example.com/book/"
-licenseNote: "按原作者授权说明填写。"
+  - 开源数据
 featured: false
 draft: false
 ---
 
-这本书的收录理由。
+为什么值得收藏。
 ```
 
-`readerUrl` 指向最适合读者打开的阅读页，`sourceUrl` 指向源码或项目主页。`draft: true` 的书不会出现在公开书架、搜索索引、sitemap 或 `llms.txt`。
+`url` 指向最适合打开的入口，`github` 可选，填了就会在卡片里嵌入 GitHub 区块，展示星标和仓库描述；`license` 可选，填写对方内容的使用授权。`draft: true` 的站点不会出现在公开列表、搜索索引或 `llms.txt`。
 
 ## Markdown 支持什么
 

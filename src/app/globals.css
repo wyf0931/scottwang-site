@@ -111,7 +111,7 @@ h2 { margin-bottom: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15;
 .resource-section { margin-top: 72px; scroll-margin-top: 120px; }
 .resource-section h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); padding-bottom: 14px; border-bottom: 1px solid var(--border); }
 .resource-empty { margin-top: 28px; color: var(--muted); font-size: .85rem; }
-.resource-section .books-list, .resource-section .research-grid { margin-top: 32px; }
+.resource-section .sites-list, .resource-section .research-grid { margin-top: 32px; }
 .research-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 42px; }
 .research-card { display: flex; flex-direction: column; min-height: 340px; padding: 24px; border: 1px solid var(--border); background: var(--surface); }
 .research-card h2 { margin: 28px 0 12px; font-size: 1.65rem; line-height: 1.15; }
@@ -474,7 +474,7 @@ h2 {
 .content-grid,
 .project-grid,
 .research-grid,
-.books-list {
+.sites-list {
   display: block;
   margin-top: 22px;
 }
@@ -543,7 +543,7 @@ h2 {
 .project-card,
 .project-teaser,
 .research-card,
-.book-card,
+.site-card,
 .taxonomy-card {
   border: 0;
   border-bottom: 1px solid var(--border);
@@ -553,7 +553,7 @@ h2 {
 .project-card,
 .project-teaser,
 .research-card,
-.book-card {
+.site-card {
   min-height: 0;
   padding: 16px 0;
   transition: none;
@@ -561,33 +561,39 @@ h2 {
 
 .project-card:hover,
 .project-teaser:hover,
-.book-card:hover {
+.site-card:hover {
   border-color: var(--border);
   transform: none;
 }
 
 .project-card h2,
 .research-card h2,
-.book-card h2,
+.site-card h2,
 .project-card h3,
-.research-card h3,
-.book-card h3 {
+.research-card h3 {
   margin: 6px 0;
   font-size: 1.12rem;
   letter-spacing: 0;
 }
 
+/* Site titles follow the blog list: same size, weight and ink as .content-card h3. */
+.site-card h3 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  font-weight: 750;
+  letter-spacing: 0;
+}
+
 .project-card p,
 .research-card p,
-.book-card p,
+.site-card p,
 .project-teaser small,
-.research-card h3,
-.book-card h3 {
+.research-card h3 {
   color: var(--muted);
   font-size: 0.94rem;
 }
 
-.book-meta {
+.site-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
@@ -596,8 +602,13 @@ h2 {
   text-transform: uppercase;
 }
 
-.book-meta span:first-child {
+.site-meta span:first-child {
   color: var(--accent);
+}
+
+.site-card .github-repo-card {
+  margin: 18px 0 2px;
+  box-shadow: none;
 }
 
 .github-repo-card {
@@ -818,7 +829,7 @@ html[data-theme="dark"] .github-repo-card {
   }
 }
 
-.book-note,
+.site-note,
 .license-note {
   max-width: 680px;
 }
@@ -828,7 +839,7 @@ html[data-theme="dark"] .github-repo-card {
   font-size: 0.82rem;
 }
 
-.book-links {
+.site-links {
   display: flex;
   flex-wrap: wrap;
   gap: 18px;
