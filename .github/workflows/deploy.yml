@@ -28,4 +28,7 @@ jobs:
       - run: npm run build
       - run: npx vercel pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
       - run: npx vercel build --prod --token="${{ secrets.VERCEL_TOKEN }}"
-      - run: npx vercel deploy --prebuilt --prod --token="${{ secrets.VERCEL_TOKEN }}"
+      # Next writes a new build id into every page, so most files change hash on each
+      # build and the Hobby upload limit (5000 files/day) is reached after two deploys.
+      # --archive=tgz uploads the prebuilt output as one tarball instead of ~2400 files.
+      - run: npx vercel deploy --prebuilt --archive=tgz --prod --token="${{ secrets.VERCEL_TOKEN }}"

@@ -381,6 +381,14 @@ NEXT_PUBLIC_UMAMI_SHARE_ID=<your-umami-share-id>
 
 Giscus 评论依赖 GitHub Discussions 和 Giscus GitHub App。仓库没有安装 Giscus 时，页面会显示对应错误。
 
+### 部署为什么要带 --archive=tgz
+
+站点是静态导出，`out/` 里有两千多个文件。每个路由除了一份 HTML，还会产出若干 `__next.*.txt` 片段，客户端路由在跳转和预取时会请求它们，不能删。
+
+Next 每次构建都会把一个新的 build id 写进每个页面，相邻两次构建之间九成以上文件的内容哈希都会变，Vercel 的文件去重缓存帮不上忙，每次部署实际上都是全量上传。Vercel Hobby 计划限制每天 5000 次文件上传，按这个量只够部署两次，第三次就会报 `api-upload-free`。
+
+`vercel deploy --prebuilt --archive=tgz` 会把构建产物打成 tarball 再上传，上传请求从两千多次降到一次。官方文档在部署命令里也建议文件数量上千时加上这个参数。
+
 ## Agent 维护时要注意什么
 
 后续 Coding Agent 接手时，先读 `AGENTS.md`。它是 Agent 的操作手册。
