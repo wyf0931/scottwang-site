@@ -41,5 +41,5 @@ export function getBookBySlug(slug: string, includeDrafts = false) {
 }
 
 export function booksPath() {
-  return "/books";
+  return "/resources";
 }

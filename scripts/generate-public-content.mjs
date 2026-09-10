@@ -24,7 +24,7 @@ for (const type of types) {
 }
 
 const researchSourceDir = path.join(contentRoot, "research");
-const researchOutputDir = path.join(publicRoot, "research");
+const researchOutputDir = path.join(publicRoot, "resources", "research");
 fs.mkdirSync(researchOutputDir, { recursive: true });
 if (fs.existsSync(researchSourceDir)) {
   for (const entry of fs.readdirSync(researchSourceDir, { withFileTypes: true })) {

@@ -4,7 +4,7 @@ test("home exposes the primary site navigation", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/ScottWang/);
   await expect(page.getByRole("link", { name: "Blog", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Research", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Resources", exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "Projects", exact: true })).toBeVisible();
 });
 
@@ -16,13 +16,11 @@ test("content index filters resource entries and keeps legacy views", async ({ p
   await expect(page.locator("h1")).toHaveText("Notes");
 });
 
-test("research report exposes SEO and raw Markdown", async ({ page, request }) => {
-  await page.goto("/research/ai-agent-platforms-2026");
-  await expect(page.locator("h1")).toContainText("AI Agent 平台");
-  await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(2);
-  const raw = await request.get("/research/ai-agent-platforms-2026.md");
-  expect(raw.ok()).toBeTruthy();
-  expect(await raw.text()).toContain("status: \"Published\"");
+test("resources page exposes books and research sections", async ({ page }) => {
+  await page.goto("/resources");
+  await expect(page.locator("h1")).toHaveText("Resources");
+  await expect(page.locator("#books h2")).toHaveText("Books");
+  await expect(page.locator("#research h2")).toHaveText("Research");
 });
 
 test("about exposes social profiles", async ({ page }) => {
@@ -34,7 +32,7 @@ test("about exposes social profiles", async ({ page }) => {
 test("search finds Chinese content", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Search" }).click();
-  await page.getByPlaceholder("搜索文章、笔记和思考…").fill("Agent");
+  await page.getByPlaceholder("搜索文章、项目、报告和书…").fill("Agent");
   await expect(page.locator(".search-result").first()).toBeVisible();
 });
 

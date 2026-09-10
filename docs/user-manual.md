@@ -29,9 +29,11 @@ content/
 ├── writing/   长文
 ├── notes/     笔记和资源
 ├── thoughts/  想法
-├── books/     精选电子书入口
-├── research/  AI Agent 调研报告
+├── books/     精选电子书入口（Resources 菜单）
+├── research/  AI Agent 调研报告（Resources 菜单）
 └── projects/  项目介绍
+
+导航中的 Resources 菜单对应 `/resources`，聚合书架与研究报告。
 
 docs/          项目建设过程、方案和用户手册
 src/           Next.js 应用代码
