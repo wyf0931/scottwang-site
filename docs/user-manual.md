@@ -351,7 +351,7 @@ git push origin main
 git switch 回原分支
 ```
 
-`main` 推送后，Deploy 工作流会先跑 lint、typecheck、test，再用 `vercel build` 构建并部署，部署完成后内容出现在 `https://wyf0931.cn`。这里只构建一次，`vercel build` 自己会执行项目的 `npm run build`（包含 prebuild 生成步骤），所以工作流里不再单独跑一遍。CI 工作流只在 Pull Request 上运行，避免同一次推送把同一套检查跑两遍。
+`main` 推送后，Deploy 工作流会先跑 lint、typecheck、test，然后把源码交给 Vercel，由 Vercel 在自己的构建机上执行 `npm run build`（包含 prebuild 生成步骤），部署完成后内容出现在 `https://wyf0931.cn`。CI 工作流只在 Pull Request 上运行，避免同一次推送把同一套检查跑两遍。
 
 如果没有本地改动，脚本会跳过 commit，但仍会推当前分支并合并到 `main`。
 
@@ -381,13 +381,15 @@ NEXT_PUBLIC_UMAMI_SHARE_ID=<your-umami-share-id>
 
 Giscus 评论依赖 GitHub Discussions 和 Giscus GitHub App。仓库没有安装 Giscus 时，页面会显示对应错误。
 
-### 部署为什么要带 --archive=tgz
+### 为什么由 Vercel 从源码构建
 
 站点是静态导出，`out/` 里有两千多个文件。每个路由除了一份 HTML，还会产出若干 `__next.*.txt` 片段，客户端路由在跳转和预取时会请求它们，不能删。
 
-Next 每次构建都会把一个新的 build id 写进每个页面，相邻两次构建之间九成以上文件的内容哈希都会变，Vercel 的文件去重缓存帮不上忙，每次部署实际上都是全量上传。Vercel Hobby 计划限制每天 5000 次文件上传，按这个量只够部署两次，第三次就会报 `api-upload-free`。
+Next 每次构建都会把一个新的 build id 写进每个页面，相邻两次构建之间九成以上文件的内容哈希都会变，Vercel 的文件去重缓存帮不上忙。之前用 `vercel build` 加上 `vercel deploy --prebuilt` 的写法，每次部署都要把这两千多个文件全量上传，Vercel Hobby 计划限制每天 5000 次文件上传，部署两次就会报 `api-upload-free`。
 
-`vercel deploy --prebuilt --archive=tgz` 会把构建产物打成 tarball 再上传，上传请求从两千多次降到一次。官方文档在部署命令里也建议文件数量上千时加上这个参数。
+现在改成 `vercel deploy --prod`，只上传源码。`.vercelignore` 排掉了依赖、构建产物、`public/` 下由 prebuild 生成的文件和本地 `.env*`，需要上传的不到两百个文件；构建交给 Vercel 的构建机，它自己会跑 `npm ci` 和 `npm run build`。官方 `--archive=tgz` 也能绕开上传次数限制，但源码部署更干净，生成的产物也不再经过本地磁盘。
+
+附带的两个好处。一是 GitHub 卡片元数据和 OG 图都在构建机上现生成，`public/og/`、`public/*.md` 这些产物本来也不该进版本库。二是部署命令里用 `--build-env NEXT_PUBLIC_SITE_URL=https://wyf0931.cn` 显式传站点地址，不依赖 Vercel 项目设置里的环境变量，canonical 和 sitemap 里的域名不会退回 localhost。
 
 ## Agent 维护时要注意什么
 

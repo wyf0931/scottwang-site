@@ -14,7 +14,6 @@ jobs:
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-      NEXT_PUBLIC_SITE_URL: https://wyf0931.cn
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,16 +21,15 @@ jobs:
           node-version: 22
           cache: npm
       # This job is the only pipeline for `main`, so the checks CI runs on pull
-      # requests run here as well. There is no separate `npm run build` step: the
-      # `vercel build` step below runs the project build command, which is
-      # `npm run build` including the `prebuild` generators.
+      # requests run here as well.
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
       - run: npx vercel pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
-      - run: npx vercel build --prod --token="${{ secrets.VERCEL_TOKEN }}"
-      # Next writes a new build id into every page, so most files change hash on each
-      # build and the Hobby upload limit (5000 files/day) is reached after two deploys.
-      # --archive=tgz uploads the prebuilt output as one tarball instead of ~2400 files.
-      - run: npx vercel deploy --prebuilt --archive=tgz --prod --token="${{ secrets.VERCEL_TOKEN }}"
+      # Vercel builds the project from source on its own builder. The alternative,
+      # `vercel build` plus `vercel deploy --prebuilt`, uploaded the exported site
+      # (~2400 files, and a new build id in every page defeats the upload cache), which
+      # hit the Hobby upload limit of 5000 files per day after two deploys. A source
+      # deploy uploads the sources only, ~170 files.
+      - run: npx vercel deploy --prod --build-env NEXT_PUBLIC_SITE_URL=https://wyf0931.cn --token="${{ secrets.VERCEL_TOKEN }}"

@@ -106,7 +106,7 @@ npm run build
 
 `deploy` 会执行检查、提交当前改动、推送当前分支、合并到 `main` 并推送，适合内容发布流程。代码和配置变更仍通过 Pull Request 合并。不要提交 Token 或 Vercel secrets。
 
-生产环境使用 Vercel，仓库需要 `VERCEL_TOKEN`、`VERCEL_ORG_ID` 和 `VERCEL_PROJECT_ID`。站点地址由 `NEXT_PUBLIC_SITE_URL` 提供；GitHub Actions 的生产工作流会注入正式地址。
+生产环境使用 Vercel，仓库需要 `VERCEL_TOKEN`、`VERCEL_ORG_ID` 和 `VERCEL_PROJECT_ID`。部署时只上传源码，由 Vercel 在自己的构建机上执行构建，站点地址由部署命令里的 `--build-env NEXT_PUBLIC_SITE_URL` 注入。
 
 ## 项目结构
 
