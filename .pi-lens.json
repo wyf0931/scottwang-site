@@ -1,3 +1,6 @@
 {
-  "ignore": [".playwright-cli/**"]
+  "ignore": [".playwright-cli/**"],
+  "format": {
+    "enabled": false
+  }
 }

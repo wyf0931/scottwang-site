@@ -36,6 +36,7 @@ This is ScottWang's Markdown-first personal site. Keep it precise, calm, technic
 
 - Preserve static generation and Vercel compatibility. Do not introduce a database, CMS, account system, or runtime search service without an approved design update.
 - Keep content parsing separate from rendering. Prefer small typed modules over large route files.
+- Automatic formatting is off for this repository (`.pi-lens.json` sets `format.enabled: false`). The agent tooling's default formatter expands the compact single-line rules in `src/app/globals.css` and the build scripts into thousands of lines that have nothing to do with the change at hand. Match the existing style by hand instead. Remove that key only together with a deliberate, single-purpose reformat commit.
 - Preserve semantic HTML, keyboard access, visible focus, readable Chinese typography, and mobile layouts.
 - When adding a content type or output, update its schema, query, route, metadata/feed behavior, docs, and tests together.
 - For the GitHub project card and article framework, follow `docs/superpowers/specs/2026-08-16-github-project-embeds-and-selection-notes-design.md`.
