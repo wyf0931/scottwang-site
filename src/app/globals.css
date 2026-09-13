@@ -108,6 +108,12 @@ h2 { margin-bottom: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15;
 .resources-page { padding: 100px 0; }
 .resources-page h1 { font-size: clamp(2.8rem, 6vw, 4.8rem); }
 .resources-page .lead { max-width: 640px; }
+.sites-page { padding: 100px 0; }
+.sites-page h1 { font-size: clamp(2.8rem, 6vw, 4.8rem); }
+.sites-page .lead { max-width: 640px; }
+.sites-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 18px; margin-top: 48px; }
+.sites-grid .site-card { min-width: 0; padding: 20px; border: 1px solid var(--border); background: var(--surface); transition: border-color 180ms ease, transform 180ms ease; }
+.sites-grid .site-card:hover { border-color: rgba(114, 246, 194, .55); transform: translateY(-3px); }
 .resource-section { margin-top: 72px; scroll-margin-top: 120px; }
 .resource-section h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); padding-bottom: 14px; border-bottom: 1px solid var(--border); }
 .resource-empty { margin-top: 28px; color: var(--muted); font-size: .85rem; }
@@ -749,12 +755,14 @@ html[data-theme="dark"] .link-card {
 
 .github-repo-title small {
   color: var(--muted);
-  font: 0.82rem ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 1rem ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 .github-repo-title strong {
-  font-size: 1.45rem;
-  letter-spacing: -0.04em;
+  font-size: 1rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
 }
 
 .github-repo-external {
@@ -813,7 +821,7 @@ html[data-theme="dark"] .github-repo-card {
   }
 
   .github-repo-title strong {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .link-card {
@@ -863,6 +871,7 @@ html[data-theme="dark"] .github-repo-card {
 .projects-page,
 .research-page,
 .resources-page,
+.sites-page,
 .books-page,
 .about-page,
 .project-detail,
@@ -870,6 +879,10 @@ html[data-theme="dark"] .github-repo-card {
 .article-layout {
   max-width: 760px;
   padding: 64px 0 90px;
+}
+
+@media (max-width: 720px) {
+  .sites-grid { grid-template-columns: 1fr; gap: 18px; margin-top: 32px; }
 }
 
 .article-header,

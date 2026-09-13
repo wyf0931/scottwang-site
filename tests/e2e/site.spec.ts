@@ -5,6 +5,7 @@ test("home exposes the primary site navigation", async ({ page }) => {
   await expect(page).toHaveTitle(/ScottWang/);
   await expect(page.getByRole("link", { name: "Blog", exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "Resources", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Sites", exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "Projects", exact: true })).toBeVisible();
 });
 
@@ -21,9 +22,22 @@ test("resources page exposes sites and research sections", async ({ page }) => {
   await expect(page.locator("h1")).toHaveText("Resources");
   await expect(page.locator("#sites h2")).toHaveText("Sites");
   await expect(page.locator("#research h2")).toHaveText("Research");
-  await expect(page.locator(".site-card")).toHaveCount(2);
-  await expect(page.locator(".site-card .github-repo-card")).toHaveCount(2);
+  await expect(page.locator(".site-card")).toHaveCount(3);
+  await expect(page.locator(".site-card .github-repo-card")).toHaveCount(3);
   await expect(page.locator("#chinese-poetry h3")).toContainText("中华古诗词数据库");
+});
+
+test("sites page exposes the compact responsive collection", async ({ page }) => {
+  await page.goto("/sites");
+  await expect(page.locator("h1")).toHaveText("Sites");
+  await expect(page.locator(".sites-grid")).toBeVisible();
+  await expect(page.locator("#scikit-learn-user-guide h3")).toContainText("scikit-learn User Guide");
+  await expect(page.locator("#scikit-learn-user-guide .github-repo-card")).toBeVisible();
+  const githubTypeSizes = await page.locator("#scikit-learn-user-guide .github-repo-title").evaluate((title) => ({ owner: getComputedStyle(title.querySelector("small")!).fontSize, repo: getComputedStyle(title.querySelector("strong")!).fontSize }));
+  expect(githubTypeSizes.owner).toBe(githubTypeSizes.repo);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator(".sites-grid")).toHaveCSS("grid-template-columns", /\d+px/);
+  expect(await page.locator(".sites-grid").evaluate((grid) => getComputedStyle(grid).gridTemplateColumns.split(" ").length)).toBe(1);
 });
 
 test("about exposes social profiles", async ({ page }) => {

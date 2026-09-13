@@ -40,7 +40,7 @@ describe("content source", () => {
   });
 
   it("loads the curated sites collection", () => {
-    expect(getAllSites()).toHaveLength(2);
+    expect(getAllSites()).toHaveLength(3);
     expect(getSiteBySlug("chinese-poetry")).toMatchObject({
       title: "中华古诗词数据库",
       url: "https://awesome-poetry.top/",
@@ -52,6 +52,12 @@ describe("content source", () => {
       url: "https://fde4.ai/book/",
       github: "xdash/FDE-the-Guidance-Book-of-Forward-Deployed-Engineer",
       featured: true,
+    });
+    expect(getSiteBySlug("scikit-learn-user-guide")).toMatchObject({
+      title: "scikit-learn User Guide",
+      url: "https://scikit-learn.org/stable/user_guide.html",
+      github: "scikit-learn/scikit-learn",
+      featured: false,
     });
   });
 
