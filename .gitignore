@@ -16,3 +16,4 @@ public/og/
 .vercel
 .generated
 .playwright-cli/
+.superpowers/
