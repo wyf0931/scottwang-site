@@ -1,6 +1,6 @@
 ---
 title: "读 OpenDesign，看它怎么把 CLI 变成设计引擎"
-description: "一个 5 个月拿到 97k star 的项目。它不重新实现 agent，把本机已经装好的编码 CLI 变成设计引擎。"
+description: "一个 5 个月拿到 97k star 的项目，它怎么把 CLI 变成设计引擎，桌面应用为什么是必经之路，CJK 为什么是短板。"
 date: "2026-09-23"
 type: "writing"
 kind: "essay"
@@ -60,10 +60,76 @@ CONTEXT.md 里是术语表，每个术语配一条 Avoid 清单。Project 不要
 
 这套命名约束看着麻烦，但要被很多 agent 消费的协议必须这样。
 
+## od 命令解决什么问题
+
+想只用一行命令装好 od，再配合自己的 agent 干活，这条路当前是断的。
+
+根因在 package.json 里，`"private": true`。`npm view open-design` 返回 404，这个包在 npm registry 上不存在。所以 `npm install -g open-design` 走不通，`brew install` 也没有官方 cask。
+
+`od` 是个 npm bin 入口，定义在 `apps/daemon/bin/od.mjs`。它做的事很简单，`import` 同目录的 `../dist/cli.js`。dist 不存在就抛错，提示你 `pnpm bootstrap` 之后再试。
+
+而 dist 是 `pnpm bootstrap` 编译出来的。这意味着 od 必须从源码 checkout 或桌面应用 bundle 里拿到，没有第三条独立路径。
+
+官方提供的 `curl -fsSL https://open-design.ai/install.sh | sh -s <agent>` 看起来是一行安装。实际它先检查 `command -v od`，只负责注册 MCP 配置，你已经有 od 才能跑它。
+
+README 里有一句容易看漏的说明，桌面应用 bundle 不会往 shell PATH 里加 od 软链。所以装了桌面应用，终端里还是敲不出 od，得去设置里复制带绝对路径的 MCP 配置片段。
+
+还有一层路径冲突。macOS、Linux、WSL2 上 `/usr/bin/od` 是系统自带的八进制转储命令，会抢占 OpenDesign 的 od。install.sh 专门加了探针 `od mcp install --open-design-cli-probe` 来检测这件事，检测到就报错让你调 PATH。
+
+所以桌面应用不是捆绑，它是 od 的唯一分发载体。沙箱 iframe 预览、导出 PDF、PPTX、MP4 需要本机渲染环境，Docker 部署也得挂一个浏览器。这条路径本身站得住。
+
+但值得注意的转向发生在 0.9.0。这个版本自称 install-and-create release，官方话术很直白，老的 first-run tax 太狠了，装 CLI、找 API key、贴密钥、测认证、调 shell，然后也许才能开始设计。0.9.0 把它砍到三步，打开应用、登录 AMR、选模型。AMR 是官方模型服务，onboarding 第一个入口就是它，桌面常驻登录入口，安装包内置 vela 运行时，UI 处理钱包余额和充值链接。
+
+本地 first-class 是 BYOK 加上 26 个 CLI。这个定位没变。只是首屏引导从 BYOK 换成了付费云，本地路径从默认变成了可选项。
+
+## CJK 是明确的短板
+
+中日韩字形问题在 issue 区有一条清晰的痕迹。
+
+#5097 由日语母语者提出。日文文本渲染出了中文风格的字形。同码位不同字形这件事，不懂日语的人基本注意不到，但对方觉得不自然也不对。
+
+修复在 #5104。问题描述写得很准，日文 fallback 被和中文、韩文归在一组，用的是中文优先的字体栈。对共享的 CJK 字符，这会渲染出中文字形。改动只有一行，`apps/web/src/styles/viewer/library.css`。
+
+更早的 #2227 是另一件事。UI 语言切到中日韩以后，按钮和标签全是方块。原因是 `--sans` 字体栈里只有拉丁字体。修法是在 `:lang(zh)`、`:lang(ja)`、`:lang(ko)` 选择器下补 PingFang SC、Microsoft YaHei、Noto Sans SC 这些系统字体。
+
+这两条都只改了 web 层的 CSS。
+
+真正的问题在设计模板和 DESIGN.md 协议。我数了一下，114 个 design-templates 里 91 个文件含 CJK 字体名，占八成。但拆开看分布就清楚了。21 个在 example.html，14 个在 style.css，7 个在 template.json。
+
+含 CJK 的 template.json 几乎全是 html-ppt-zhangzara-* 系列，字体配置里写 `"cn": "Noto Sans SC"`，style 字段标注 bilingual EN/CN。这些是有意识地做过中英双语的 deck 模板，作者显然是中文用户。
+
+主流原型模板没有这层。web-prototype、saas-landing、mobile-app 的字体走 `var(--font-body)`、`var(--font-display)` 这类 CSS 变量，变量值来自 design system，而 design system 的字体定义是拉丁字优先。中文塞进去就靠系统 fallback 兜底，字重、行高、字间距全部失配。
+
+DESIGN.md 协议本身也没有语言维度的 schema。它定义 display、body、mono 三类字体角色，没有 cn、jp 字段。CJK 支持是模板作者自己加的约定，不是协议保证的。
+
+issue 区还有几条在印证同一件事。#6478 是 Albert Sans 没有西里尔覆盖，俄文靠 OS 兜底。#6085 是首页标题回退到随机系统衬线体，得手动打包 Source Serif 4。#6291 是 DESIGN.md 解析把 `Nunito Sans` 截成 `Nunito Sans,`，连带丢掉 Google Fonts 地址和字重元数据。#5644 和 #6839 是 PPTX 导出破坏 CJK 字重和字体。
+
+CJK 是协议层的缺口。DESIGN.md 没有语言维度，模板作者各自为战，PPTX 导出还会把字重和字体再破坏一次。
+
 ## 判断
 
 生成模型和设计编辑器它都没动，它占的是 agent 产出物落地的位置。
 
 三个数字说明重心，165 skills、154 design-systems、115 templates。增长的动力在内容这一侧。Anthropic 的 loop 是产品，OpenDesign 的 loop 是文件系统，这是两者最根本的区别。
 
-风险也清楚。0.23.1 的版本号加 5 个月历史，架构契约还在快速变动。核心体验要么依赖你自己有 agent CLI，要么付费上 AMR Cloud。97k star 对一个年轻项目是极高热度，社区治理压力只会越来越大。
+热度这一侧我持保留态度。开发节奏是真的，CHANGELOG 里每个版本都记了 PR 和贡献者数，0.1.0 是 45 个 PR 加 27 个贡献者，0.9.0 是 310 个 PR 加 88 个贡献者，7 天。到 5 月底已有 1748 个 commit，现在 3689 个。这种密度不是买来的。
+
+但 star 曲线有人在质疑。发推当天的 HN 讨论里，有人贴出 star-history 的图，说仓库上线一周拿到 14k star，增速几乎精确地每天 1400，质疑存在刷量。也有人反驳，说 star 未必是买的，可能是 agent 在人类没明确指示的情况下顺手点的。两边都没有证据，我只能说这条曲线读着不顺。
+
+社区反馈的调性比 star 数更值得看。HN 上 232 分、92 条评论，正面集中在"agent 原生"这个定位，有人直接问输出质量里有多少是 design system 和 skill 文件在做真功夫，有多少只是 Claude 本身擅长写 HTML。这个问题现在没有答案。
+
+批评也很直接。设计师说看到的 LLM 产出物丑、平庸、不可用，提示词救不回来。有人指出 Claude Design 那种要生成完整网站的流程极耗 token，ChatGPT image 更快更便宜。还有人觉得 README 读起来像销售稿，翻到"six load-bearing ideas"就关掉了标签页。
+
+对中文用户，实用建议很具体。避开 zhangzara 系列的 deck 模板去拿模板，改用 web-prototype 加自己的 DESIGN.md，手动指定中文字体栈。PPTX 导出会破坏 CJK，要发正式材料走 HTML 加浏览器打印。
+
+风险也清楚。0.23.1 的版本号加 5 个月历史，架构契约还在快速变动。核心体验要么依赖你自己有 agent CLI，要么付费上 AMR Cloud，桌面应用是 od 的唯一分发载体，这个耦合短期解不开。CJK 支持不是靠等上游修就能解决的，DESIGN.md 协议没有语言维度，这件事需要自己做模板或者补 craft 规则。
+
+## 资料来源
+
+- 仓库源码，`nexu-io/open-design` 0.23.1，2026-09-23 浅克隆
+- GitHub API 的 release 时间线、issues、PR 与 commit 分页计数
+- Hacker News 讨论，Open Design 用你的编码 agent 做设计引擎，232 分 92 评论，2026-05-02
+- CJK 相关 issue，#2227、#5097、#5104、#6085、#6291、#6478、#5644、#6839
+- `CHANGELOG.md` 各版本 PR 与贡献者计数，`package.json`，`apps/daemon/bin/od.mjs`，`open-design.ai/install.sh`，`docs/architecture.md`，`docs/skills-protocol.md`，`CONTEXT.md`
+
+Reddit 和 Stack Overflow 没有查到相关讨论。Stack Exchange 的搜索只返回 Visual Studio Designer 之类的无关结果，这个项目在那边没有存在感。
