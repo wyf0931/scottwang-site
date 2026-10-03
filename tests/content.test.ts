@@ -46,6 +46,7 @@ describe("content source", () => {
       url: "https://awesome-poetry.top/",
       github: "chinese-poetry/chinese-poetry",
       license: "MIT",
+      licenseUrl: "https://spdx.org/licenses/MIT.html",
     });
     expect(getSiteBySlug("fde-guidance-book")).toMatchObject({
       title: "FDE: The Guidance Book of Forward Deployed Engineer",
@@ -57,6 +58,7 @@ describe("content source", () => {
       title: "scikit-learn User Guide",
       url: "https://scikit-learn.org/stable/user_guide.html",
       github: "scikit-learn/scikit-learn",
+      licenseUrl: "https://spdx.org/licenses/BSD-3-Clause.html",
       featured: false,
     });
   });

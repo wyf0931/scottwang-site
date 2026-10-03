@@ -5,6 +5,7 @@ date: "2026-08-14"
 url: "https://fde4.ai/book/"
 github: "xdash/FDE-the-Guidance-Book-of-Forward-Deployed-Engineer"
 license: "公众内容可免费阅读和非商业分享，需保留署名；商业使用需获得书面许可"
+licenseUrl: "https://github.com/xdash/FDE-the-Guidance-Book-of-Forward-Deployed-Engineer"
 tags:
   - FDE
   - AI

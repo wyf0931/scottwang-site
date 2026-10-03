@@ -21,19 +21,20 @@ date: "2026-09-10"
 url: "https://example.com/"
 github: "owner/repo"   # optional
 license: "MIT"          # optional
+licenseUrl: "https://spdx.org/licenses/MIT.html"   # optional, opens the license chip
 tags: []
 featured: false
 draft: false
 ```
 
-`github` and `license` are optional. The old `author`, `language`, `status`, `sourceUrl`, `readerUrl`, and `licenseNote` fields are gone; repository facts belong to the GitHub block, not to the site record.
+`github` and `license` are optional. The old `author`, `language`, `status`, `sourceUrl`, `readerUrl`, and `licenseNote` fields are gone; repository facts belong to the GitHub block, not to the site record. `licenseUrl` is optional and turns the license chip into an external link in the card footer.
 
 ## UI behavior
 
 - The section keeps the site's editorial list look: borderless cards with a bottom hairline.
 - Card titles use the same size, weight, and ink as blog list titles (`.content-card h3`), instead of the previous smaller muted gray.
 - A card with a `github` field embeds the shared `GithubRepoCard` (stars, description, language, CTA), with the card chrome flattened to fit the list.
-- Tags, the license chip, the date, and a `Visit site` link complete the card.
+- Tags and a `Visit site` link complete the card; `date` still orders the collection but is not rendered.
 
 ## Integration behavior
 

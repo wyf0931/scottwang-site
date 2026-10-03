@@ -13,6 +13,7 @@ const siteSchema = z.object({
   url: z.string().url(),
   github: z.string().regex(/^[^/\s]+\/[^/\s]+$/, "Expected a GitHub repository in owner/repo format").optional(),
   license: z.string().min(1).optional(),
+  licenseUrl: z.string().url().optional(),
   tags: z.array(z.string()).default([]),
   featured: z.boolean().default(false),
   draft: z.boolean().default(false),

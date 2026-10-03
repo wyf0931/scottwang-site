@@ -33,6 +33,12 @@ test("sites page exposes the compact responsive collection", async ({ page }) =>
   await expect(page.locator(".sites-grid")).toBeVisible();
   await expect(page.locator("#scikit-learn-user-guide h3")).toContainText("scikit-learn User Guide");
   await expect(page.locator("#scikit-learn-user-guide .github-repo-card")).toBeVisible();
+  await expect(page.locator("#scikit-learn-user-guide .site-meta")).toHaveCount(0);
+  await expect(page.locator("#scikit-learn-user-guide .site-card time")).toHaveCount(0);
+  const license = page.locator("#scikit-learn-user-guide .site-license");
+  await expect(license).toHaveText("BSD-3-Clause");
+  await expect(license).toHaveAttribute("href", "https://spdx.org/licenses/BSD-3-Clause.html");
+  await expect(page.locator("#scikit-learn-user-guide .site-links")).toContainText("GitHub");
   const githubTypeSizes = await page.locator("#scikit-learn-user-guide .github-repo-title").evaluate((title) => ({ owner: getComputedStyle(title.querySelector("small")!).fontSize, repo: getComputedStyle(title.querySelector("strong")!).fontSize }));
   expect(githubTypeSizes.owner).toBe(githubTypeSizes.repo);
   await page.setViewportSize({ width: 390, height: 844 });

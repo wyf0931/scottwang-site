@@ -6,7 +6,7 @@ Add a first-class `/sites` collection page and a `Sites` item to the primary nav
 
 ## Sites page
 
-The dedicated page uses a responsive editorial grid. It renders two compact cards per row on wide screens and one card per row on narrow screens. Each card contains the site type/date, linked title, short description, optional editorial note, tags, and external links. GitHub-backed entries keep the shared `GithubRepoCard`, but the card is visually compact within the site card. No client-side search or database is added.
+The dedicated page uses a responsive editorial grid. Site cards stack one per row on wide screens and keep the same single-column layout on narrow screens. Each card contains a linked title, short description, optional editorial note, tags, and a footer with external links. GitHub-backed entries keep the shared `GithubRepoCard`, but the card is visually compact within the site card. The license, when present, renders as a footer chip to the right of the GitHub link and opens `licenseUrl` when one is set; the collection date is no longer shown on the card. No client-side search or database is added.
 
 The initial scikit-learn entry links to the official User Guide at `https://scikit-learn.org/stable/user_guide.html`, uses the repository `scikit-learn/scikit-learn`, and describes the guide as a reference for supervised and unsupervised learning, preprocessing, model selection, and evaluation in Python. It is published but not featured.
 

@@ -5,6 +5,7 @@ date: "2026-09-10"
 url: "https://awesome-poetry.top/"
 github: "chinese-poetry/chinese-poetry"
 license: "MIT"
+licenseUrl: "https://spdx.org/licenses/MIT.html"
 tags:
   - 古诗词
   - 开源数据

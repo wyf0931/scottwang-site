@@ -599,16 +599,22 @@ h2 {
   font-size: 0.94rem;
 }
 
-.site-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+.site-license {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
   color: var(--muted);
-  font: .7rem ui-monospace, SFMono-Regular, Menlo, monospace;
-  text-transform: uppercase;
+  font-size: .72rem;
 }
 
-.site-meta span:first-child {
+.site-license-icon {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+a.site-license:hover {
   color: var(--accent);
 }
 
@@ -850,6 +856,7 @@ html[data-theme="dark"] .github-repo-card {
 .site-links {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 18px;
   margin-top: 18px;
   color: var(--accent);

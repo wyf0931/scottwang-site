@@ -5,6 +5,7 @@ date: "2026-09-13"
 url: "https://scikit-learn.org/stable/user_guide.html"
 github: "scikit-learn/scikit-learn"
 license: "BSD-3-Clause"
+licenseUrl: "https://spdx.org/licenses/BSD-3-Clause.html"
 tags:
   - Machine Learning
   - Python

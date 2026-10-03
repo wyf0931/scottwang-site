@@ -171,6 +171,7 @@ date: "2026-09-10"
 url: "https://example.com/"
 github: "owner/repo"
 license: "MIT"
+licenseUrl: "https://spdx.org/licenses/MIT.html"
 tags:
   - 开源数据
 featured: false
@@ -180,7 +181,7 @@ draft: false
 为什么值得收藏。
 ```
 
-`url` 指向最适合打开的入口，`github` 可选，填了就会在卡片里嵌入 GitHub 区块，展示星标和仓库描述；`license` 可选，填写对方内容的使用授权。`draft: true` 的站点不会出现在公开列表、搜索索引或 `llms.txt`。
+`url` 指向最适合打开的入口，`github` 可选，填了就会在卡片里嵌入 GitHub 区块，展示星标和仓库描述；`license` 可选，填写对方内容的使用授权，`licenseUrl` 可选，填了卡片底部的授权标签会变成可打开的链接。这两个字段都不写时卡片不会显示授权标签。卡片不展示收录日期，`date` 只用于排序和机器可读输出。`draft: true` 的站点不会出现在公开列表、搜索索引或 `llms.txt`。
 
 ## Markdown 支持什么
 
