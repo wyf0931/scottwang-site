@@ -111,7 +111,7 @@ h2 { margin-bottom: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15;
 .sites-page { padding: 100px 0; }
 .sites-page h1 { font-size: clamp(2.8rem, 6vw, 4.8rem); }
 .sites-page .lead { max-width: 640px; }
-.sites-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 18px; margin-top: 48px; }
+.sites-grid { display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 48px; }
 .sites-grid .site-card { min-width: 0; padding: 20px; border: 1px solid var(--border); background: var(--surface); transition: border-color 180ms ease, transform 180ms ease; }
 .sites-grid .site-card:hover { border-color: rgba(114, 246, 194, .55); transform: translateY(-3px); }
 .resource-section { margin-top: 72px; scroll-margin-top: 120px; }
