@@ -4,6 +4,7 @@ import matter from "gray-matter";
 
 const root = process.cwd();
 const publicRoot = path.join(root, "public", "og");
+fs.rmSync(path.join(publicRoot, "research"), { recursive: true, force: true });
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const hostLabel = (() => { try { return new URL(siteUrl).hostname.toUpperCase(); } catch { return "WYF0931.CN"; } })();
 
@@ -37,8 +38,7 @@ for (const type of ["writing", "notes", "thoughts"]) for (const { slug, file } o
   if (data.data.draft === true) continue;
   write(type, slug, { title: data.data.title, type, label: data.data.description ?? "Technical notes and field reports" });
 }
-for (const kind of ["projects", "research"]) for (const { slug, file } of markdownFiles(path.join(root, "content", kind))) {
+for (const { slug, file } of markdownFiles(path.join(root, "content", "projects"))) {
   const data = matter(fs.readFileSync(file, "utf8"));
-  if (kind === "research" && data.data.status !== "Published") continue;
-  write(kind, slug, { title: data.data.title, type: kind === "research" ? "research report" : "project", label: data.data.industry ?? data.data.visibility ?? "Systems in motion" });
+  write("projects", slug, { title: data.data.title, type: "project", label: data.data.visibility ?? "Systems in motion" });
 }

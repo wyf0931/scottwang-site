@@ -4,7 +4,7 @@ test("home exposes the primary site navigation", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/ScottWang/);
   await expect(page.getByRole("link", { name: "Blog", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Resources", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Resources", exact: true })).toHaveCount(0);
   await expect(page.getByRole("link", { name: "Sites", exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "Projects", exact: true })).toBeVisible();
 });
@@ -17,20 +17,13 @@ test("content index filters resource entries and keeps legacy views", async ({ p
   await expect(page.locator("h1")).toHaveText("Notes");
 });
 
-test("resources page exposes sites and research sections", async ({ page }) => {
-  await page.goto("/resources");
-  await expect(page.locator("h1")).toHaveText("Resources");
-  await expect(page.locator("#sites h2")).toHaveText("Sites");
-  await expect(page.locator("#research h2")).toHaveText("Research");
-  await expect(page.locator(".site-card")).toHaveCount(3);
-  await expect(page.locator(".site-card .github-repo-card")).toHaveCount(3);
-  await expect(page.locator("#chinese-poetry h3")).toContainText("中华古诗词数据库");
-});
-
 test("sites page exposes the compact responsive collection", async ({ page }) => {
   await page.goto("/sites");
   await expect(page.locator("h1")).toHaveText("Sites");
   await expect(page.locator(".sites-grid")).toBeVisible();
+  await expect(page.locator("#awesome-design-md-cn h3")).toContainText("Awesome Design MD CN");
+  await expect(page.locator("#awesome-design-md-cn .github-repo-card")).toBeVisible();
+  await expect(page.locator("#awesome-design-md-cn > h3 > a")).toHaveAttribute("href", "https://github-html-preview.dohyeon5626.com/?https://github.com/wyf0931/awesome-design-md-cn/blob/main/gallery.html");
   await expect(page.locator("#scikit-learn-user-guide h3")).toContainText("scikit-learn User Guide");
   await expect(page.locator("#scikit-learn-user-guide .github-repo-card")).toBeVisible();
   await expect(page.locator("#scikit-learn-user-guide .site-meta")).toHaveCount(0);
@@ -55,7 +48,7 @@ test("about exposes social profiles", async ({ page }) => {
 test("search finds Chinese content", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Search" }).click();
-  await page.getByPlaceholder("搜索文章、项目、报告和书…").fill("Agent");
+  await page.getByPlaceholder("搜索文章、项目和站点…").fill("Agent");
   await expect(page.locator(".search-result").first()).toBeVisible();
 });
 

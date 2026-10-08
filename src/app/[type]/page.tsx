@@ -5,6 +5,7 @@ import { contentTypeSchema, type ContentType } from "@/lib/content/schema";
 import Link from "next/link";
 
 export function generateStaticParams() { return contentTypeSchema.options.map((type) => ({ type })); }
+export const dynamicParams = false;
 
 export default async function CollectionPage({ params }: { params: Promise<{ type: string }> }) {
   const { type } = await params;

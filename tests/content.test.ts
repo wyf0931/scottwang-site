@@ -40,7 +40,13 @@ describe("content source", () => {
   });
 
   it("loads the curated sites collection", () => {
-    expect(getAllSites()).toHaveLength(3);
+    expect(getAllSites()).toHaveLength(4);
+    expect(getSiteBySlug("awesome-design-md-cn")).toMatchObject({
+      title: "Awesome Design MD CN",
+      url: "https://github-html-preview.dohyeon5626.com/?https://github.com/wyf0931/awesome-design-md-cn/blob/main/gallery.html",
+      github: "wyf0931/awesome-design-md-cn",
+      license: "MIT",
+    });
     expect(getSiteBySlug("chinese-poetry")).toMatchObject({
       title: "中华古诗词数据库",
       url: "https://awesome-poetry.top/",
