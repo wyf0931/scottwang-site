@@ -30,11 +30,10 @@ content/
 ├── notes/     笔记和资源
 ├── thoughts/  想法
 ├── series/    合集标识、URL 与标题
-├── sites/     精选站点收藏（Resources 菜单）
-├── research/  AI Agent 调研报告（Resources 菜单）
+├── sites/     精选站点收藏（Sites 页面）
 └── projects/  项目介绍
 
-导航中的 Resources 菜单对应 `/resources`，聚合站点收藏与研究报告。
+导航中的 Sites 菜单对应 `/sites`，展示精选站点。
 
 docs/          项目建设过程、方案和用户手册
 src/           Next.js 应用代码
@@ -430,6 +429,5 @@ Playwright 在本机有时需要浏览器权限。如果沙盒启动失败，用
 
 这个项目现在不引入数据库、CMS、账号系统或运行时搜索服务。搜索索引在构建时生成，前端按需加载。
 
-Research 报告由外部 Deep Research Agent 生成 Markdown，站点只负责静态发布，不接入 Agent 运行时。
 
 项目页可以记录开源、闭源或私有项目。只有明确公开的项目才填写公开仓库或 demo URL。

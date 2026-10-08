@@ -78,14 +78,14 @@ Markdown 支持 GFM 表格和 Mermaid 图表。
 
 默认写入 `content/notes/<slug>/index.md` 并保持为草稿。确认无误后再使用 `--publish --overwrite`。导入器会处理基础 wikilink、callout 和本地图片附件，图片复制到 `public/obsidian-assets/<slug>/`。
 
-项目放在 `content/projects/*.md`，研究报告放在 `content/research/`。研究报告由外部 Agent 生成，人工审核后才发布；站点本身不连接 Agent 运行时。
+项目放在 `content/projects/*.md`。
 
 ## 内容导航
 
 - `/content`：统一浏览文章和资源
 - `/writing`、`/notes`、`/thoughts`：按旧类型筛选的兼容视图
 - `/tags`、`/series`、`/archive`：标签、合集和归档
-- `/projects`、`/research`、`/resources`：项目、研究报告、站点收藏（Sites）
+- `/projects`、`/sites`：项目与精选站点
 
 ## 开发与发布
 

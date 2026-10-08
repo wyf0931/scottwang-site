@@ -7,6 +7,9 @@ const contentRoot = path.join(root, "content");
 const publicRoot = path.join(root, "public");
 const types = ["writing", "notes", "thoughts"];
 
+fs.rmSync(path.join(publicRoot, "research"), { recursive: true, force: true });
+fs.rmSync(path.join(publicRoot, "resources", "research"), { recursive: true, force: true });
+
 for (const type of types) {
   const sourceDir = path.join(contentRoot, type);
   const outputDir = path.join(publicRoot, type);
@@ -21,17 +24,5 @@ for (const type of types) {
     if (matter(raw).data.draft === true) continue;
     const slug = entry.isDirectory() ? entry.name : entry.name.replace(/\.mdx?$/, "");
     fs.writeFileSync(path.join(outputDir, `${slug}.md`), raw);
-  }
-}
-
-const researchSourceDir = path.join(contentRoot, "research");
-const researchOutputDir = path.join(publicRoot, "resources", "research");
-fs.mkdirSync(researchOutputDir, { recursive: true });
-if (fs.existsSync(researchSourceDir)) {
-  for (const entry of fs.readdirSync(researchSourceDir, { withFileTypes: true })) {
-    if (!entry.isFile() || !entry.name.endsWith(".md")) continue;
-    const raw = fs.readFileSync(path.join(researchSourceDir, entry.name), "utf8");
-    if (!/^status:\s*["']?Published["']?\s*$/m.test(raw)) continue;
-    fs.writeFileSync(path.join(researchOutputDir, entry.name), raw);
   }
 }
