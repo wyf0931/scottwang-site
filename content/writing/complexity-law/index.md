@@ -15,8 +15,8 @@ draft: false
 原始表述约 1984 年。
 
 > “Every application has an inherent amount of irreducible complexity. The only question is who will have to deal with it—user, application developer, or platform developer.”
-
-中文大意。每个应用都有固有的不可消除的复杂性。问题在于谁承担这份复杂度。用户、应用开发者，还是平台开发者。
+>
+> 每个应用都有固有的不可消除的复杂性。问题在于谁承担这份复杂度。用户、应用开发者，还是平台开发者。
 
 想进一步讨论，可参见 Dan Saffer 的访谈。以下是各个视角。
 
