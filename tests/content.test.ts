@@ -27,7 +27,7 @@ describe("content source", () => {
   });
 
   it("includes OmniData as an active closed-source project", () => {
-    expect(getAllProjects()).toHaveLength(4);
+    expect(getAllProjects()).toHaveLength(7);
     expect(getProjectBySlug("omni-data")).toMatchObject({ status: "Active", visibility: "Closed Source", url: "https://data.ohmyagent.ai/" });
   });
 
@@ -39,14 +39,26 @@ describe("content source", () => {
     });
   });
 
-  it("loads the curated sites collection", () => {
-    expect(getAllSites()).toHaveLength(4);
-    expect(getSiteBySlug("awesome-design-md-cn")).toMatchObject({
-      title: "Awesome Design MD CN",
-      url: "https://github-html-preview.dohyeon5626.com/?https://github.com/wyf0931/awesome-design-md-cn/blob/main/gallery.html",
-      github: "wyf0931/awesome-design-md-cn",
-      license: "MIT",
+  it("includes the three new open-source projects", () => {
+    expect(getProjectBySlug("oma-watermark")).toMatchObject({
+      status: "Active",
+      visibility: "Open Source",
+      repository: "https://github.com/wyf0931/oma-watermark",
     });
+    expect(getProjectBySlug("mflux-webui")).toMatchObject({
+      status: "Active",
+      visibility: "Open Source",
+      repository: "https://github.com/wyf0931/mflux-webui",
+    });
+    expect(getProjectBySlug("awesome-design-md-cn")).toMatchObject({
+      status: "Active",
+      visibility: "Open Source",
+      repository: "https://github.com/wyf0931/awesome-design-md-cn",
+    });
+  });
+
+  it("loads the curated sites collection", () => {
+    expect(getAllSites()).toHaveLength(3);
     expect(getSiteBySlug("chinese-poetry")).toMatchObject({
       title: "中华古诗词数据库",
       url: "https://awesome-poetry.top/",
