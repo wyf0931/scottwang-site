@@ -27,7 +27,7 @@ describe("content source", () => {
   });
 
   it("includes OmniData as an active closed-source project", () => {
-    expect(getAllProjects()).toHaveLength(7);
+    expect(getAllProjects()).toHaveLength(8);
     expect(getProjectBySlug("omni-data")).toMatchObject({ status: "Active", visibility: "Closed Source", url: "https://data.ohmyagent.ai/" });
   });
 
@@ -36,6 +36,15 @@ describe("content source", () => {
       status: "Active",
       visibility: "Open Source",
       repository: "https://github.com/wyf0931/oma-drop",
+    });
+  });
+
+  it("includes oma-fetcher as an active open-source project", () => {
+    expect(getProjectBySlug("oma-fetcher")).toMatchObject({
+      status: "Active",
+      visibility: "Open Source",
+      featured: true,
+      repository: "https://github.com/wyf0931/oma-fetcher",
     });
   });
 
