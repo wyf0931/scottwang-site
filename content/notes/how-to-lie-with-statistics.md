@@ -1,5 +1,5 @@
 ---
-title: "拆穿数据胡扯：1954 年的一本书，今天依然管用"
+title: "How to Lie with Statistics：数据不会说谎，拿数据的人会"
 description: "Darrell Huff 用一本小册子教会普通人看穿被操纵的数据。没有公式，只有一双训练过的眼睛。"
 date: "2026-08-26"
 type: "notes"

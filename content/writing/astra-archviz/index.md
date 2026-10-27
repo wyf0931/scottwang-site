@@ -1,5 +1,5 @@
 ---
-title: "用 Astra 做建筑可视化：从一句话到一栋能走进去的房子"
+title: "用 Astra 做建筑可视化：提示词到可编辑的 3D 场景"
 description: "Thomas Ricouard 用 Astra 做了一座叫 Solace 的房子。极简现代风格、电影感灯光、可编辑的 Blender 场景、Unreal Engine 5 交互漫游，还有配套的故事板、宇宙级戴森球和巡洋舰。原文发在 OpenAI Developers 博客。"
 date: "2026-10-22"
 type: "writing"

@@ -1,5 +1,5 @@
 ---
-title: "Needle：把 4500 万参数的模型塞进 14MB，让端侧设备自己做工具调用"
+title: "Needle：端侧 Tool Calling 小模型，4500 万参数、14 MB"
 description: "一个端侧专用的 Tool Calling 小模型。它主动放弃对话和推理，只专注一件事，理解指令、选工具、填参数、输出 JSON。"
 date: "2026-08-17"
 type: "notes"

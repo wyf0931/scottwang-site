@@ -1,5 +1,5 @@
 ---
-title: "461 行搭一个 agent，差的那一步"
+title: "ditto：461 行的自建 coding agent 骨架"
 description: "读 ditto 源码：一个用 461 行 Python 写成的自构建 coding agent，agent 运行时就是一个 Flask 服务，agent 把代码写进 routes/ 再热加载自己。工具集缺了执行环节，这就是它只能偶尔做成的地方。"
 date: "2026-10-20"
 type: "writing"

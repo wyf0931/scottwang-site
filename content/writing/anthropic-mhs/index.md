@@ -1,5 +1,5 @@
 ---
-title: "Anthropic 发布 MHS，把 agent 的手伸进实验室"
+title: "Anthropic 发布 MHS：让 agent 直接控制实验设备"
 description: "2026-08-27，Anthropic 联合 HHMI Janelia 发布 Model Hardware Standard（MHS）research preview。这是一个把 MCP 的思路延伸到物理设备的标准，让 AI agent 直接操作显微镜、机械臂、激光校准仪。文章梳理它的机制、案例与我的判断。"
 date: "2026-08-30"
 type: "writing"

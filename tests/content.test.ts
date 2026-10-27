@@ -159,6 +159,73 @@ describe("heading style", () => {
   });
 });
 
+// 营销味标题钩子：反转/对比、悬念缺口、动作化夸张、绝对化。
+const TITLE_HOOKS = [
+  "是两回事",
+  "不是同一个东西",
+  "而不是",
+  "你以为",
+  "其实",
+  "到底",
+  "竟然",
+  "居然",
+  "究竟",
+  "差的那一步",
+  "救回来",
+  "值得吗",
+  "塞进",
+  "拆穿",
+  "伸进",
+  "看它怎么",
+  "从一句话到",
+  "从一句体验描述到",
+  "永远不再",
+  "依然管用",
+  "真正的",
+  "不是AI 家教",
+  "把 AI 变成",
+];
+
+function titleHooks(title: string): string[] {
+  return TITLE_HOOKS.filter((hook) => title.includes(hook));
+}
+
+describe("title style", () => {
+  it("title is an objective label, not a hook", () => {
+    const offenders: string[] = [];
+    for (const dir of ["writing", "notes", "thoughts", "projects", "research"]) {
+      const root = path.join(process.cwd(), "content", dir);
+      if (!fs.existsSync(root)) continue;
+      const walk = (current: string): string[] =>
+        fs.readdirSync(current, { withFileTypes: true }).flatMap((entry) => {
+          const full = path.join(current, entry.name);
+          if (entry.isDirectory()) return walk(full);
+          return entry.name.endsWith(".md") ? [full] : [];
+        });
+      for (const file of walk(root)) {
+        const text = fs.readFileSync(file, "utf8");
+        const match = /^title:\s*"(.+)"\s*$/m.exec(text);
+        if (!match) continue;
+        const hooks = titleHooks(match[1]);
+        if (hooks.length) {
+          offenders.push(`${path.relative(process.cwd(), file)}: ${match[1]} (${hooks.join(", ")})`);
+        }
+      }
+    }
+    expect(
+      offenders,
+      `titles are written as attention hooks instead of objective labels:\n${offenders.join("\n")}`,
+    ).toEqual([]);
+  });
+
+  it("flags a hook title and lets an objective one pass", () => {
+    expect(titleHooks("叙事学导论：讲什么和怎么讲，是两回事")).toContain("是两回事");
+    expect(titleHooks("叙事学导论：Genette 的时间、视角与语态分类")).toEqual([]);
+    expect(titleHooks("Strix：把 AI 变成渗透测试员，而不是更聪明的漏洞扫描器")).toEqual(["而不是", "把 AI 变成"]);
+    expect(titleHooks("Strix：自动化渗透测试工作流的 AI Agent")).toEqual([]);
+  });
+});
+
 describe("series registry", () => {
   it("keeps the grouping key, the URL slug, and the display title as separate values", () => {
     expect(getSeriesBySlug("agent-architecture")).toMatchObject({

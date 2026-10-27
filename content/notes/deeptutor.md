@@ -1,5 +1,5 @@
 ---
-title: "DeepTutor：不是 AI 家教 App，而是一套学习场景的 Agent Runtime"
+title: "DeepTutor：学习场景下的 Agent Runtime"
 description: "35,000 颗 Star，把 RAG、Memory、Agent Loop、Tool、Skill、MCP、Sub-Agent 统一到一套长期学习 Runtime 里。它最值得学的，是那个三级文件 Memory。"
 date: "2026-08-17"
 type: "notes"

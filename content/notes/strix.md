@@ -1,5 +1,5 @@
 ---
-title: "Strix：把 AI 变成渗透测试员，而不是更聪明的漏洞扫描器"
+title: "Strix：自动化渗透测试工作流的 AI Agent"
 description: "一个开源的 AI 渗透测试 Agent，53,000 颗 GitHub Star，自动化的是渗透测试人员的工作流程，而不是规则检查。"
 date: "2026-08-17"
 type: "notes"

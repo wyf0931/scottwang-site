@@ -1,5 +1,5 @@
 ---
-title: "读 OpenDesign，看它怎么把 CLI 变成设计引擎"
+title: "OpenDesign：Claude Design 的开源替代品"
 description: "一个 5 个月拿到 97k star 的项目，它怎么把 CLI 变成设计引擎，桌面应用为什么是必经之路，CJK 为什么是短板。"
 date: "2026-09-23"
 type: "writing"
