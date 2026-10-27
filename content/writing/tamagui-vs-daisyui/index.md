@@ -3,6 +3,7 @@ title: "Tamagui、DaisyUI 和 Arc 的架构选型笔记"
 description: "三个 CSS 方案，三种架构哲学。从前端架构师选型角度，拆解 DaisyUI 的零运行时 CSS 路线、Tamagui 的编译时优化路线，以及 Arc 的代码复制路线。"
 date: "2026-10-19"
 type: "writing"
+kind: "essay"
 tags: ["TypeScript", "CSS", "React", "React Native", "Tailwind", "UI Framework"]
 draft: false
 ---
@@ -39,7 +40,7 @@ DaisyUI 的核心思路只有一个，给 Tailwind CSS 加一层组件级语义�
 
 Tamagui 的复杂度高出一个量级。
 
-它的 monorepo 里有 14 个 packages，光 `code/compiler` 下面就有 10 个子目录。编译器核心用 Rust 写的，仓库里 Rust 代码 24 万行，还有 C++ 代码 3.6 万行。TypeScript 代码 1400 万行占了绝大部分，但编译器这条线是实打实的系统级工程。
+它的 monorepo 里有 14 个 packages，光 `code/compiler` 下面就有 10 个子目录。编译器核心用 Rust 写的，仓库里 Rust 代码约 6,600 行，还有约 1,200 行 C++。TypeScript 代码约 50 万行占了绝大部分，但编译器这条线是实打实的系统级工程。
 
 Tamagui 分三层。`@tamagui/core` 是样式引擎，提供 styled 组件和样式 props。`@tamagui/static` 是优化编译器，在构建时把 styled 组件编译成平台特定代码。`tamagui` 是 UI kit，提供跨平台的组件库。
 

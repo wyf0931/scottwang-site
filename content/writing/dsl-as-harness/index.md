@@ -3,6 +3,7 @@ title: "DSL 作为 Harness，给 Agent 一个站得住的地方"
 description: "为什么刻意限制的语言，反而是给 AI Agent 最可靠的约束工具。从 SWE-agent 的 linter 到 MulmoClaude 的集合系统，拆解 DSL-as-harness 的四层架构。"
 date: "2026-10-19"
 type: "writing"
+kind: "essay"
 tags: ["TypeScript", "AI Agent", "Architecture", "DSL", "Design"]
 draft: false
 ---

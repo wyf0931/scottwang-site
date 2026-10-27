@@ -94,7 +94,7 @@ README 里有一句容易看漏的说明，桌面应用 bundle 不会往 shell P
 
 这两条都只改了 web 层的 CSS。
 
-真正的问题在设计模板和 DESIGN.md 协议。我数了一下，114 个 design-templates 里 91 个文件含 CJK 字体名，占八成。但拆开看分布就清楚了。21 个在 example.html，14 个在 style.css，7 个在 template.json。
+真正的问题在设计模板和 DESIGN.md 协议。我数了一下，115 个 design-templates 里只有 26 个含 CJK 字体名，占两成多。拆开看分布就清楚了。22 个在 example.html，8 个在 template.json，其余散在 SKILL.md 和 README 里。
 
 含 CJK 的 template.json 几乎全是 html-ppt-zhangzara-* 系列，字体配置里写 `"cn": "Noto Sans SC"`，style 字段标注 bilingual EN/CN。这些是有意识地做过中英双语的 deck 模板，作者显然是中文用户。
 
@@ -106,7 +106,7 @@ issue 区还有几条在印证同一件事。#6478 是 Albert Sans 没有西里�
 
 CJK 是协议层的缺口。DESIGN.md 没有语言维度，模板作者各自为战，PPTX 导出还会把字重和字体再破坏一次。
 
-## 判断
+## 判断落在内容这一侧
 
 生成模型和设计编辑器它都没动，它占的是 agent 产出物落地的位置。
 
