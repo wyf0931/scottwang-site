@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import fs from "node:fs";
+import path from "node:path";
 import { renderToStaticMarkup } from "react-dom/server";
 import { renderMdx } from "@/lib/content/markdown";
 import { getAllContent, getContentBySlug, getContentByType } from "@/lib/content/source";
@@ -94,6 +96,66 @@ describe("content source", () => {
     const content = await renderMdx("<p>保留 <mark>这段高亮</mark> 文本。</p>");
 
     expect(renderToStaticMarkup(content)).toContain("<mark>这段高亮</mark>");
+  });
+});
+
+const FORBIDDEN_FRAME = /^(why|how|what)(\s*[，,。.、：:/]\s*.*)?$/;
+const FORBIDDEN_GENERIC = /^(overview|details|background|introduction|intro|summary|conclusion|motivation)$/;
+const FORBIDDEN_CN = /^(背景|方案|实现|功能|架构|概述|目标|关于|项目介绍|项目概述|项目简介|技术栈|使用方法|使用方式|安装说明|背景与动机|设计思路|解决方案|工作原理)$/;
+const ALLOWED_EXACT = /^(小结|参考资料|来源|参考|references|reference|license|许可|许可协议)$/;
+
+function frameworkSlotHeadings(markdown: string): string[] {
+  const offenders: string[] = [];
+  let inFence = false;
+  for (const line of markdown.split("\n")) {
+    if (/^```/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    const match = /^#{2,3} (.+)$/.exec(line.trim());
+    if (!match) continue;
+    const heading = match[1].trim();
+    const lowered = heading.toLowerCase();
+    if (ALLOWED_EXACT.test(lowered)) continue;
+    if (FORBIDDEN_FRAME.test(lowered) || FORBIDDEN_GENERIC.test(lowered) || FORBIDDEN_CN.test(lowered)) {
+      offenders.push(heading);
+    }
+  }
+  return offenders;
+}
+
+describe("heading style", () => {
+  it("keeps headings content-specific instead of framework slots", () => {
+    const offenders: string[] = [];
+    for (const dir of ["writing", "notes", "thoughts", "projects", "research"]) {
+      const root = path.join(process.cwd(), "content", dir);
+      if (!fs.existsSync(root)) continue;
+      const walk = (current: string): string[] =>
+        fs.readdirSync(current, { withFileTypes: true }).flatMap((entry) => {
+          const full = path.join(current, entry.name);
+          if (entry.isDirectory()) return walk(full);
+          return entry.name.endsWith(".md") ? [full] : [];
+        });
+      for (const file of walk(root)) {
+        const rel = path.relative(process.cwd(), file);
+        for (const heading of frameworkSlotHeadings(fs.readFileSync(file, "utf8"))) {
+          offenders.push(`${rel}: ## ${heading}`);
+        }
+      }
+    }
+    expect(
+      offenders,
+      `headings name the framework slot instead of the content:\n${offenders.join("\n")}`,
+    ).toEqual([]);
+  });
+
+  it("rejects a framework name kept in front of the real topic", () => {
+    expect(frameworkSlotHeadings("## Why，Agent 只是模型不够用\n\n正文。")).toEqual(["Why，Agent 只是模型不够用"]);
+    expect(frameworkSlotHeadings("## What / curl_cffi 到底是什么\n\n正文。")).toEqual(["What / curl_cffi 到底是什么"]);
+    expect(frameworkSlotHeadings("## 四级降级链和正文评估\n\n正文。")).toEqual([]);
+    expect(frameworkSlotHeadings("## 小结\n\n正文。")).toEqual([]);
+    expect(frameworkSlotHeadings("```markdown\n## Why\n```\n")).toEqual([]);
   });
 });
 

@@ -9,7 +9,7 @@ featured: true
 repository: "https://github.com/wyf0931/oma-fetcher"
 ---
 
-## Why
+## 每个调用方都别装一套 Playwright
 
 Agent 要读网页，绕不开同一件事。同一个 URL，有的站一个 GET 就拿到正文，有的站换了 UA 还是返回反爬页面。
 
@@ -17,7 +17,7 @@ Agent 要读网页，绕不开同一件事。同一个 URL，有的站一个 GET
 
 oma-fetcher 把这件事收进一个服务。上游只管发一个 URL，下游拿到干净 Markdown。抓取策略、降级顺序、robots 判断都在服务端。调用方不装浏览器，也不感知反爬。
 
-## How
+## 四级降级链和正文评估
 
 抓取不是单一路径，是一条降级链。`httpx` 先试，浏览器指纹不对就换 `curl-cffi`，还拿到占位页就上 Scrapling stealth，最后才起 Playwright 渲染。四级共用一个超时预算，不会一路重试把时间耗光。
 
@@ -33,7 +33,7 @@ oma-fetcher 把这件事收进一个服务。上游只管发一个 URL，下游�
 
 同一个服务还挂 Web UI 和 MCP server，`/mcp` 上暴露六个工具，Agent 直接调。
 
-## What
+## 能力清单与上手命令
 
 现在支持这些。
 

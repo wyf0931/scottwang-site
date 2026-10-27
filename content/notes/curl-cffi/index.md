@@ -26,7 +26,7 @@ draft: false
 
 <GithubRepoCard repo="lexiforest/curl_cffi" />
 
-## Why / 业务为什么需要它
+## 什么时候普通客户端不够用
 
 ### 失败的代价不只是一次请求报错
 
@@ -47,7 +47,7 @@ draft: false
 
 只有当公开网页是合理的数据来源，且团队已经确认目标站点的访问规则和法律边界，才值得评估指纹模拟。技术上能发出请求，不代表业务上有权这么做。
 
-## What / curl_cffi 到底是什么
+## 模拟浏览器指纹的 Python 客户端
 
 `curl_cffi` 是一个 Python HTTP 客户端。官方项目说明，它通过 CFFI 绑定 curl-impersonate 的 fork，可以模拟浏览器的 TLS、JA3 和 HTTP/2 指纹，同时提供接近 `requests` 的调用方式。
 
@@ -59,7 +59,7 @@ draft: false
 
 官方仓库当前说明，v0.14 起 Python 3.10 是最低支持版本。项目提供预编译包，也支持同步和 `asyncio` 用法，并以 MIT License 发布。版本、浏览器指纹和 HTTP/3 支持会随项目变化，落地前应以仓库和文档当前版本为准。
 
-## How / 它怎样处理一次请求
+## 一次请求的四个阶段
 
 可以把一次 `curl_cffi` 请求拆成四个阶段。
 
@@ -70,7 +70,7 @@ draft: false
 
 这里有一个容易被忽略的边界。指纹模拟只影响请求的一部分特征。目标站点还可能检查 JavaScript 执行、Cookie 生成、账号状态、访问频率、IP 信誉和行为轨迹。请求成功率提高以后，系统仍然需要处理这些后续条件。
 
-## 核心能力
+## 接入方式与传输能力
 
 ### requests-like API
 

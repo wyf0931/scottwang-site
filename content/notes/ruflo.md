@@ -10,7 +10,7 @@ Simon Sinek 有个著名的黄金圈法则，最有说服力的叙述先回答�
 
 先讲为什么 Ruflo 存在。再讲它怎么实现。最后才是它具体交付了什么。
 
-## Why，Agent 只是模型不够用
+## Agent 等于 Model 加 Harness
 
 AI Agent 这个词被滥用了几年，但把 Agent 拆开看，模型只是一部分。真正让 Agent 能干活的还有工具、记忆、循环、沙箱、控制。README 第一句就写死了这个公式，Agent 等于 Model 加 Harness。模型负责写，Harness 给工具、给记忆、给循环、给沙箱、给控制，让模型真的能工作。
 
@@ -20,7 +20,7 @@ Ruflo 就是这层 Harness。它是 Claude Code、Codex、Hermes 这类编程 Ag
 
 为什么需要"元框架"这个词。编程 Agent 已经有好几代，Claude Code、Codex、Hermes 都是各自的 Model 加 Harness 组合。再往上还需要一层，把不同的 Agent 编排起来、共享记忆、跨机器通信。这一层就是元框架。Ruflo 想做的就是把这层从每个项目内部抽出来，独立成生态。
 
-## How，三层架构
+## 三层：记忆、学习、编排
 
 Ruflo 的架构可以拆成三段。
 
@@ -40,7 +40,7 @@ Agent 想加入联邦，先用 mTLS 加 ed25519 挑战认证身份，不用 API 
 
 这个设计的意图很清楚，Agent 跨组织协作之前，先建立可信边界，再谈共享。Ruflo 把零信任、PII 脱敏、行为信任评分都内置进协议层，不用应用方自己拼。
 
-## What，Ruflo 交付了什么
+## 插件、UI、规划器与安装
 
 98 个专精 Agent，覆盖编码、测试、安全、文档、架构、迁移、可观测性等。
 

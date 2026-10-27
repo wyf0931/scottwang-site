@@ -10,7 +10,7 @@ url: "https://github-html-preview.dohyeon5626.com/?https://github.com/wyf0931/aw
 repository: "https://github.com/wyf0931/awesome-design-md-cn"
 ---
 
-## Why
+## 机器可读的设计规范
 
 让 coding agent 按某个产品的视觉风格做页面，通常只能靠自然语言描述。"参考阿里云百炼的风格"这类说法，agent 只能猜颜色、间距和圆角，结果常常像那么回事但不像。
 
@@ -18,7 +18,7 @@ repository: "https://github.com/wyf0931/awesome-design-md-cn"
 
 awesome-design-md-cn 做的是中文产品的这一份规范。它整理公开可见的中文互联网产品界面，记录实测值、来源页面、采集条件和不确定项。
 
-## How
+## 复制、引用、构建
 
 每个品牌一个 `DESIGN.md`，遵循 Google 的标准章节顺序。Typography 一章做了中文场景的扩展，覆盖中文字体回退、断行、中英文混排和简繁语言差异。上游格式目前标记为 alpha，项目跟进其规范并用官方 linter 校验。
 
@@ -38,7 +38,7 @@ node build.mjs
 
 不要直接改 `gallery.html`，它是生成文件。
 
-## What
+## 收录范围与授权
 
 已经有可核实规范的收录了十多个产品，包括阿里云百炼、火山引擎 AI Hub、小米、华为、飞书、知乎、网易、稀土掘金、滴滴、商汤科技、美团、携程、微信开放平台、拼多多。百度、腾讯、阿里巴巴、大众点评、支付宝、小红书、新浪、京东、淘宝还在计划中。
 
