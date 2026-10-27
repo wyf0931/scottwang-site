@@ -1,5 +1,5 @@
 ---
-title: "用 Astra 做游戏：从一句体验描述到 2048 个星系"
+title: "用 Astra 做游戏：把体验描述变成可探索的程序化星系"
 description: "Thomas Ricouard 用 Astra 做了 Void Explorer，2048 个星系、上万颗星球，从太空飞到地表。这篇文章总结了他在架构、缩放、地形流送和测试上踩过的关键决策。"
 date: "2026-10-21"
 type: "writing"

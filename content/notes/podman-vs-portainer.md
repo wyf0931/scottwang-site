@@ -1,5 +1,5 @@
 ---
-title: "Podman 和 Portainer 不是同一个东西：一个管容器怎么跑，一个管怎么管"
+title: "Podman 与 Portainer：容器引擎与容器管理"
 description: "32,000 颗 Star 的 Podman 是容器引擎，对标 Docker；38,000 颗 Star 的 Portainer 是管理平台，可以管理 Podman。它们不在同一层。"
 date: "2026-08-17"
 type: "notes"

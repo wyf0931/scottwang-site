@@ -1,5 +1,5 @@
 ---
-title: "H.264 到底在压什么，以及你手机上那个 4 分钟的 MOV 该用哪条命令救回来"
+title: "H.264 编码原理，以及 4 分钟 MOV 的转码命令"
 description: "把 H.264 编码器拆成三步讲透，再演示 Mac 上怎么用 ffmpeg 和 HandBrake 完成最常见的三个视频转换场景。"
 date: "2026-10-08"
 type: "writing"

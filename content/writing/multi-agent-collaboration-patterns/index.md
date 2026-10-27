@@ -1,5 +1,5 @@
 ---
-title: "多 agent 协作到底在协作什么"
+title: "多 agent 协作：CrewAI 与 OpenAI Agents SDK 的两种编排"
 description: "从 CrewAI 和 OpenAI Agents SDK 的实现里，拆解任务流水线、动态委派、handoff 与 Agent as a tool 这几种多 agent 协作模式。"
 date: "2026-09-08"
 type: "writing"
