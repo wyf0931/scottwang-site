@@ -9,7 +9,7 @@ featured: true
 repository: "https://github.com/wyf0931/pi-rpc-pydemo"
 ---
 
-## Why
+## 不要复制一份会话记录
 
 Pi 是一个很强的 coding agent，但它本身是命令行工具。想在浏览器里用它，聊天记录怎么存、Agent 怎么配置、生成出来的文件去哪找，这些它都不管。
 
@@ -17,7 +17,7 @@ Pi 是一个很强的 coding agent，但它本身是命令行工具。想在浏�
 
 OMA Studio 换了一种分工。Pi 继续拥有对话内容和会话记录，平台只保存 Agent 定义、聊天元数据这类自己的东西，不复制消息。两边用同一个 UUID 指向同一次会话，省掉一层映射。
 
-## How
+## 一个进程，一条 JSONL 管道
 
 整个系统是一个 FastAPI 进程。它托管静态前端和 JSON API，往下通过 `pi --mode rpc` 启动 Pi 子进程，用 JSONL 在 stdin 和 stdout 之间通信，向上把事件转成 SSE 推给浏览器。每次发消息或取历史，都是一次短生命周期的 Pi 进程。
 
@@ -31,7 +31,7 @@ Agent 的定义是显式的。指令、Provider、Model、内置工具白名单�
 
 部署是单容器方案。FastAPI 应用层和 Pi 及其工具链的进程层放在同一个镜像里，数据、工作目录、日志全部走宿主机挂载。运维入口是 `bin/ops.sh start|stop|restart|status|logs`。日志为 JSONL 格式，带 `X-Request-ID` 做请求追踪。
 
-## What
+## 线上用法与本地启动
 
 线上跑着一个实例，studio.ohmyagent.ai。日常在里面做几类事。
 

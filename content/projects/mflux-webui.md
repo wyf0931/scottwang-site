@@ -9,13 +9,13 @@ featured: true
 repository: "https://github.com/wyf0931/mflux-webui"
 ---
 
-## Why
+## 本机跑图，别再自己拼
 
 FLUX、Qwen-Image 这一批开源模型能力已经很接近商业 API，但要在本机跑出好看的图，得自己拼 mflux、MLX、推理脚本、模型下载和缓存。每一步都要装环境、对版本、调参数。
 
 mflux-webui 把这些收进一个工作台。Flask 后端，Alpine.js 加 daisyUI 5 前端，推理交给 [mflux](https://github.com/mflux-community/mflux) 和 MLX。权重和提示词全程不出本机。
 
-## How
+## 策展模型和默认参数
 
 模型是策展的，不是让用户自己找权重。内置 Qwen Image 2.1 Turbo、Krea 2 Turbo、Z-Image Turbo、FLUX.2 Klein，提供 q4 / q8 / 4-bit 量化档。每个模型有各自的默认 steps 和 guidance，比如 Qwen Turbo 固定 8 steps、guidance 1.0，不用每次手调。
 
@@ -27,7 +27,7 @@ mflux-webui 把这些收进一个工作台。Flask 后端，Alpine.js 加 daisyU
 
 桌面版是 Tauri 2 打包的，打开像原生应用，不用装 Python 或 Node.js，首次使用时自己下模型。
 
-## What
+## 实测数据与硬件要求
 
 M4 Pro 48GB、1024x1024、8 steps 下实测过这几组数据。
 

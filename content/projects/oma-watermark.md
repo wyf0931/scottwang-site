@@ -9,13 +9,13 @@ featured: true
 repository: "https://github.com/wyf0931/oma-watermark"
 ---
 
-## Why
+## 素材不适合离开本机
 
 图片上去水印的需求经常很急，但大多数在线工具要上传原图。素材、合同截图、带平台标的水印图，这类内容往往不适合离开本机。
 
 oma-watermark 把这件事放回本地。上传图片，框选水印区域，工具只检测区域内的高亮度像素并填补。全程图片存在本机内存里，没有账号、没有历史、没有第三方服务。
 
-## How
+## 选区、遮罩、修补三步
 
 后端是 FastAPI，前端是原生 HTML/CSS/JS。Web 端和 macOS 桌面端共用同一套接口和页面。
 
@@ -25,7 +25,7 @@ AI 模式用 [OpenCV LaMa ONNX 模型](https://huggingface.co/opencv/inpainting_
 
 两个可调参数。Threshold 控制亮度阈值，残留就调低，误选背景就调高。Edge expand 向外扩遮罩覆盖毛边、阴影和抗锯齿，默认 6px，范围 0-12。
 
-## What
+## 能力清单与本地启动
 
 现在支持这些。
 
