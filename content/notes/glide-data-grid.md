@@ -66,6 +66,38 @@ tags:
 
 **数据生命周期**。`#394` 粘贴时自动加行，`#994` `useAsyncDataSource` 缓存失效，`#844` 导出 CSV/Excel/PDF 的 hook，`#838` 校验消息展示，`#1012` 禁用表头 prop，`#976` 选择表头 cell 的 API。
 
+## 真实应用场景
+
+这个库在 HN 上只被提过两次，都是 1 分的小帖子，但 npm 的周下载量有 57.8 万，说明它是被大量项目静默依赖的工作马，不是社区明星。两者放在一起看，才是它真实的采用状态。
+
+最硬的一个案例是 **analytics-grid**，2026 年 5 月的 Show HN 帖子标题就是「1B rows (14B cells) in the browser with DuckDB and Glide Data Grid」。作者说这是一个电池齐全的报告分析表格，引擎可换（demo 用 DuckDB），渲染层建在 Glide Data Grid 的一个 fork 上。帖子下的社区反应很真实，有人直接质疑「把 10 亿行全加载进浏览器是在解决什么问题，分页才是正道」。这是它被拿去做超大数据集产品的最直接证据。
+
+**Infinite Pixels**（HN 44824056，250 分，2025 年 8 月）那场讨论里，有人把 Glide 和 TanStack Virtual 并列为「无限数据网格」的两个参考实现，说明这类库的实现方式（一个大滚动 DIV 加 viewport）已经是社区公认的范式。同一帖子里也确认了它和 TanStack 一样，底层是撑一个超高 DIV 来获得原生滚动条手感。
+
+在无障碍方向上，2022 年 Datagridxl2.js 的作者公开拿 Glide 说事，原话是「Glide Data Grid 有完整可访问的 DOM 子树，用 Canvas 不一定要牺牲无障碍」，等于把它当成 canvas 网格无障碍的天花板。
+
+Glide 团队自己也会在 r/reactjs 发版本公告，从 2021 年 1 月的「We are open sourcing our fast React Data Grid component」，到 2022 年 5 月的 4.0，再到 2024 年 1 月的 6.0，四次都有人跟帖。Teable（开源无代码数据库）上线时也有人专门问「和 Glide 的 data-grid 差在哪」。这些都是它在真实产品语境里被拿来比较的证据。
+
+## 同类项目横向对比
+
+数据网格是个拥挤的赛道，选型要先分清两类，DOM 渲染和 Canvas 渲染。
+
+| 项目 | 渲染 | 授权 | 关键特色 |
+|---|---|---|---|
+| **glide-data-grid** | Canvas | MIT | 12 种 cell、自定义 Canvas 渲染器、百万行 |
+| AG Grid | DOM | MIT 社区 + Enterprise 付费 | 服务器端操作、Excel 透视、master-detail 在 Enterprise |
+| TanStack Table | 无头 | MIT | 不渲染 UI，配 TanStack Virtual 虚拟化 |
+| MUI X DataGrid | DOM | open-core，核心 MIT，Pro 付费 | 多过滤、多排序、列钉住 |
+| Comcast/react-data-grid | DOM | MIT | 虚拟化、冻结列、列分组、多列排序 |
+| revogrid | Canvas | MIT | Web Component 框架无关，分组、透视 |
+| rowsncolumns/grid | Canvas | MIT | 声明式 React Canvas 透视表，2023 年后停更 |
+
+DOM 派是主流。AG Grid（15.7k star）功能最全，服务器端操作、Excel 式透视、master-detail 都在 Enterprise 版。MUI X DataGrid（5.9k）走 open-core，核心 MIT，Pro 版才有多过滤、多排序、列钉住。TanStack Table（28.5k）是反过来的，无头，不渲染，你拿它接自己的 UI。Comcast/react-data-grid（7.7k）是纯 DOM 的 React 实现，虚拟化、冻结列、列分组、多列排序都内置。Handsontable（22k）是电子表格观感，商业授权。
+
+Canvas 派是少数派，但都冲着同一个目标，用画布绕开 DOM 性能墙。glide-data-grid 是 React 生态里最完整的 Canvas 网格。revogrid（3.5k）是 Web Component，框架无关，分组、透视都有。rowsncolumns/grid（635）是声明式 React Canvas 网格，能画透视表，但 2023 年 10 月后就没再更新。canvas-datagrid（1.6k）是最早的 canvas 网格之一，BSD 协议。SlickGrid（6.9k）是 jQuery 时代的经典快速网格，还在但节奏慢。
+
+横向看，Glide 的定位是免费、高上限、Canvas 全控制。DOM 派把排序过滤做进库里，但到不了它的行数上限。商业派功能最全，但高级功能要钱。Glide 选了另一头，性能上限给到最大，代价是排序过滤这类活得你自己实现，而且维护节奏在放缓。选型的时候，这个权衡要先想清楚。
+
 ## 选型要称一称的地方
 
 维护节奏值得掂量。最新稳定版本是 v6.0.3，2024 年 2 月发布，到现在两年多。package.json 已经到 `6.0.4-alpha25`，稳定版一直没出。2025 年只有零星几个 commit，2026 年到现在只有 1 个（1 月 21 日的 alpha 版本号 bump）。Star 有 5421，但开发节奏明显放缓。对一个要长期依赖的表格组件，这是必须算进去的账。它很成熟，能力清单很长，但你要接受它可能停留在 alpha 迭代，或者哪天被 Glide 的商业优先级挤到后面。
@@ -77,15 +109,27 @@ tags:
 - **useRowGrouping**，行分组的 hook，接受 RowGroupingOptions，支持嵌套和折叠。
 - **getCellContent**，数据接入回调，库只要求你按坐标给格子，不关心数据源。
 - **freezeColumns**，冻结列 prop，目前只支持左侧。
+- **analytics-grid**，真实案例，DuckDB 引擎加 Glide Data Grid 的 fork，宣称能撑 10 亿行。
+- **AG Grid**，DOM 渲染数据网格，功能最全，Enterprise 版付费。
+- **TanStack Table**，无头表格库，不渲染 UI，配 TanStack Virtual 做虚拟化。
+- **npm 周下载**，57.8 万，采用率远超它在 HN 上的讨论热度。
 
 ## 小结
 
-glide-data-grid 把复杂度压进底层，Canvas 渲染换来了滚动性能和百万行能力，代价是格子的一切都得自己画。能力清单覆盖了大部分表格该有的东西，但过滤、右侧冻结、BigInt、JSON/Code cell 这些还在等，35 个功能请求挂着。选它之前，先把维护节奏和这些 gap 一起称一称。
+glide-data-grid 把复杂度压进底层，Canvas 渲染换来了滚动性能和百万行能力，代价是格子的一切都得自己画。能力清单覆盖了大部分表格该有的东西，但过滤、右侧冻结、BigInt、JSON/Code cell 这些还在等，35 个功能请求挂着。npm 周下载 57.8 万说明它是被大量项目依赖的工作马，但 HN 上几乎没人讨论，维护节奏也在放缓。选它之前，先把维护节奏、功能 gap 和 Canvas 派的窄赛道一起称一称。
 
 ## 参考资料
 
 - [GitHub: glideapps/glide-data-grid](https://github.com/glideapps/glide-data-grid)
 - [API 文档](https://grid.glideapps.com/docs/index.html)
 - [Storybook](https://quicktype.github.io/glide-data-grid)
+- [analytics-grid（Show HN，10 亿行案例）](https://analytics-grid.com/)
+- [Infinite Pixels 讨论（HN 44824056）](https://news.ycombinator.com/item?id=44824056)
+- [r/reactjs 开源公告（2021-01）](https://www.reddit.com/r/reactjs/comments/l2995f/)
+- [AG Grid](https://github.com/ag-grid/ag-grid)
+- [TanStack Table](https://github.com/TanStack/table)
+- [MUI X](https://github.com/mui/mui-x)
+- [Comcast/react-data-grid](https://github.com/adazzle/react-data-grid)
+- [revogrid](https://github.com/revolist/revogrid)
 - [croc 笔记](/notes/croc/)
 - [RAGFlow 笔记](/notes/ragflow/)
