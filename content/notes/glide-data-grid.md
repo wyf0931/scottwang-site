@@ -48,6 +48,8 @@ tags:
 
 **数据接入**。`getCellContent` 是 `(cell) => GridCell` 回调，库不关心数据从哪来，只要求你按坐标给格子。这设计让它能接任意数据源，但也意味着排序过滤这类活得你自己做。
 
+**导入导出的边界要分清**。文件层面的导入导出没有内建 API。CSV/Excel 文件得自己解析（SheetJS、PapaParse 这类），再把数据喂给 `getCellContent`，没有 `loadFile` 这种入口。文件导出同样没有，`#844` 提议的 `useCsvExport`、`useExcelExport`、`usePdfExport` 三个 hook 还挂在 issue 上。内建的是剪贴板互操作，Copy 走 `getCellsForSelection`，Paste 走 `onPaste`，自动解析粘贴缓冲、触发 `onCellEdited`，`coercePasteValue` 做值转换，和 Excel 复制粘贴格式互通。也就是说，要的是「用户点按钮下载 Excel/CSV 文件」，得自己写；要的是「和 Excel 之间复制粘贴」，开箱即用。
+
 **其他**。copy-paste 模块、markdown 渲染（marked）、sprites 图标、复制表头、`editOnType` 边输边编辑、`cellActivationBehavior`（单击/双击/二次点击激活）、`scaleToRem`、`portalElementRef`。
 
 ## 35 个还挂在 issue 上的功能请求
