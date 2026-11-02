@@ -104,7 +104,6 @@ h2 { margin-bottom: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15;
 .project-teaser strong { margin: 18px 0 10px; font-size: 1.5rem; letter-spacing: -.04em; }
 .project-teaser .eyebrow { margin-bottom: 0; }
 .sites-page { padding: 100px 0; }
-.sites-page h1 { font-size: clamp(2.8rem, 6vw, 4.8rem); }
 .sites-page .lead { max-width: 640px; }
 .sites-grid { display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 48px; }
 .sites-grid .site-card { min-width: 0; padding: 20px; border: 1px solid var(--border); background: var(--surface); transition: border-color 180ms ease, transform 180ms ease; }
@@ -275,6 +274,7 @@ h1,
 .collection-page h1,
 .taxonomy-page h1,
 .projects-page h1,
+.sites-page h1,
 .books-page h1,
 .about-page h1 {
   max-width: none;
@@ -555,28 +555,44 @@ h2 {
   font-size: 0.94rem;
 }
 
-.site-license {
-  display: inline-flex;
+.site-source {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 6px;
-  margin-left: auto;
+  gap: 6px 12px;
+  margin: 10px 0 14px;
   color: var(--muted);
+  font-size: .82rem;
+}
+
+.site-source-label {
+  color: var(--faint);
   font-size: .72rem;
 }
 
-.site-license-icon {
-  width: 15px;
-  height: 15px;
-  flex: none;
+.site-source-repo,
+.site-source-url {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
 }
 
-a.site-license:hover {
+.site-source-repo:hover,
+.site-source-url:hover {
   color: var(--accent);
 }
 
-.site-card .github-repo-card {
-  margin: 18px 0 2px;
-  box-shadow: none;
+.site-source-icon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  fill: currentColor;
+}
+
+.site-source-extra {
+  color: var(--faint);
+  font: .72rem ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 .github-repo-card {
@@ -799,26 +815,6 @@ html[data-theme="dark"] .github-repo-card {
   }
 }
 
-.site-note,
-.license-note {
-  max-width: 680px;
-}
-
-.license-note {
-  margin: 14px 0 0;
-  font-size: 0.82rem;
-}
-
-.site-links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 18px;
-  margin-top: 18px;
-  color: var(--accent);
-  font: .75rem ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-
 .project-teaser {
   display: block;
 }
@@ -923,6 +919,7 @@ html[data-theme="dark"] .site-grid {
   .collection-page h1,
   .taxonomy-page h1,
   .projects-page h1,
+  .sites-page h1,
   .about-page h1,
   .article-header h1,
   .project-detail-header h1 {
