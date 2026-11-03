@@ -32,7 +32,7 @@ description: "多 agent 系统的协作模式、运行循环与职责划分。"
 - `getSeriesRegistry()` returns the registry keyed by `series`, and rejects duplicate keys or slugs.
 - `getAllSeries()` returns `{ key, slug, title, description?, count }` for every key that has published content, sorted by title.
 - `getSeriesBySlug(slug)` resolves one series for the detail route and its metadata.
-- `getContentBySeries(slug)` lists the entries grouped under that series.
+- `getContentBySeries(slug)` lists the entries grouped under that series, in its intended order. `getOrderedSeriesContent(key)` is the same list keyed directly by the grouping key.
 
 ## Rules
 
@@ -40,6 +40,20 @@ description: "多 agent 系统的协作模式、运行循环与职责划分。"
 - A registry file without published content does not create a route.
 - The registry carries identity only. Entries, ordering, and counts come from the content itself.
 - Legacy keys keep working. `Agent Architecture` is still the key in article frontmatter; only its URL segment was normalized.
+
+## Article order and navigation
+
+Within a series, the reading order comes from an optional `order` field in article frontmatter, a positive integer that is 1-based within that series:
+
+```yaml
+series: "Google 技术写作"
+order: 1
+```
+
+- `getContentBySeries(slug)` sorts the entries by `order` ascending. Entries without `order` sort after the ordered ones, newest first, then by title.
+- The series detail page renders cards in this order.
+- Article pages render a `SeriesPagination` nav with 上一篇 / 下一篇 links, derived from the same ordered list, so a reader can follow a series front to back. The nav is omitted when the article is not part of a series or the series has a single item.
+- `order` is scoped to a series; it does not affect `getAllContent()` date ordering on other pages.
 
 ## Compatibility
 
@@ -55,7 +69,7 @@ description: "多 agent 系统的协作模式、运行循环与职责划分。"
 
 Not shipped in this change:
 
-- series-level drafts or ordering
+- series-level drafts
 - a per-series RSS feed
 - series filtering on `/content`
 - the same treatment for tags, which already store their display names directly

@@ -5,6 +5,7 @@ date: "2026-11-03"
 type: "notes"
 kind: "note"
 series: "Google 技术写作"
+order: 15
 tags:
   - 技术写作
   - Google 技术写作
