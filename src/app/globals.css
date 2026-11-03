@@ -205,6 +205,7 @@ html[data-theme="dark"] [data-rehype-pretty-code-figure] code { color: var(--shi
   .article-layout { padding-top: 70px; }
   .article-header h1 { font-size: clamp(2.05rem, 9vw, 3rem); }
   .content-grid { grid-template-columns: 1fr; }
+  .series-pagination { grid-template-columns: 1fr; }
   .project-grid { grid-template-columns: 1fr; }
   .taxonomy-grid { grid-template-columns: 1fr; }
   .archive-item { grid-template-columns: 58px 1fr; }
@@ -505,6 +506,49 @@ h2 {
 }
 
 .content-taxonomy .tag-row a:hover {
+  color: var(--accent);
+}
+
+.series-pagination {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.series-pagination-link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.series-pagination-link:hover {
+  border-color: var(--accent);
+}
+
+.series-pagination-next {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.series-pagination-label {
+  color: var(--faint);
+  font: 0.68rem ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.series-pagination-title {
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.series-pagination-link:hover .series-pagination-title {
   color: var(--accent);
 }
 
