@@ -69,7 +69,7 @@ describe("content source", () => {
   });
 
   it("loads the curated sites collection", () => {
-    expect(getAllSites()).toHaveLength(3);
+    expect(getAllSites()).toHaveLength(6);
     expect(getSiteBySlug("chinese-poetry")).toMatchObject({
       title: "中华古诗词数据库",
       url: "https://awesome-poetry.top/",
@@ -89,6 +89,20 @@ describe("content source", () => {
       github: "scikit-learn/scikit-learn",
       licenseUrl: "https://spdx.org/licenses/BSD-3-Clause.html",
       featured: false,
+    });
+    expect(getSiteBySlug("jiangshan-map")).toMatchObject({
+      title: "江山时序",
+      url: "https://deanchen.me/jiangshan-map/",
+      github: "DeanChensj/jiangshan-map",
+      license: "GPL-3.0",
+    });
+    expect(getSiteBySlug("hackertube")).toMatchObject({
+      title: "HackerTube",
+      url: "https://hackertube.org/",
+    });
+    expect(getSiteBySlug("hackerbooks")).toMatchObject({
+      title: "Hacker Books",
+      url: "https://hackerbooks.org/",
     });
   });
 
