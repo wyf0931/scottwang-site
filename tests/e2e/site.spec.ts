@@ -32,6 +32,13 @@ test("sites page exposes the compact responsive collection", async ({ page }) =>
   await expect(page.locator("#scikit-learn-user-guide .site-source-extra").filter({ hasText: "BSD-3-Clause" })).toBeVisible();
   await expect(page.locator("#scikit-learn-user-guide .github-repo-card")).toHaveCount(0);
   await expect(page.locator("#scikit-learn-user-guide .site-links")).toHaveCount(0);
+  await expect(page.locator("#civilization-map h3")).toContainText("Civilization Map");
+  await expect(page.locator("#civilization-map .site-source-label")).toHaveText("网址");
+  await expect(page.locator("#civilization-map .site-source-url")).toHaveAttribute("href", "https://civilizationmap.org/");
+  await expect(page.locator("#openhistoricalmap h3")).toContainText("OpenHistoricalMap");
+  await expect(page.locator("#openhistoricalmap .site-source-repo")).toHaveAttribute("href", "https://github.com/OpenHistoricalMap/ohm-website");
+  await expect(page.locator(".sites-grid")).toHaveCSS("grid-template-columns", /\d+px/);
+  expect(await page.locator(".sites-grid").evaluate((grid) => getComputedStyle(grid).gridTemplateColumns.split(" ").length)).toBe(2);
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(page.locator(".sites-grid")).toHaveCSS("grid-template-columns", /\d+px/);
   expect(await page.locator(".sites-grid").evaluate((grid) => getComputedStyle(grid).gridTemplateColumns.split(" ").length)).toBe(1);

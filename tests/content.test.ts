@@ -69,7 +69,7 @@ describe("content source", () => {
   });
 
   it("loads the curated sites collection", () => {
-    expect(getAllSites()).toHaveLength(6);
+    expect(getAllSites()).toHaveLength(8);
     expect(getSiteBySlug("chinese-poetry")).toMatchObject({
       title: "中华古诗词数据库",
       url: "https://awesome-poetry.top/",
@@ -103,6 +103,15 @@ describe("content source", () => {
     expect(getSiteBySlug("hackerbooks")).toMatchObject({
       title: "Hacker Books",
       url: "https://hackerbooks.org/",
+    });
+    expect(getSiteBySlug("civilization-map")).toMatchObject({
+      title: "Civilization Map",
+      url: "https://civilizationmap.org/",
+    });
+    expect(getSiteBySlug("openhistoricalmap")).toMatchObject({
+      title: "OpenHistoricalMap",
+      url: "https://www.openhistoricalmap.org/",
+      github: "OpenHistoricalMap/ohm-website",
     });
   });
 
