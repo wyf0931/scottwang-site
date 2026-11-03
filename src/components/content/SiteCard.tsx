@@ -21,6 +21,5 @@ export function SiteCard({ site }: { site: SiteRecord }) {
       {stars && <span className="site-source-extra">★ {stars}</span>}
       {site.license && <span className="site-source-extra">{site.license}</span>}
     </div>
-    <div className="tag-row">{site.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
   </article>;
 }

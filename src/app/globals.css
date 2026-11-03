@@ -226,7 +226,7 @@ body {
 .site-header,
 .site-footer,
 .page-shell {
-  width: min(calc(100% - 48px), 960px);
+  width: min(calc(100% - 48px), var(--content-width));
 }
 
 .site-header {
@@ -825,12 +825,18 @@ html[data-theme="dark"] .github-repo-card {
   font-weight: 750;
 }
 
+/* List and grid pages use the wider shell; keep the reading column optimal for prose. */
 .collection-page,
 .taxonomy-page,
 .projects-page,
 .sites-page,
 .books-page,
-.about-page,
+.about-page {
+  max-width: 960px;
+  margin-inline: auto;
+  padding: 64px 0 90px;
+}
+
 .project-detail,
 .article-layout {
   max-width: 760px;
