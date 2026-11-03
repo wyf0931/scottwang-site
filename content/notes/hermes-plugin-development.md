@@ -86,7 +86,7 @@ def register(ctx):
     ctx.register_delegation_provider(Tiers())
 ```
 
-配置放 delegation.backends.<name> 下。
+配置放 `delegation.backends.<name>` 下。
 
 ```yaml
 delegation:
@@ -121,7 +121,7 @@ def register(ctx):
 
 ## 验证
 
-hermes plugins doctor <路径> --ci 用 Hermes 自己那套目录发现、manifest 解析、命名空间导入、register 调用、hook 注册表、工具注册表跑一遍，能报告非法 hook 名、不接受 kwargs 的回调、注册失败、声明与注册不一致。这个命令当发布前自检很合适。
+`hermes plugins doctor <路径> --ci` 用 Hermes 自己那套目录发现、manifest 解析、命名空间导入、register 调用、hook 注册表、工具注册表跑一遍，能报告非法 hook 名、不接受 kwargs 的回调、注册失败、声明与注册不一致。这个命令当发布前自检很合适。
 
 ## 小结
 
