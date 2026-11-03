@@ -834,6 +834,7 @@ html[data-theme="dark"] .github-repo-card {
 .project-detail,
 .article-layout {
   max-width: 760px;
+  margin-inline: auto;
   padding: 64px 0 90px;
 }
 
