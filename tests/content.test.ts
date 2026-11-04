@@ -69,7 +69,7 @@ describe("content source", () => {
   });
 
   it("loads the curated sites collection", () => {
-    expect(getAllSites()).toHaveLength(8);
+    expect(getAllSites()).toHaveLength(9);
     expect(getSiteBySlug("chinese-poetry")).toMatchObject({
       title: "中华古诗词数据库",
       url: "https://awesome-poetry.top/",
@@ -112,6 +112,12 @@ describe("content source", () => {
       title: "OpenHistoricalMap",
       url: "https://www.openhistoricalmap.org/",
       github: "OpenHistoricalMap/ohm-website",
+    });
+    expect(getSiteBySlug("wenyang")).toMatchObject({
+      title: "中国传统纹样图鉴 Wényàng",
+      url: "https://wenyang.net/",
+      github: "dososo/chinese-traditional-patterns",
+      license: "CC BY-NC 4.0",
     });
   });
 
