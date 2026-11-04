@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 无障碍
   - Google 技术写作
-draft: false
+draft: true
 ---
 *替代文本*（alt text）是一段简短、描述性的文字，用来替代页面上的视觉元素。最常见的用途是描述图片。
 

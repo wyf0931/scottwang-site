@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 技术写作
   - Google 技术写作
-draft: false
+draft: true
 ---
 我们对文档做了大量研究，结果发现世上最好的句子主要由词语构成。
 

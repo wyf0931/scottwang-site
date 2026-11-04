@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 错误消息
   - Google 技术写作
-draft: false
+draft: true
 ---
 几个简单的技巧能让错误消息从周围的文本和代码中凸显出来。
 

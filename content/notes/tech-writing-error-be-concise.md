@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 错误消息
   - Google 技术写作
-draft: false
+draft: true
 ---
 编写简洁的错误消息。突出重要的内容，删掉不必要的文字。关于缩短句子长度的技巧，参见[技术写作（一）的短句子单元](https://developers.google.com/tech-writing/one/short-sentences)。
 

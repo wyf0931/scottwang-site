@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 技术写作
   - Google 技术写作
-draft: false
+draft: true
 ---
 软件工程师通常尽量把实现代码的行数压到最少，原因如下：
 

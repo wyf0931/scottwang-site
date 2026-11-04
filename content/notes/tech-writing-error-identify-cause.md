@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 错误消息
   - Google 技术写作
-draft: false
+draft: true
 ---
 明确告诉用户到底出了什么问题。要具体——含糊的错误消息会让用户受挫。
 

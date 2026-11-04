@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 技术写作
   - Google 技术写作
-draft: false
+draft: true
 ---
 这一单元提供理解后续课程所需的最小语法知识。如果你已经懂一些语法，可以跳到[用词](https://developers.google.com/tech-writing/one/words)。否则请继续往下读。
 
