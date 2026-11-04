@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 技术写作
   - Google 技术写作
-draft: false
+draft: true
 ---
 像 [Gemini](https://gemini.google.com) 这样的[**大语言模型**](https://developers.google.com/machine-learning/glossary#large-language-model)（**LLM**）可以帮助你改进文档。另一方面，粗心大意地使用 LLM 可能给你的文档注入错误。本节聚焦如何负责任地使用 LLM，以帮助你完成以下任务：
 

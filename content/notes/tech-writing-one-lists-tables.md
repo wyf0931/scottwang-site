@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 技术写作
   - Google 技术写作
-draft: false
+draft: true
 ---
 好的列表能把技术上的混乱整理得井井有条。技术读者通常很喜欢列表。因此，写作时要寻找机会把散文式的叙述改写成列表。
 

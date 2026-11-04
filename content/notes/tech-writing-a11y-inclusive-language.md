@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 无障碍
   - Google 技术写作
-draft: false
+draft: true
 ---
 在写残障人士或无障碍话题时，要注意避免使用可能造成伤害的、无意中带有偏见的语言。
 

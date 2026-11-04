@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 技术写作
   - Google 技术写作
-draft: false
+draft: true
 ---
 *技术写作（二）*
 

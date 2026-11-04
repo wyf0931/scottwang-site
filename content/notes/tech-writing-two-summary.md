@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 技术写作
   - Google 技术写作
-draft: false
+draft: true
 ---
 恭喜！你已完成技术写作（二）的课前学习部分，它涵盖了以下技术写作的中级原则：
 

@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 无障碍
   - Google 技术写作
-draft: false
+draft: true
 ---
 本篇概览介绍为所有人写作的关键概念。
 

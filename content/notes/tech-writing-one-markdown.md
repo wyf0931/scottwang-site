@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 技术写作
   - Google 技术写作
-draft: false
+draft: true
 ---
 **Markdown** 是一种轻量标记语言，许多技术专业人士用它来创建和编辑技术文档。使用 Markdown 时，你在纯文本编辑器（例如 vi 或 Emacs）里写文本，插入特殊字符来创建标题、加粗、项目符号等等。例如，下面这个例子展示了一份用 Markdown 格式化的简单技术文档：
 

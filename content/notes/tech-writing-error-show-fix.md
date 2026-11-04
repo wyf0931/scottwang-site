@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 错误消息
   - Google 技术写作
-draft: false
+draft: true
 ---
 创建**可操作的错误消息**。也就是说，在解释问题原因之后，说明如何修复问题。
 

@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 错误消息
   - Google 技术写作
-draft: false
+draft: true
 ---
 错误消息的语气会显著影响用户如何理解它们。
 

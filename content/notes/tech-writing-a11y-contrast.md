@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 无障碍
   - Google 技术写作
-draft: false
+draft: true
 ---
 更高的对比度让每个人读文本和图片都更容易。对比度低时，每个人看内容都会困难。
 

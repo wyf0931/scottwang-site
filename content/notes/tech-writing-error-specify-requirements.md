@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 错误消息
   - Google 技术写作
-draft: false
+draft: true
 ---
 帮助用户理解需求和约束。要具体。
 不要假设用户了解你系统的限制。

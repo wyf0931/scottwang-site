@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 无障碍
   - Google 技术写作
-draft: false
+draft: true
 ---
 在本单元中，你将学习如何创建结合文本与视觉元素的无障碍视觉内容，而不是仅依靠视觉线索来传达信息。
 

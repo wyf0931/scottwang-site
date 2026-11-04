@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 技术写作
   - Google 技术写作
-draft: false
+draft: true
 ---
 你能写句子。你能写段落。但你能把所有段落组织成一份连贯的文档吗？
 

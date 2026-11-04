@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 错误消息
   - Google 技术写作
-draft: false
+draft: true
 ---
 如果错误涉及用户可以输入或修改的值（例如文本、设置、命令行参数），那么错误消息应该指出违规的值。
 

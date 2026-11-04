@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 错误消息
   - Google 技术写作
-draft: false
+draft: true
 ---
 **双重否定**是指包含两个否定词的句子或短语，例如：
 

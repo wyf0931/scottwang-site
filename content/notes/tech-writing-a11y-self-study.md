@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 无障碍
   - Google 技术写作
-draft: false
+draft: true
 ---
 这门自学课教你如何写出对更多人无障碍的文档。在这个语境下，**无障碍（accessible）** 指的是任何人都能阅读并理解你的文档，包括残障人士。
 

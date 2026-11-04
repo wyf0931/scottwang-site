@@ -8,7 +8,7 @@ series: "Google 技术写作"
 tags:
   - 错误消息
   - Google 技术写作
-draft: false
+draft: true
 ---
 在进入课程最有趣的部分——错误消息的措辞——之前，我们先讨论几条通用的错误处理规则。
 
