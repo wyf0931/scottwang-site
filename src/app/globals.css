@@ -381,7 +381,7 @@ h2 {
 }
 
 .content-page.collection-page {
-  max-width: 960px;
+  max-width: var(--page-width);
 }
 
 .sidebar-label {
@@ -825,14 +825,14 @@ html[data-theme="dark"] .github-repo-card {
   font-weight: 750;
 }
 
-/* List and grid pages use the wider shell; keep the reading column optimal for prose. */
+/* List and grid pages use the wide page shell; the reading column stays narrow for prose. */
 .collection-page,
 .taxonomy-page,
 .projects-page,
 .sites-page,
 .books-page,
 .about-page {
-  max-width: 960px;
+  max-width: var(--page-width);
   margin-inline: auto;
   padding: 64px 0 90px;
 }
@@ -898,7 +898,7 @@ html[data-theme="dark"] .site-grid {
   .site-header,
   .site-footer,
   .page-shell {
-    width: min(calc(100% - 28px), 960px);
+    width: min(calc(100% - 28px), var(--content-width));
   }
 
   .site-header {
