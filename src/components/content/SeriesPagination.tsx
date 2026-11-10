@@ -17,7 +17,9 @@ function seriesLink(entry: ContentRecord, direction: "prev" | "next") {
 // ordering that the series page uses.
 export function SeriesPagination({ entry }: { entry: ContentRecord }) {
   if (!entry.series) return null;
-  const items = getOrderedSeriesContent(entry.series);
+  // Match the entry's own visibility so a draft article can still navigate its
+  // full series (drafts only leave public listings, not the reading sequence).
+  const items = getOrderedSeriesContent(entry.series, entry.draft);
   const index = items.findIndex((item) => item.type === entry.type && item.slug === entry.slug);
   if (index < 0 || items.length < 2) return null;
   const prev = index > 0 ? items[index - 1] : null;

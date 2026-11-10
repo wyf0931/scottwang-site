@@ -288,8 +288,8 @@ describe("series registry", () => {
   });
 
   it("orders the Google tech writing series in its intended sequence", () => {
-    const entries = getContentBySeries("google-tech-writing");
-    const byKey = getOrderedSeriesContent("Google 技术写作");
+    const entries = getContentBySeries("google-tech-writing", true);
+    const byKey = getOrderedSeriesContent("Google 技术写作", true);
 
     expect(entries).toHaveLength(45);
     expect(byKey.map((entry) => entry.slug)).toEqual(entries.map((entry) => entry.slug));
@@ -300,7 +300,7 @@ describe("series registry", () => {
   });
 
   it("exposes every series entry for prev/next navigation", () => {
-    const entries = getOrderedSeriesContent("Google 技术写作");
+    const entries = getOrderedSeriesContent("Google 技术写作", true);
     const index = entries.findIndex((entry) => entry.slug === "tech-writing-two-intro");
     const prev = entries[index - 1];
     const next = entries[index + 1];
@@ -310,7 +310,7 @@ describe("series registry", () => {
   });
 
   it("renders the next article link inside the series", () => {
-    const entry = getContentBySeries("google-tech-writing")[0];
+    const entry = getContentBySeries("google-tech-writing", true)[0];
     const markup = renderToStaticMarkup(createElement(SeriesPagination, { entry }));
 
     expect(markup).toContain("下一篇");
@@ -319,7 +319,7 @@ describe("series registry", () => {
   });
 
   it("renders the previous article link on the last entry and nothing when alone", () => {
-    const entries = getContentBySeries("google-tech-writing");
+    const entries = getContentBySeries("google-tech-writing", true);
     const last = entries[entries.length - 1];
     const markup = renderToStaticMarkup(createElement(SeriesPagination, { entry: last }));
     expect(markup).toContain("上一篇");
