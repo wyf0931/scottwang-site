@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { z } from "zod";
 import { CONTENT_ROOT } from "./paths";
 import { getAllContent } from "./source";
+import type { ContentRecord } from "./schema";
 
 const SERIES_ROOT = path.join(CONTENT_ROOT, "series");
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -61,7 +62,21 @@ export function getSeriesBySlug(slug: string, includeDrafts = false) {
   return getAllSeries(includeDrafts).find((series) => series.slug === slug);
 }
 
+// Within a series, entries with an explicit `order` sort first (ascending); entries
+// without one follow, newest first, then by title. This keeps a series navigable in
+// its intended teaching sequence rather than by publication date.
+function bySeriesOrder(a: ContentRecord, b: ContentRecord) {
+  return (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER)
+    || b.date.getTime() - a.date.getTime()
+    || a.title.localeCompare(b.title);
+}
+
+// All public content for a series key, in its intended order.
+export function getOrderedSeriesContent(key: string, includeDrafts = false): ContentRecord[] {
+  return getAllContent(includeDrafts).filter((entry) => entry.series === key).sort(bySeriesOrder);
+}
+
 export function getContentBySeries(slug: string, includeDrafts = false) {
   const record = getSeriesBySlug(slug, includeDrafts);
-  return record ? getAllContent(includeDrafts).filter((entry) => entry.series === record.key) : [];
+  return record ? getOrderedSeriesContent(record.key, includeDrafts) : [];
 }

@@ -19,6 +19,8 @@ export const frontmatterSchema = z.object({
   github: z.string().regex(/^[^/\s]+\/[^/\s]+$/, "Expected a GitHub repository in owner/repo format").optional(),
   tags: z.array(z.string()).default([]),
   series: z.string().optional(),
+  // 1-based position within a series. Entries without it sort after ordered ones.
+  order: z.number().int().positive().optional(),
   draft: z.boolean().default(false),
   featured: z.boolean().default(false),
   cover: z.string().optional(),
