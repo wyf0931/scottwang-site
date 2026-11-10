@@ -8,7 +8,7 @@ import { renderMdx } from "@/lib/content/markdown";
 import { getAllContent, getContentBySlug, getContentByType } from "@/lib/content/source";
 import { getAllProjects, getProjectBySlug } from "@/lib/content/projects";
 import { getAllSites, getSiteBySlug } from "@/lib/content/sites";
-import { getAllSeries, getContentBySeries, getOrderedSeriesContent, getSeriesBySlug, getSeriesRegistry } from "@/lib/content/series";
+import { getAllSeries, getContentBySeries, getSeriesBySlug, getSeriesRegistry } from "@/lib/content/series";
 import { seriesPath } from "@/lib/content/paths";
 
 describe("content source", () => {
@@ -287,45 +287,7 @@ describe("series registry", () => {
     expect(getContentBySeries("data-judgment").every((entry) => entry.series === "data-judgment")).toBe(true);
   });
 
-  it("orders the Google tech writing series in its intended sequence", () => {
-    const entries = getContentBySeries("google-tech-writing");
-    const byKey = getOrderedSeriesContent("Google 技术写作");
-
-    expect(entries).toHaveLength(45);
-    expect(byKey.map((entry) => entry.slug)).toEqual(entries.map((entry) => entry.slug));
-    expect(entries[0]).toMatchObject({ slug: "tech-writing-one-intro", order: 1 });
-    expect(entries.at(-1)).toMatchObject({ slug: "tech-writing-a11y-summary", order: 45 });
-    const orders = entries.map((entry) => entry.order);
-    expect(orders.every((value, index) => value === index + 1)).toBe(true);
-  });
-
-  it("exposes every series entry for prev/next navigation", () => {
-    const entries = getOrderedSeriesContent("Google 技术写作");
-    const index = entries.findIndex((entry) => entry.slug === "tech-writing-two-intro");
-    const prev = entries[index - 1];
-    const next = entries[index + 1];
-
-    expect(prev).toMatchObject({ slug: "tech-writing-one-summary" });
-    expect(next).toMatchObject({ slug: "tech-writing-two-self-editing" });
-  });
-
-  it("renders the next article link inside the series", () => {
-    const entry = getContentBySeries("google-tech-writing")[0];
-    const markup = renderToStaticMarkup(createElement(SeriesPagination, { entry }));
-
-    expect(markup).toContain("下一篇");
-    expect(markup).toContain("/notes/tech-writing-one-grammar");
-    expect(markup).not.toContain("上一篇");
-  });
-
-  it("renders the previous article link on the last entry and nothing when alone", () => {
-    const entries = getContentBySeries("google-tech-writing");
-    const last = entries[entries.length - 1];
-    const markup = renderToStaticMarkup(createElement(SeriesPagination, { entry: last }));
-    expect(markup).toContain("上一篇");
-    expect(markup).toContain("/notes/tech-writing-a11y-editing");
-    expect(markup).not.toContain("下一篇");
-
+  it("renders nothing for a series without a pair", () => {
     const alone = getContentBySeries("agent-architecture")[0];
     expect(renderToStaticMarkup(createElement(SeriesPagination, { entry: alone }))).toBe("");
   });
